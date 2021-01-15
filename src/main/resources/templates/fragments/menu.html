@@ -1,0 +1,33 @@
+<nav th:fragment="menu-principal" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" th:href="@{/rico}">Riko Juego</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <li><a class="nav-link" th:href="@{/tienda/}">Tienda</a></li>
+      </li>
+     <li class="nav-item">
+        <li><a class="nav-link" th:href="@{/perfil/list}">Perfil</a></li>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/list}">Usuarios</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/productos/list}">Productos</a>
+      </li>     
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/skin/list}">Skins</a>
+      </li>           
+    </ul>  
+    <div th:if="${usuario==null}">
+    	<a class="btn btn-primary" th:href="@{/login}">Login</a>&nbsp;
+    	<a class="btn btn-primary" th:href="@{/signup}">Registrarse</a>&nbsp;
+    </div>
+    <div th:if="${usuario!=null}">
+    	<a class="btn btn-primary" th:href="@{/logout}">Salir</a>
+    </div>
+  </div>
+</nav>

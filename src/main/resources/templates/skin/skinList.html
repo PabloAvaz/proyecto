@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/head:: head"/>
+</head>
+<body>
+	<nav th:insert="fragments/menu :: menu-principal"/>
+	<a class="btn btn-primary" th:href="@{/skin/create}">Crear</a>
+	<table class="table">
+		<tr>
+			<th>Id</th>
+			<th>Imagen</th>
+			<th>Audio</th>
+			<th>Acciones</th>
+		</tr>
+		<tr th:each="skin:${skins}">
+			<td th:text="${skin.id}"></td>
+			<td><img th:src="@{/img/{img} (img=${skin.imagen})}"></td>
+			<td><button th:id="${skin.sonido}">Tocar</td>
+			<td>
+				<a th:href="@{/skins/edit/{id} (id=${skin.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                <a th:href="@{/skins/delete/{id} (id=${skin.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+			</td>
+		</tr>
+	</table>
+	<script>
+	$("button").click(function(evt){
+		a = new Audio('/img/' + evt.target.id);
+		a.play();
+	})
+	</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/head:: head"/>
+</head>
+<body>
+	<nav th:insert="fragments/menu :: menu-principal"/>
+	<div class="row">
+		<div class="col col-lg-6">
+			<form th:action="@{/productos/create}" enctype="multipart/form-data" method="post" th:object="${producto}">
+			  <div class="form-group">
+			    <label>Nombre</label>
+			    <input type="text" name="nombre" th:field="*{nombre}" class="form-control"  aria-describedby="emailHelp" placeholder="Nombre del producto">
+			  </div>
+			  <div class="form-group">
+			    <label>Descripcion</label>
+			    <input type="text" name="descripcion" th:field="*{descripcion}" class="form-control"  placeholder="Descripcion del producto">
+			  </div>
+			  <div class="form-group">
+			    <label>Precio</label>
+			    <input type="number" name="precio" th:field="*{precio}" class="form-control" placeholder="Precio" value="0" step="1">
+			  </div>
+			  <div class="form-group">
+			    <label>Imagen</label>
+			    <input name="archivoImagen" type="file" class="form-control-file">
+			  </div>
+			  <input type="hidden" th:field="*{imagen}"></input>
+			  <input type="hidden" th:field="*{id}"></input>
+			  <button type="submit" class="btn btn-primary">Enviar</button>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

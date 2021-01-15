@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/head:: head"/>
+</head>
+<body>
+	<nav th:insert="fragments/menu :: menu-principal"/>
+
+	<table class="table">
+		<tr>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th>Puntos</th>
+		</tr>
+		<tr th:each="user:${usuarios}">
+			<td th:text="${user.id}"></td>
+			<td th:text="${user.nombre}"></td>
+			<td th:text="${user.puntos}"></td>
+		</tr>
+	</table>
+</body>
+</html>

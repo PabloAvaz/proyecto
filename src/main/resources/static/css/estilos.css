@@ -1,0 +1,15 @@
+.flex{
+	display:flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+body{
+		animation: color 14s ease 0s infinite normal;	
+}
+	
+@keyframes color {
+	0% {background: rgb(65, 196, 222);}
+	25% {background: rgb(140, 199, 63)}
+	50% {background: rgb(243, 211, 51)}
+	75% {background: rgb(247, 142, 86)}
+}

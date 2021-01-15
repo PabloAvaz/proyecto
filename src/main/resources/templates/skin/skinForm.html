@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/head:: head"/>
+</head>
+<body>
+	<nav th:insert="fragments/menu :: menu-principal"/>
+	<div class="row">
+		<div class="col col-lg-6">
+			<form th:action="@{/skin/create}" enctype="multipart/form-data" method="post" th:object="${skin}">
+			  <div class="form-group">
+			    <label>Imagen</label>
+			    <input name="archivoImagen" type="file" class="form-control-file">
+			  </div>
+			  <div class="form-group">
+			    <label>Audio</label>
+			    <input name="archivoSonido" type="file" class="form-control-file">
+			  </div>
+			  <input type="hidden" th:field="*{imagen}"></input>
+			  <input type="hidden" th:field="*{id}"></input>
+			  <button type="submit" class="btn btn-primary">Enviar</button>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

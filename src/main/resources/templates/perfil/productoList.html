@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/head:: head"/>
+</head>
+<body>
+	<nav th:insert="fragments/menu :: menu-principal"/>
+	<table class="table">
+		<tr>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th>Descripcion</th>
+		</tr>
+		<tr th:each="producto:${productos}">
+			<td th:text="${producto.id}"></td>
+			<td th:text="${producto.nombre}"></td>
+			<td th:text="${producto.descripcion}"></td>
+		</tr>
+	</table>
+</body>
+</html>
