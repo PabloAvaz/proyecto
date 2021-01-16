@@ -3,6 +3,7 @@ package com.model.user;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,28 +12,36 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.model.interfaces.Equipable;
 import com.model.producto.Producto;
+import com.model.producto.Skin;
 
 @Entity
 @Table(name="usuario")
 public class Usuario extends User {
 
 	private int puntos;
+	@OneToOne
+	@JoinColumn(name = "skin", referencedColumnName ="idSkin")
+	private Skin skin;
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "productousuario",
 			joinColumns = @JoinColumn(name="id"), 
 			inverseJoinColumns = @JoinColumn(name="idProducto"))
 	private List<Producto> articulos;
+	
 	@Transient
 	private List<Equipable> equipo;
-
+	
 	public Usuario() {
-		this(0,"","",true,"DEFAULT",0);
+		this(0,"","",true,"",0);
+		//this.skin = new Skin();
 	}
 
 	public Usuario(Integer id, String username, String password, boolean estatus, String nombre, int puntos) {
@@ -63,6 +72,12 @@ public class Usuario extends User {
 	public void setEquipo(List<Equipable> equipo) {
 		this.equipo = equipo;
 	}
+	public Skin getSkin() {
+		return skin;
+	}
+	public void setSkin(Skin skin) {
+		this.skin = skin;
+	}
 
 	public void anotar() {
 		this.puntos++;
@@ -79,13 +94,15 @@ public class Usuario extends User {
 	public void desEquipar(Equipable equipo) {
 		this.equipo.remove(equipo);
 	}
+
 	
 	@Override
 	public String toString() {
-		return "Usuario [puntos=" + puntos + ", articulos=" + articulos + ", equipo=" + equipo + ", id=" + id
-				+ ", nombre=" + nombre + ", estatus=" + estatus + ", username=" + username + ", password=" + password
-				+ "]";
+		return "Usuario [puntos=" + puntos + ", skin=" + skin + ", articulos=" + articulos + ", equipo=" + equipo
+				+ ", id=" + id + ", nombre=" + nombre + ", estatus=" + estatus + ", username=" + username
+				+ ", password=" + password + "]";
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

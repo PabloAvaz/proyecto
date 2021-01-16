@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/head:: head"/>
+</head>
+<body>
+	<nav th:insert="fragments/menu :: menu-principal"/>
+
+	<table class="table table-striped">
+		<tr>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th>Puntos</th>
+			<th>Skin</th>
+			<th>Acciones</th>
+		</tr>
+		<tr th:each="user:${usuarios}">
+			<td th:text="${user.id}"></td>
+			<td th:text="${user.nombre}"></td>
+			<td th:text="${user.puntos}"></td>
+			<td th:text="${user.skin}"></td>
+			<td>
+				<a th:href="@{/usuarios/edit/{id} (id=${user.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                <a th:href="@{/usuarios/delete/{id} (id=${user.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

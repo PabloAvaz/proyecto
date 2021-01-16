@@ -25,7 +25,7 @@ public class PerfilController {
 	private boolean logeado;
 	
 	@ModelAttribute
-	public String init(Model modelo, HttpSession sesion) {
+	public void init(Model modelo, HttpSession sesion) {
 		Usuario usr = (Usuario) sesion.getAttribute("usuario");
 		System.out.println(usr);
 		if(usr != null) {
@@ -35,8 +35,6 @@ public class PerfilController {
 		} else {
 			logeado = false;
 		}
-
-		return "redirect:/rico";
 	}
 	
 	@GetMapping("/list")

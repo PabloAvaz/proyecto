@@ -9,8 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 	@Value("${ruta.imagenes}")
 	private String rutaImagenes;
+	@Value("${ruta.sonidos}")
+	private String rutaSonidos;
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/img/**").addResourceLocations("file:" + rutaImagenes);
+		registry.addResourceHandler("/sounds/**").addResourceLocations("file:"+ rutaSonidos);
 	}
 }

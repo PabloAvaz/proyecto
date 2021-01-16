@@ -17,6 +17,17 @@ public class Skin {
 	private String imagen;
 	private String sonido;
 	
+	public Skin() {
+		this(1,"default.png","default.wav");
+	}
+
+	public Skin(Integer id, String imagen, String sonido) {
+		super();
+		this.id = id;
+		this.imagen = imagen;
+		this.sonido = sonido;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -36,4 +47,25 @@ public class Skin {
 		this.sonido = sonido;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Skin other = (Skin) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Skin [id=" + id + ", imagen=" + imagen + ", sonido=" + sonido + "]";
+	}
 }

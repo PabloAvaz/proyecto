@@ -19,6 +19,7 @@ import com.service.IUsuarioService;
 public class UsuariosJpaService implements IUsuarioService {
 	@Autowired
 	private UsuarioRepository repoUsuarios;
+	
 	@Override
 	public List<Usuario> getAll() {
 		return repoUsuarios.findAll();
@@ -48,14 +49,15 @@ public class UsuariosJpaService implements IUsuarioService {
 
 	@Override
 	public void modificar(Usuario user) {
-		Optional<Usuario> tmp = repoUsuarios.findByUsername(user.getUsername());
+		Optional<Usuario> tmp = repoUsuarios.findById(user.getId());
 		if(tmp.isPresent()) {
 			Usuario userFinal = tmp.get();
 			userFinal.setNombre(user.getNombre());
 			userFinal.setUsername(user.getUsername());
-			userFinal.setPassword(user.getPassword());
+			if(!user.getPassword().equals(""))userFinal.setPassword(user.getPassword());
 			userFinal.setEstatus(user.isEstatus());
 			userFinal.setPuntos(user.getPuntos());
+			userFinal.setSkin(user.getSkin());
 			repoUsuarios.save(userFinal);
 		}
 	}

@@ -1,6 +1,5 @@
 package com.controller;
 
-import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,21 +13,21 @@ public class IndexController {
 	@ModelAttribute
 	public void init(Model modelo, HttpSession sesion) {
 		modelo.addAttribute("usuario",sesion.getAttribute("usuario"));
+		System.out.println(sesion.getAttribute("usuario"));
 	}
 	
 	@GetMapping("/")
 	public String defaultIndex() {
-		return "redirect:/rico";
+		return "redirect:/play";
 	}
 	
 	@GetMapping("/index")
-	public String index(Model modelo) {
-		modelo.addAttribute("hora", new Date());
-		return "index.html";
+	public String index() {
+		return "redirect:/play";
 	}
 	
-	@GetMapping("/rico")
+	@GetMapping("/play")
 	public String rico() {
-		return "rico.html";
+		return "index.html";
 	}
 }

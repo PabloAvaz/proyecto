@@ -4,7 +4,11 @@
 	flex-wrap: wrap;
 }
 body{
-		animation: color 14s ease 0s infinite normal;	
+		animation: color 14s ease 0s infinite alternate;	
+}
+
+.clicker:hover {
+		animation: clicker 4s linear 0s infinite alternate;	
 }
 	
 @keyframes color {
@@ -12,4 +16,11 @@ body{
 	25% {background: rgb(140, 199, 63)}
 	50% {background: rgb(243, 211, 51)}
 	75% {background: rgb(247, 142, 86)}
+}
+
+@keyframes clicker {
+	0% {filter:hue-rotate(0deg)}
+	25% {filter:hue-rotate(90deg)}
+	50% {filter:hue-rotate(180deg)}
+	75% {filter:hue-rotate(270deg)}
 }

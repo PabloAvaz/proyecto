@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.model.user.Usuario;
+import com.service.ISkinService;
 import com.service.IUsuarioService;
 
 @Controller
@@ -18,6 +19,9 @@ public class LoginController {
 	
 	@Autowired
 	private IUsuarioService serviceUsuarios;
+	
+	@Autowired
+	private ISkinService serviceSkin;
 	
 	private boolean logeado;
 	
@@ -29,20 +33,24 @@ public class LoginController {
 	
 	
 	@GetMapping("/signup")
-	private String registrar() {
-		return logeado ? "redirect:/rico" : "userForm.html";
+	private String registrar(Model modelo) {
+		modelo.addAttribute("user",new Usuario());
+		modelo.addAttribute("action","signup");
+		return logeado ? "redirect:/play" : "/usuarios/userForm.html";
 	}
 	
 	@PostMapping("/signup")
 	private String registro(Usuario user, RedirectAttributes atrib, HttpSession sesion) {
+		if(user.getSkin() == null)user.setSkin(serviceSkin.getById(1));
+		System.out.println(user);
 		serviceUsuarios.guardar(user);
 		sesion.setAttribute("usuario",serviceUsuarios.getByUserName(user.getUsername()));
-		return "redirect:/rico";
+		return "redirect:/play";
 	}
 	
 	@GetMapping("/login")
 	private String login() {
-		return logeado ? "redirect:/rico" : "login.html";
+		return logeado ? "redirect:/play" : "/usuarios/login.html";
 	}
 	
 	@PostMapping("/login")
@@ -50,8 +58,7 @@ public class LoginController {
 		Usuario usr = serviceUsuarios.validar(user);
 		if(usr != null) {
 			sesion.setAttribute("usuario", usr);
-			modelo.addAttribute("usuario",usr);
-			return "rico.html";
+			return "redirect:/play";
 		} else {
 			atrib.addFlashAttribute("msg","Error al iniciar sesion");
 			return "redirect:/login";
@@ -60,6 +67,6 @@ public class LoginController {
 	@GetMapping("/logout")
 	private String logout(HttpSession sesion) {
 		sesion.invalidate();
-		return "redirect:/rico";
+		return "redirect:/play";
 	}
 }

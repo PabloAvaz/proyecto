@@ -4,8 +4,10 @@
 </head>
 <body>
 	<nav th:insert="fragments/menu :: menu-principal"/>
-
-	<table class="table">
+	
+	<a th:href="@{/usuarios/adminList}">Administrar</a>
+	
+	<table class="table table-striped">
 		<tr>
 			<th>Id</th>
 			<th>Nombre</th>
