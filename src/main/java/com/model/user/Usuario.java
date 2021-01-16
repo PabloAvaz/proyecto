@@ -6,13 +6,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -29,7 +25,7 @@ public class Usuario extends User {
 	@OneToOne
 	@JoinColumn(name = "skin", referencedColumnName ="idSkin")
 	private Skin skin;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "productousuario",
 			joinColumns = @JoinColumn(name="id"), 
@@ -83,7 +79,7 @@ public class Usuario extends User {
 		this.puntos++;
 	}
 	public void comprar(Producto articulo) {
-		articulos.add(articulo);
+			articulos.add(articulo);
 	}
 	public void gastar(int cantidad) {
 		this.puntos -= cantidad;

@@ -17,6 +17,7 @@ public interface IUsuarioService {
 	void punto(Usuario user);
 	Usuario validar(Usuario user);
 	boolean comprar(Usuario user, Producto prod);
+	void dar(Usuario user, Producto prod, Integer cantidad);
 	void usar(Usuario user, Consumible consumible);
 	void equipar(Usuario user, Equipable equipo);
 	void desequipar(Usuario user, Equipable equipo);

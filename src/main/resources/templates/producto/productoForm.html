@@ -15,6 +15,11 @@
 			    <label>Descripcion</label>
 			    <input type="text" name="descripcion" th:field="*{descripcion}" class="form-control"  placeholder="Descripcion del producto">
 			  </div>
+			  <div class="form-check">
+			  	Tipo<br>
+			    <input type="radio" name="tipo" th:field="*{tipo}" class="form-check-input" value="CONSUMIBLE">CONSUMIBLE<br>
+			    <input type="radio" name="tipo" th:field="*{tipo}" class="form-check-input" value="EQUIPABLE">EQUIPABLE
+			  </div>
 			  <div class="form-group">
 			    <label>Precio</label>
 			    <input type="number" name="precio" th:field="*{precio}" class="form-control" placeholder="Precio" value="0" step="1">

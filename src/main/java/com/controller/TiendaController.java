@@ -43,7 +43,7 @@ public class TiendaController {
 		if(usuario == null) return "redirect:/login";
 		
 		if(serviceUsuario.comprar(usuario, serviceProductos.getById(id))) {
-			serviceUsuario.guardar(usuario);
+			serviceUsuario.modificar(usuario);
 			sesion.setAttribute("usuario", usuario);
 		} else {
 			

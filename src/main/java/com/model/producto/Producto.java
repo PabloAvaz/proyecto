@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.model.enums.Tipo;
+
 @Entity
 @Table(name="producto")
 public class Producto {
@@ -18,6 +20,7 @@ public class Producto {
 	private String descripcion;
 	private String imagen = "default.png";
 	private int precio;
+	private Tipo tipo;
 	
 	public int getId() {
 		return id;
@@ -49,7 +52,12 @@ public class Producto {
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
-
+	public Tipo getTipo() {
+		return tipo;
+	}
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio

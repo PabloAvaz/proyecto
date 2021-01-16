@@ -29,15 +29,19 @@ nombre varchar(50),
 descripcion varchar(50),
 imagen varchar(50),
 precio int,
+tipo varchar(20),
 CONSTRAINT pk_producto PRIMARY KEY(idProducto)
 );
 
 CREATE TABLE productoUsuario(
 id int not null,
 idProducto int not null,
+cantidad int default 1,
+CONSTRAINT pk_productoUsuario PRIMARY KEY(id,idproducto),
 constraint fk_productousuario1 foreign key (id) references usuario(id),
 constraint fk_productousuario2 foreign key (idProducto) references producto(idproducto)
 );
+
 
 
 

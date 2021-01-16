@@ -54,10 +54,11 @@ public class UsuariosJpaService implements IUsuarioService {
 			Usuario userFinal = tmp.get();
 			userFinal.setNombre(user.getNombre());
 			userFinal.setUsername(user.getUsername());
-			if(!user.getPassword().equals(""))userFinal.setPassword(user.getPassword());
 			userFinal.setEstatus(user.isEstatus());
 			userFinal.setPuntos(user.getPuntos());
-			userFinal.setSkin(user.getSkin());
+			userFinal.setArticulos(user.getArticulos());
+			if(!user.getPassword().equals(""))userFinal.setPassword(user.getPassword());
+			if(user.getSkin()!=null)userFinal.setSkin(user.getSkin());
 			repoUsuarios.save(userFinal);
 		}
 	}
@@ -83,13 +84,23 @@ public class UsuariosJpaService implements IUsuarioService {
 	public boolean comprar(Usuario user, Producto prod) {
 		if(user.getPuntos() >= prod.getPrecio()) {
 			user.gastar(prod.getPrecio());
-			user.comprar(prod);
+			if(!user.getArticulos().contains(prod)) {
+				user.comprar(prod);
+			} else {
+				dar(user,prod,1);
+			}
 			return true;
 		} else {
 			return false;
 		}
 	}
-
+	@Override
+	public void dar(Usuario user, Producto prod, Integer cantidad) {
+		Integer usr = user.getId();
+		Integer produ = prod.getId();
+		int total = cantidad + repoUsuarios.countArticulos(usr, produ);
+		repoUsuarios.comprarArticulo(total,usr,produ);
+	}
 	@Override
 	public void usar(Usuario user, Consumible consumible) {
 		
@@ -104,6 +115,8 @@ public class UsuariosJpaService implements IUsuarioService {
 	public void desequipar(Usuario user, Equipable equipo) {
 		
 	}
+
+
 
 
 }
