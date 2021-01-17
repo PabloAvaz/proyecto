@@ -15,11 +15,14 @@
 		<label>Password</label>
 		<input th:field="*{password}" name="password" type="password"><br>
 		
-		<select name="skin" th:field="*{skin.id}" th:if="${admin}">
+		<select name="skin" th:if="${admin}">
+			<option th:text="'Elige una opcion'" value></option>
 			<option th:each="skin:${skins}" th:value="${skin.id}" th:text="${skin.imagen}">
 		</select>
 		
 		<input th:field="*{id}" name="id" type="hidden">
+		<input th:field="*{skin}" type="hidden">
+		
 		<button type="submit">Enviar</button>
 	</form>
 </body>

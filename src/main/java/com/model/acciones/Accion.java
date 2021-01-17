@@ -5,7 +5,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.model.producto.Producto;
@@ -25,7 +24,6 @@ public abstract class Accion {
 	
 	public Accion(int id) {
 		this.id = id;
-		System.out.println(producto);
 	}
 	
 	public int getId() {

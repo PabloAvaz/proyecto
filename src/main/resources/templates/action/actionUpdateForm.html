@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/head:: head"/>
+</head>
+<body>
+	<nav th:insert="fragments/menu :: menu-principal"/>
+	<div class="row">
+		<div class="col col-lg-6">
+			<form th:action="@{/action/create}"  method="post" th:object="${accion}">
+
+				<input type="hidden" th:field="${producto.id}"></input>
+				<h1>Elige una skin para [[${producto.nombre}]]</h1>
+				<select th:field="${accion.skin}">
+					<option th:each="skin:${skins}" th:object="${skin}" th:value="*{id}" th:text="*{nombre}"></option>
+				</select>
+			  <button type="submit" class="btn btn-primary">Enviar</button>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

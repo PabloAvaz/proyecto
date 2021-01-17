@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.model.enums.Tipo;
 import com.model.producto.Producto;
 import com.model.user.Usuario;
 import com.service.IProductoService;
@@ -57,6 +58,8 @@ public class ProductoController {
 		String rutaImg = Utilidades.guardarArchivo(imagen, ruta);
 		if(rutaImg.endsWith("png")||rutaImg.endsWith("jpg"))producto.setImagen(rutaImg);
 		serviceProducto.guardar(producto);
+		
+		if(producto.getTipo().equals(Tipo.EQUIPABLE))return"redirect:/action/edit/" + producto.getId();
 		return "redirect:/productos/list";
 	}
 	@GetMapping("/delete/{id}")
