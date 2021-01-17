@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import com.model.interfaces.Consumible;
-import com.model.interfaces.Equipable;
+import com.model.acciones.AccionEquipable;
 import com.model.producto.Producto;
 import com.model.user.Usuario;
+import com.repository.AccionEquipableRepository;
 import com.repository.UsuarioRepository;
 import com.service.IUsuarioService;
 
@@ -19,6 +19,8 @@ import com.service.IUsuarioService;
 public class UsuariosJpaService implements IUsuarioService {
 	@Autowired
 	private UsuarioRepository repoUsuarios;
+	@Autowired
+	private AccionEquipableRepository repoAccionEquipable;
 	
 	@Override
 	public List<Usuario> getAll() {
@@ -82,13 +84,13 @@ public class UsuariosJpaService implements IUsuarioService {
 
 	@Override
 	public boolean comprar(Usuario user, Producto prod) {
-		if(user.getPuntos() >= prod.getPrecio()) {
-			user.gastar(prod.getPrecio());
+		if(prod != null && user.getPuntos() >= prod.getPrecio()) {
 			if(!user.getArticulos().contains(prod)) {
 				user.comprar(prod);
 			} else {
 				dar(user,prod,1);
 			}
+			user.gastar(prod.getPrecio());
 			return true;
 		} else {
 			return false;
@@ -102,21 +104,22 @@ public class UsuariosJpaService implements IUsuarioService {
 		repoUsuarios.comprarArticulo(total,usr,produ);
 	}
 	@Override
-	public void usar(Usuario user, Consumible consumible) {
-		
+	public void usar(Usuario user, Producto producto) {
+		switch(producto.getTipo()) {
+			case CONSUMIBLE:
+				
+				break;
+				
+			case EQUIPABLE:
+				Optional<AccionEquipable> accion = repoAccionEquipable.findById(producto.getId());
+				if(accion.isPresent()) {
+					user.setSkin(accion.get().getSkin());
+				}
+				break;
+				
+			default:
+				break;
+		}
 	}
-
-	@Override
-	public void equipar(Usuario user, Equipable equipo) {
-		
-	}
-
-	@Override
-	public void desequipar(Usuario user, Equipable equipo) {
-		
-	}
-
-
-
 
 }

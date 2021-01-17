@@ -1,18 +1,39 @@
-package com.model.producto;
+package com.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.model.acciones.Accion;
 import com.model.enums.Tipo;
 
 @Entity
 @Table(name="producto")
 public class Producto {
+	
+	//TEEEEEEEEEEMP
+    @OneToMany(
+            mappedBy = "producto",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+        )
+   private List<ProductoUsuario> productos = new ArrayList<>();
+    
+	
+	
+	public List<ProductoUsuario> getProductos() {
+		return productos;
+	}
+	public void setProductos(List<ProductoUsuario> productos) {
+		this.productos = productos;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +44,6 @@ public class Producto {
 	private String imagen = "default.png";
 	private int precio;
 	private Tipo tipo;
-
     
 	public int getId() {
 		return id;

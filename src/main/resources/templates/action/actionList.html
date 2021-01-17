@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/head:: head"/>
+</head>
+<body>
+	<nav th:insert="fragments/menu :: menu-principal"/>
+	<a class="btn btn-primary" th:href="@{/action/create}">Crear</a>
+	<table class="table">
+		<tr>
+			<th>Id</th>
+			<th>Skin</th>
+		</tr>
+		<tr th:each="accion:${acciones}" th:object="${accion}">
+			<td th:text="*{id}"></td>
+			<td th:text="*{skin}"></td>
+		</tr>
+	</table>
+</body>
+</html>

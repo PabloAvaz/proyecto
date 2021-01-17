@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.model.user.Usuario;
@@ -23,11 +24,11 @@ public class PerfilController {
 	private IProductoService serviceProducto;
 	
 	private boolean logeado;
-	
+	private Usuario usr;
+
 	@ModelAttribute
 	public void init(Model modelo, HttpSession sesion) {
-		Usuario usr = (Usuario) sesion.getAttribute("usuario");
-		System.out.println(usr);
+		usr = (Usuario) sesion.getAttribute("usuario");
 		if(usr != null) {
 			logeado = true;
 			modelo.addAttribute("usuario",usr);
@@ -41,5 +42,16 @@ public class PerfilController {
 	public String productos() {
 		if(!logeado) return "redirect:/login";
 		return "/perfil/productoList";
+	}
+	
+	@GetMapping("/usar/{id}")
+	public String usar(@PathVariable int id, HttpSession sesion) {
+		if(!logeado) return "redirect:/login";
+		
+		serviceUsuario.usar(usr, serviceProducto.getById(id));
+		serviceUsuario.modificar(usr);
+
+		sesion.setAttribute("usuario", usr);
+		return "redirect:/perfil/list";
 	}
 }

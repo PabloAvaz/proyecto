@@ -1,33 +1,20 @@
-package com.model.producto;
+package com.model.acciones;
 
-import com.model.enums.TipoAccion;
+import com.model.enums.Operacion;
 
-public class Accion {
-	private int id;
-	private TipoAccion tipo;
+public class AccionTemporal {
+	private Operacion tipo;
+
 	private int cantidad;
 	private int duracion;
 	private int poder;
-	
-	public Accion(int id, TipoAccion tipo, int cantidad, int duracion, int poder) {
-		this.id = id;
-		this.tipo = tipo;
+		
+	public AccionTemporal(int cantidad, int duracion, int poder) {
 		this.cantidad = cantidad;
 		this.duracion = duracion;
 		this.poder = poder;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public TipoAccion getTipo() {
-		return tipo;
-	}
-	public void setTipo(TipoAccion tipo) {
-		this.tipo = tipo;
-	}
+	
 	public int getCantidad() {
 		return cantidad;
 	}
@@ -45,6 +32,12 @@ public class Accion {
 	}
 	public void setPoder(int poder) {
 		this.poder = poder;
+	}
+	public Operacion getTipo() {
+		return tipo;
+	}
+	public void setTipo(Operacion tipo) {
+		this.tipo = tipo;
 	}
 
 }

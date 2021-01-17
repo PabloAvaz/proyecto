@@ -42,7 +42,15 @@ constraint fk_productousuario1 foreign key (id) references usuario(id),
 constraint fk_productousuario2 foreign key (idProducto) references producto(idproducto)
 );
 
+-- EN DESARROLLO
 
+CREATE TABLE accionEquipable(
+id int not null,
+idSkin int not null,
+CONSTRAINT pk_accion PRIMARY KEY(id),
+CONSTRAINT UQ_accion UNIQUE (idSkin),
+constraint fk_accionEquipable foreign key (idSkin) references skin(idSkin)
+);
 
 
 -- drop table usuario;

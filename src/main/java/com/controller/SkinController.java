@@ -43,11 +43,16 @@ public class SkinController {
 		String img = Utilidades.guardarArchivo(archivoImagen, rutaImagen);
 		String audio = Utilidades.guardarArchivo(archivoSonido, rutaSonido);
 		
-		skin.setImagen(img);
-		skin.setSonido(audio);
+		if(!img.endsWith("_"))skin.setImagen(img);
+		if(!audio.endsWith("_"))skin.setSonido(audio);
 		serviceSkin.guardar(skin);
 		
-		return "skin/skinForm.html";
+		return "redirect:/skin/list";
+	}
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable int id, Model modelo) {
+		modelo.addAttribute("skin", serviceSkin.getById(id));
+		return "/skin/skinForm";
 	}
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {

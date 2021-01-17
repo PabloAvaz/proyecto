@@ -10,7 +10,7 @@ import com.model.producto.Skin;
 import com.repository.SkinRepository;
 import com.service.ISkinService;
 @Service
-public class SkinJpaService implements ISkinService{
+public class SkinJpaService implements ISkinService {
 	@Autowired
 	private SkinRepository repoSkin;
 

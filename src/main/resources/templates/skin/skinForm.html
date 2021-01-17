@@ -15,8 +15,12 @@
 			    <label>Audio</label>
 			    <input name="archivoSonido" type="file" class="form-control-file">
 			  </div>
-			  <input type="hidden" th:field="*{imagen}"></input>
+			  <div class="col-md-3">
+                  <label for="imagen">Imagen/Logo</label>
+                  <img class="rounded mx-auto d-block" th:src="@{/img/{img} (img=*{imagen})}" alt="Generic placeholder image" width="200" height="200">            
+                </div>
 			  <input type="hidden" th:field="*{id}"></input>
+			  
 			  <button type="submit" class="btn btn-primary">Enviar</button>
 			</form>
 		</div>

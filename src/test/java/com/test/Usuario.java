@@ -1,5 +1,6 @@
-package com.model.user;
+package com.test;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,29 +10,47 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.model.producto.Producto;
 import com.model.producto.Skin;
+import com.model.user.User;
 
 @Entity
 @Table(name="usuario")
 public class Usuario extends User {
 	
+	//TEEEEEEEEEMP
+    @OneToMany(
+            mappedBy = "usuario",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+        )
+    private List<ProductoUsuario> productos = new ArrayList<>();
+    
+	
+
+	public List<ProductoUsuario> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<ProductoUsuario> productos) {
+		this.productos = productos;
+	}
+
 	private int puntos;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "skin", referencedColumnName ="idSkin")
 	private Skin skin;
-	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "productousuario",
 			joinColumns = @JoinColumn(name="id"), 
 			inverseJoinColumns = @JoinColumn(name="idProducto"))
 	private List<Producto> articulos;
-	
 	
 	public Usuario() {
 		this(0,"","",true,"",0);
@@ -75,7 +94,6 @@ public class Usuario extends User {
 	public void gastar(int cantidad) {
 		this.puntos -= cantidad;
 	}
-
 	
 	@Override
 	public String toString() {

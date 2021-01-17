@@ -1,6 +1,6 @@
 package com.model.enums;
 
-public enum TipoAccion {
+public enum Operacion {
 	CURAR,
 	VELOCIDAD
 }

@@ -7,14 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import com.model.interfaces.Consumible;
-import com.model.interfaces.Equipable;
 import com.model.producto.Producto;
-import com.model.user.Usuario;
 import com.repository.ProductoRepository;
-import com.repository.UsuarioRepository;
 import com.service.IProductoService;
-import com.service.IUsuarioService;
 
 @Service
 @Primary

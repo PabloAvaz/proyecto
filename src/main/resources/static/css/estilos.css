@@ -7,7 +7,7 @@ body{
 		animation: color 14s ease 0s infinite alternate;	
 }
 
-.clicker:hover {
+.animado {
 		animation: clicker 4s linear 0s infinite alternate;	
 }
 	

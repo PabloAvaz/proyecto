@@ -11,8 +11,8 @@
 	 -->
 	 
 	<h1 id="salida"></h1>
-	<image th:if="${usuario!=null}" class="clicker" id="rico" th:src="@{/img/{img} (img=${usuario.skin.imagen})}" />
-	<image th:if="${usuario==null}" class="clicker" id="rico" th:src="@{/img/default.png}" />
+	<image th:if="${usuario!=null}" class="" id="clicker" th:src="@{/img/{img} (img=${usuario.skin.imagen})}" />
+	<image th:if="${usuario==null}" class="" id="clicker" th:src="@{/img/default.png}" />
 
 	<script  th:if="${usuario!=null}" th:inline="javascript">
 	audio = /*[[
@@ -21,7 +21,7 @@
 
 	veces = 0;
 	audio = new Audio(audio)
-	$("#rico").click(function(){
+	$("#clicker").click(function(){
 		$("#salida").text("Total: " + ++veces);
 		audio.play();
 		$.ajax({
@@ -32,17 +32,25 @@
 		    	console.log("Enviado: " , json)
 		    }
 		});
+		if(veces%50==0){
+			$("#clicker").addClass("animado");
+			setTimeout(function(){$("#clicker").removeClass("animado");}, 4000);
+		};
 		})
 	</script>
 	
-		<script  th:if="${usuario==null}" th:inline="javascript">
+<script  th:if="${usuario==null}" th:inline="javascript">
 	audio = "/sounds/default.wav";
 
 	veces = 0;
 	audio = new Audio(audio)
-	$("#rico").click(function(){
+	$("#clicker").click(function(){
 		$("#salida").text("Total: " + ++veces);
 		audio.play();
+		if(veces%50==0){
+			$("#clicker").addClass("animado");
+			setTimeout(function(){$("#clicker").removeClass("animado");}, 4000);
+		};
 		})
 	</script>
 </body>

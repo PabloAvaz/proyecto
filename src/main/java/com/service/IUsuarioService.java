@@ -2,8 +2,6 @@ package com.service;
 
 import java.util.List;
 
-import com.model.interfaces.Consumible;
-import com.model.interfaces.Equipable;
 import com.model.producto.Producto;
 import com.model.user.Usuario;
 
@@ -16,10 +14,7 @@ public interface IUsuarioService {
 	void modificar(Usuario user);
 	void punto(Usuario user);
 	Usuario validar(Usuario user);
+	void usar(Usuario user, Producto producto);
 	boolean comprar(Usuario user, Producto prod);
 	void dar(Usuario user, Producto prod, Integer cantidad);
-	void usar(Usuario user, Consumible consumible);
-	void equipar(Usuario user, Equipable equipo);
-	void desequipar(Usuario user, Equipable equipo);
-
 }
