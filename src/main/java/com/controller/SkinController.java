@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,7 @@ public class SkinController {
 		return "skin/skinForm.html";
 	}
 	@PostMapping("/create")
-	public String crear(Model modelo, Skin skin, MultipartFile archivoImagen, BindingResult resultadoImg, MultipartFile archivoSonido, BindingResult resultadoAudio) {
+	public String crear(Model modelo,@ModelAttribute Skin skin, MultipartFile archivoImagen, BindingResult resultadoImg, MultipartFile archivoSonido, BindingResult resultadoAudio) {
 		if(resultadoImg.hasErrors() || resultadoAudio.hasErrors()) return "redirect:/skin/create";
 		String img = Utilidades.guardarArchivo(archivoImagen, rutaImagen);
 		String audio = Utilidades.guardarArchivo(archivoSonido, rutaSonido);

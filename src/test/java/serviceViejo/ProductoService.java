@@ -1,4 +1,4 @@
-package com.service;
+package serviceViejo;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.model.enums.Tipo;
 import com.model.producto.Producto;
+import com.service.IProductoService;
 
 @Service
 public class ProductoService implements IProductoService {

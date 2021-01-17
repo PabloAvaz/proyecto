@@ -1,4 +1,4 @@
-package com.service;
+package serviceViejo;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.model.producto.Producto;
 import com.model.user.Usuario;
+import com.service.IUsuarioService;
 
 @Service
 public class UsuariosService implements IUsuarioService{

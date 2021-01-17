@@ -24,6 +24,8 @@
                   <img class="rounded mx-auto d-block" th:src="@{/img/{img} (img=*{imagen})}" alt="Generic placeholder image" width="200" height="200">            
                 </div>
 			  <input type="hidden" th:field="*{id}"></input>
+			  <input type="hidden" th:field="*{imagen}"></input>
+			  <input type="hidden" th:field="*{sonido}"></input>
 			  
 			  <button type="submit" class="btn btn-primary">Enviar</button>
 			</form>

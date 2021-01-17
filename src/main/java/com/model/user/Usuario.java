@@ -32,6 +32,7 @@ public class Usuario extends User {
 			inverseJoinColumns = @JoinColumn(name="idProducto"))
 	private List<Producto> articulos;
 	
+
 	public Usuario() {
 		this(0,"","",true,"",0);
 		//this.skin = new Skin();

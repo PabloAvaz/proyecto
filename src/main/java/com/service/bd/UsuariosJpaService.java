@@ -118,6 +118,7 @@ public class UsuariosJpaService implements IUsuarioService {
 				break;
 				
 			default:
+				System.out.println("Tipo de producto no válido");
 				break;
 		}
 	}

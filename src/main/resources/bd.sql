@@ -49,6 +49,9 @@ constraint fk_accionEquipable1 foreign key (idSkin) references skin(idSkin),
 constraint fk_accionEquipable2 foreign key (idProducto) references producto(idproducto)
 );
 
+-- drop table accionEquipable;
+-- drop table usuario;
+
 insert into skin values(1,"DEFAULT","default.png","default.wav");
 insert into skin values(2,"Kanan","kanan.webp","cancion1.mp3");
 insert into skin values(3,"Woki","woki.jpg","gato.mp3");
@@ -68,3 +71,12 @@ insert into productoUsuario values(1,4,10);
 insert into accionEquipable values(1,1);
 insert into accionEquipable values(2,2);
 insert into accionEquipable values(3,3);
+
+-- Desarrollo
+CREATE TABLE efecto (
+idEfecto int NOT NULL AUTO_INCREMENT,
+duracion int,
+poder int,
+tipo varchar(20),
+CONSTRAINT pk_efecto PRIMARY KEY(idEfecto)
+);
