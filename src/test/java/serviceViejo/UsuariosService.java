@@ -67,11 +67,6 @@ public class UsuariosService implements IUsuarioService{
 		return null;
 	}
 	@Override
-	public void dar(Usuario user, Producto prod, Integer cantidad) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
 	public void usar(Usuario user, Producto producto) {
 		// TODO Auto-generated method stub
 		

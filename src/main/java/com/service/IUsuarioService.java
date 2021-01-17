@@ -3,6 +3,7 @@ package com.service;
 import java.util.List;
 
 import com.model.producto.Producto;
+import com.model.producto.ProductoUsuario;
 import com.model.user.Usuario;
 
 public interface IUsuarioService {
@@ -16,5 +17,5 @@ public interface IUsuarioService {
 	Usuario validar(Usuario user);
 	void usar(Usuario user, Producto producto);
 	boolean comprar(Usuario user, Producto prod);
-	void dar(Usuario user, Producto prod, Integer cantidad);
+	List<ProductoUsuario> getProductos(Usuario user);
 }

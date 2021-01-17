@@ -10,15 +10,17 @@
 			<th>Nombre</th>
 			<th>Descripcion</th>
 			<th>Tipo</th>
+			<th>Cantidad</th>
 			<th>Acción</th>
 		</tr>
-		<tr th:each="producto:${productos}">
-			<td th:text="${producto.id}"></td>
-			<td th:text="${producto.nombre}"></td>
-			<td th:text="${producto.descripcion}"></td>
-			<td th:text="${producto.tipo}"></td>
+		<tr th:each="prdUsr:${productos}" th:object="${prdUsr}">
+			<td th:text="*{productoUsuarioId.producto.id}"></td>
+			<td th:text="*{productoUsuarioId.producto.nombre}"></td>
+			<td th:text="*{productoUsuarioId.producto.descripcion}"></td>
+			<td th:text="*{productoUsuarioId.producto.tipo}"></td>
+			<td th:text="*{cantidad}"></td>
 			<td>
-				<a class="btn btn-success" th:href="@{/perfil/usar/{prd} (prd=${producto.id})}">Usar</a>
+				<a class="btn btn-success" th:href="@{/perfil/usar/{prd} (prd=*{productoUsuarioId.producto.id})}">Usar</a>
 			</td>
 		</tr>
 	</table>

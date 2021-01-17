@@ -22,6 +22,7 @@ public class PerfilController {
 	private IUsuarioService serviceUsuario;
 	@Autowired
 	private IProductoService serviceProducto;
+
 	
 	private boolean logeado;
 	private Usuario usr;
@@ -31,16 +32,16 @@ public class PerfilController {
 		usr = (Usuario) sesion.getAttribute("usuario");
 		if(usr != null) {
 			logeado = true;
-			modelo.addAttribute("usuario",usr);
-			modelo.addAttribute("productos",usr.getArticulos());
 		} else {
 			logeado = false;
 		}
 	}
 	
 	@GetMapping("/list")
-	public String productos() {
+	public String productos(Model modelo) {
 		if(!logeado) return "redirect:/login";
+		System.out.println(serviceUsuario.getProductos(usr));
+		modelo.addAttribute("productos",serviceUsuario.getProductos(usr));
 		return "/perfil/productoList";
 	}
 	

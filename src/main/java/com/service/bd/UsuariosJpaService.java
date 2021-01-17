@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.model.acciones.AccionEquipable;
 import com.model.producto.Producto;
+import com.model.producto.ProductoUsuario;
+import com.model.producto.ProductoUsuarioId;
 import com.model.user.Usuario;
 import com.repository.AccionEquipableRepository;
+import com.repository.ProductoUsuarioRepository;
 import com.repository.UsuarioRepository;
 import com.service.IUsuarioService;
 
@@ -19,6 +22,8 @@ import com.service.IUsuarioService;
 public class UsuariosJpaService implements IUsuarioService {
 	@Autowired
 	private UsuarioRepository repoUsuarios;
+	@Autowired
+	private ProductoUsuarioRepository repoProductoUsuario;
 	@Autowired
 	private AccionEquipableRepository repoAccionEquipable;
 	
@@ -88,7 +93,8 @@ public class UsuariosJpaService implements IUsuarioService {
 			if(!user.getArticulos().contains(prod)) {
 				user.comprar(prod);
 			} else {
-				dar(user,prod,1);
+				ProductoUsuarioId id = new ProductoUsuarioId(prod,user);
+				repoProductoUsuario.save(new ProductoUsuario(id,repoProductoUsuario.findById(id).get().getCantidad()+1));
 			}
 			user.gastar(prod.getPrecio());
 			return true;
@@ -96,13 +102,7 @@ public class UsuariosJpaService implements IUsuarioService {
 			return false;
 		}
 	}
-	@Override
-	public void dar(Usuario user, Producto prod, Integer cantidad) {
-		Integer usr = user.getId();
-		Integer produ = prod.getId();
-		int total = cantidad + repoUsuarios.countArticulos(usr, produ);
-		repoUsuarios.comprarArticulo(total,usr,produ);
-	}
+
 	@Override
 	public void usar(Usuario user, Producto producto) {
 		switch(producto.getTipo()) {
@@ -122,5 +122,13 @@ public class UsuariosJpaService implements IUsuarioService {
 				break;
 		}
 	}
+
+	@Override
+	public List<ProductoUsuario> getProductos(Usuario user) {
+		return repoProductoUsuario.findByUsuario(user.getId());
+	}
+
+
+
 
 }
