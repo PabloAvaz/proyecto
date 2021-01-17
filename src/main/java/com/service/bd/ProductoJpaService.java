@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.model.enums.Tipo;
 import com.model.producto.Producto;
 import com.repository.ProductoRepository;
 import com.service.IProductoService;
@@ -21,7 +22,11 @@ public class ProductoJpaService implements IProductoService {
 	public List<Producto> getAll() {
 		return repoProductos.findAll();
 	}
-
+	
+	@Override
+	public List<Producto> getByTipo(Tipo tipo) {
+		return repoProductos.findByTipo(tipo);
+	}
 	@Override
 	public Producto getById(int id) {
 		Optional<Producto> p = repoProductos.findById(id);
@@ -54,7 +59,5 @@ public class ProductoJpaService implements IProductoService {
 			pFinal.setPrecio(producto.getPrecio());
 		}
 	}
-	
-
 
 }

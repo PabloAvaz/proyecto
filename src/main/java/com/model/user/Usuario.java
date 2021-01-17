@@ -32,7 +32,6 @@ public class Usuario extends User {
 			inverseJoinColumns = @JoinColumn(name="idProducto"))
 	private List<Producto> articulos;
 	
-	
 	public Usuario() {
 		this(0,"","",true,"",0);
 		//this.skin = new Skin();
@@ -76,7 +75,6 @@ public class Usuario extends User {
 		this.puntos -= cantidad;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Usuario [puntos=" + puntos + ", skin=" + skin + ", articulos=" + articulos 

@@ -4,19 +4,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.model.acciones.AccionEquipable;
+import com.model.enums.Tipo;
 import com.service.IAccionEquipableService;
+import com.service.IProductoService;
+import com.service.ISkinService;
 
 @Controller
 @RequestMapping("/action")
 public class AccionController {
 	@Autowired
 	private IAccionEquipableService serviceAccionEquipable;
+	@Autowired
+	private IProductoService serviceProducto;
+	@Autowired
+	private ISkinService serviceSkins;
 	
 	@GetMapping("/create")
-	public String crear() {
-		return "";
+	public String crear(Model modelo) {
+		modelo.addAttribute("productos", serviceProducto.getByTipo(Tipo.EQUIPABLE));
+		modelo.addAttribute("skins", serviceSkins.getAll());
+		modelo.addAttribute("accion", new AccionEquipable());
+
+		return "action/actionForm.html";
+	}
+	@PostMapping("/create")
+	public String crearForm(AccionEquipable accion) {
+		System.out.println(accion);
+		serviceAccionEquipable.save(accion);
+
+		return "redirect:/action/create";
+	}
+	@GetMapping("/edit/{id}")
+	public String edit(Model modelo) {
+		modelo.addAttribute("productos", serviceProducto.getByTipo(Tipo.EQUIPABLE));
+		modelo.addAttribute("skins", serviceSkins.getAll());
+		modelo.addAttribute("accion", new AccionEquipable());
+
+		return "action/actionForm.html";
 	}
 	@GetMapping("/list")
 	public String list(Model modelo) {

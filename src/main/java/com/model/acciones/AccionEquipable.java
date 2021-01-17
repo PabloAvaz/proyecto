@@ -30,5 +30,11 @@ public class AccionEquipable extends Accion {
 	public void setSkin(Skin skin) {
 		this.skin = skin;
 	}
+
+	@Override
+	public String toString() {
+		return "AccionEquipable [skin=" + skin + ", id=" + id + "]";
+	}
+	
 	
 }

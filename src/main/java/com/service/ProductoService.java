@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.model.enums.Tipo;
 import com.model.producto.Producto;
 
 @Service
@@ -43,6 +44,12 @@ public class ProductoService implements IProductoService {
 	public void update(Producto producto) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Producto> getByTipo(Tipo tipo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

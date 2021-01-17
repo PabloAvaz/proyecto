@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.model.acciones.Accion;
 import com.model.acciones.AccionEquipable;
 import com.model.user.Usuario;
 import com.repository.AccionEquipableRepository;
@@ -55,10 +56,7 @@ public class IndexController {
 	@ResponseBody
 	private String test(HttpSession sesion) {
 		Usuario usr = (Usuario)sesion.getAttribute("usuario");
-		serviceUsuario.usar(usr, serviceProducto.getById(1));
-		System.out.println(usr);
-		serviceUsuario.modificar(usr);
-		//repoAcciones.save(new AccionEquipable(2, serviceSkin.getById(1)));
+
 		return "fin";
 	} 
 }

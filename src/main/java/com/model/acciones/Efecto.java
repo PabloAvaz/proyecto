@@ -1,26 +1,18 @@
 package com.model.acciones;
 
-import com.model.enums.Operacion;
+import com.model.enums.TipoEfecto;
 
-public class AccionTemporal {
-	private Operacion tipo;
+public class Efecto {
+	private TipoEfecto tipo;
 
-	private int cantidad;
 	private int duracion;
 	private int poder;
 		
-	public AccionTemporal(int cantidad, int duracion, int poder) {
-		this.cantidad = cantidad;
+	public Efecto(int duracion, int poder) {
 		this.duracion = duracion;
 		this.poder = poder;
 	}
 	
-	public int getCantidad() {
-		return cantidad;
-	}
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
 	public int getDuracion() {
 		return duracion;
 	}
@@ -33,10 +25,10 @@ public class AccionTemporal {
 	public void setPoder(int poder) {
 		this.poder = poder;
 	}
-	public Operacion getTipo() {
+	public TipoEfecto getTipo() {
 		return tipo;
 	}
-	public void setTipo(Operacion tipo) {
+	public void setTipo(TipoEfecto tipo) {
 		this.tipo = tipo;
 	}
 

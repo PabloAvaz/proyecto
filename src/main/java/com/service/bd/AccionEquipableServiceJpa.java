@@ -18,4 +18,9 @@ public class AccionEquipableServiceJpa implements IAccionEquipableService {
 		return repoAcciones.findAll();
 	}
 
+	@Override
+	public void save(AccionEquipable accion) {
+		repoAcciones.save(accion);
+	}
+
 }

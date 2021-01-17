@@ -8,12 +8,14 @@
 	<table class="table">
 		<tr>
 			<th>Id</th>
+			<th>Nombre</th>
 			<th>Imagen</th>
 			<th>Audio</th>
 			<th>Acciones</th>
 		</tr>
 		<tr th:each="skin:${skins}">
 			<td th:text="${skin.id}"></td>
+			<td th:text="${skin.nombre}"></td>
 			<td><img style="max-width:200px;max-height:200px" th:src="@{/img/{img} (img=${skin.imagen})}"></td>
 			<td><button th:id="${skin.sonido}">Tocar</td>
 			<td>
