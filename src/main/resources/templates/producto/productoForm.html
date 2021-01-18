@@ -25,8 +25,10 @@
 			    <input type="number" name="precio" th:field="*{precio}" class="form-control" placeholder="Precio" value="0" step="1">
 			  </div>
 			  <div class="form-group">
-			    <label>Imagen</label>
-			    <input name="archivoImagen" type="file" class="form-control-file">
+				  <div class="custom-file">
+					  <input name="archivoImagen" type="file" class="custom-file-input" id="customFile">
+					  <label class="custom-file-label" for="customFile">Elige una iagen</label>
+				  </div>
 			  </div>
 			  <input type="hidden" th:field="*{imagen}"></input>
 			  <input type="hidden" th:field="*{id}"></input>

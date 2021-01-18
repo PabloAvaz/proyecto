@@ -36,6 +36,13 @@ public class ProductoUsuario {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+	
+	public void aumentarCantidad(int cantidad) {
+		this.cantidad += cantidad;
+	}
+	public void disminuirCantidad(int cantidad) {
+		this.cantidad -= cantidad;
+	}
 
 	public ProductoUsuarioId getProductoUsuario() {
 		return productoUsuarioId;

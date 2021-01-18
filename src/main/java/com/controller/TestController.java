@@ -37,6 +37,11 @@ public class TestController {
 	@GetMapping("/")
 	@ResponseBody
 	private String test(HttpSession sesion) {
+
+		return "fin";
+	} 
+	
+	private void testComprarCantidad() {
 		ProductoUsuarioId puID = new ProductoUsuarioId();
 		ProductoUsuario pu = new ProductoUsuario();
 
@@ -47,6 +52,5 @@ public class TestController {
 		
 		repoProductoUsuario.save(pu);
 		System.out.println(pu);
-		return "fin";
-	} 
+	}
 }

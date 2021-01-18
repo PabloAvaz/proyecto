@@ -7,10 +7,11 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.model.producto.Producto;
+import com.model.producto.ProductoUsuario;
 import com.model.user.Usuario;
 import com.service.IUsuarioService;
 
-@Service
+//@Service
 public class UsuariosService implements IUsuarioService{
 	private List<Usuario> usuarios = new LinkedList<Usuario>();
 	private static int id = 0;
@@ -66,10 +67,15 @@ public class UsuariosService implements IUsuarioService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
-	public void usar(Usuario user, Producto producto) {
+	public boolean usar(Usuario user, Producto producto) {
+		return false;
+	}
+	@Override
+	public List<ProductoUsuario> getProductos(Usuario user) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.model.enums.Tipo;
 import com.model.producto.Producto;
+import com.model.user.Usuario;
 import com.repository.ProductoRepository;
 import com.service.IProductoService;
 
@@ -58,6 +59,10 @@ public class ProductoJpaService implements IProductoService {
 			pFinal.setImagen(producto.getImagen());
 			pFinal.setPrecio(producto.getPrecio());
 		}
+	}
+	@Override
+	public List<Producto> getListaCompraByUser(Usuario user) {
+		return repoProductos.getListaCompra(user.getId());
 	}
 
 }

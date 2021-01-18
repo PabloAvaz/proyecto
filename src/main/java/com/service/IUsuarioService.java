@@ -15,7 +15,7 @@ public interface IUsuarioService {
 	void modificar(Usuario user);
 	void punto(Usuario user);
 	Usuario validar(Usuario user);
-	void usar(Usuario user, Producto producto);
+	boolean usar(Usuario user, Producto producto);
 	boolean comprar(Usuario user, Producto prod);
 	List<ProductoUsuario> getProductos(Usuario user);
 }

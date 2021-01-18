@@ -33,7 +33,7 @@ public class TiendaController {
 		if(usuario == null) return "redirect:/login";
 		
 		modelo.addAttribute("usuario", usuario);
-		modelo.addAttribute("productos", serviceProductos.getAll());
+		modelo.addAttribute("productos", serviceProductos.getListaCompraByUser(usuario));
 
 		return "tienda";
 	}

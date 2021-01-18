@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.model.enums.Tipo;
 import com.model.producto.Producto;
+import com.model.user.Usuario;
 import com.service.IProductoService;
 
 @Service
@@ -49,6 +50,12 @@ public class ProductoService implements IProductoService {
 
 	@Override
 	public List<Producto> getByTipo(Tipo tipo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Producto> getListaCompraByUser(Usuario user) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -26,7 +26,7 @@ public class UsuariosJpaService implements IUsuarioService {
 	private ProductoUsuarioRepository repoProductoUsuario;
 	@Autowired
 	private AccionEquipableRepository repoAccionEquipable;
-	
+
 	@Override
 	public List<Usuario> getAll() {
 		return repoUsuarios.findAll();
@@ -104,31 +104,36 @@ public class UsuariosJpaService implements IUsuarioService {
 	}
 
 	@Override
-	public void usar(Usuario user, Producto producto) {
+	public boolean usar(Usuario user, Producto producto) {
 		switch(producto.getTipo()) {
-			case CONSUMIBLE:
-				
-				break;
-				
-			case EQUIPABLE:
-				Optional<AccionEquipable> accion = repoAccionEquipable.findById(producto.getId());
-				if(accion.isPresent()) {
-					user.setSkin(accion.get().getSkin());
+		case CONSUMIBLE:
+			Optional<ProductoUsuario> pu = repoProductoUsuario.findById(new ProductoUsuarioId(producto, user));
+			if(pu!=null) {
+				ProductoUsuario puFinal = pu.get();
+				if(puFinal.getCantidad()>0) {
+					puFinal.disminuirCantidad(1);
+					repoProductoUsuario.save(puFinal);
+					return true;
 				}
-				break;
-				
-			default:
-				System.out.println("Tipo de producto no válido");
-				break;
+			}
+			break;
+
+		case EQUIPABLE:
+			Optional<AccionEquipable> accion = repoAccionEquipable.findById(producto.getId());
+			if(accion.isPresent()) {
+				user.setSkin(accion.get().getSkin());
+				return true;
+			}
+			break;
+		default:
+			System.out.println("Tipo de producto no válido");
 		}
+		return false;
 	}
 
 	@Override
 	public List<ProductoUsuario> getProductos(Usuario user) {
 		return repoProductoUsuario.findByUsuario(user.getId());
 	}
-
-
-
 
 }

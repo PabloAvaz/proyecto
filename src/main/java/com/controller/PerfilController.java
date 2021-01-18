@@ -30,17 +30,14 @@ public class PerfilController {
 	@ModelAttribute
 	public void init(Model modelo, HttpSession sesion) {
 		usr = (Usuario) sesion.getAttribute("usuario");
-		if(usr != null) {
-			logeado = true;
-		} else {
-			logeado = false;
-		}
+		logeado = (usr != null);
+		modelo.addAttribute("usuario",usr);
+
 	}
 	
 	@GetMapping("/list")
 	public String productos(Model modelo) {
 		if(!logeado) return "redirect:/login";
-		System.out.println(serviceUsuario.getProductos(usr));
 		modelo.addAttribute("productos",serviceUsuario.getProductos(usr));
 		return "/perfil/productoList";
 	}
@@ -49,10 +46,11 @@ public class PerfilController {
 	public String usar(@PathVariable int id, HttpSession sesion) {
 		if(!logeado) return "redirect:/login";
 		
-		serviceUsuario.usar(usr, serviceProducto.getById(id));
-		serviceUsuario.modificar(usr);
+		if(serviceUsuario.usar(usr, serviceProducto.getById(id))) {
+			serviceUsuario.modificar(usr);
+			sesion.setAttribute("usuario", usr);
+		}
 
-		sesion.setAttribute("usuario", usr);
 		return "redirect:/perfil/list";
 	}
 }

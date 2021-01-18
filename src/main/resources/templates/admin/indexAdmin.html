@@ -1,6 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Pruebas</title>
 	<div th:replace="fragments/head:: head"/>
 </head>
 <body>
@@ -17,8 +16,8 @@
 				<div class="card-body">
 					<h1 class="card-title pricing-card-title">Administrar los usuarios</h1>
 					<ul class="list-unstyled mt-3 mb-4">
-					   <li>Crear usuario</li>
-					   <li>Ver usuarios</li>
+					   <li><a href="#">Crear usuario</a></li>
+					   <li><a th:href="@{/usuarios/adminList}">Ver usuarios</a></li>
 					   <li></li>
 					   <li></li>
 					</ul>
@@ -35,7 +34,7 @@
 				<div class="card-body">
 					<h1 class="card-title pricing-card-title">Administrar los productos</h1>
 					<ul class="list-unstyled mt-3 mb-4">
-					   <li>Crear producto</li>
+					   <li><a th:href="@{/productos/create}">Crear producto</a></li>
 					   <li><a th:href="@{/productos/list}">Ver productos</a></li>
 					   <li><a th:href="@{/action/list}">Modificar Skins</a></li>
 					   <li></li>
@@ -53,8 +52,8 @@
 				<div class="card-body">
 					<h1 class="card-title pricing-card-title">Administrar las skins</h1>
 					<ul class="list-unstyled mt-3 mb-4">
-					   <li>Crear skin</li>
-					   <li>Ver skins</li>
+					   <li><a th:href="@{/skin/create}">Crear skin</li>
+					   <li><a th:href="@{/skin/list}">Ver skins</li>
 					   <li></li>
 					   <li></li>
 					</ul>
