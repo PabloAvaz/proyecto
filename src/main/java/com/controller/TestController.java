@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.model.producto.ProductoUsuario;
 import com.model.producto.ProductoUsuarioId;
+import com.model.user.Energia;
+import com.model.user.Usuario;
 import com.repository.AccionEquipableRepository;
 import com.repository.EfectoRepository;
+import com.repository.EnergiaRepository;
 import com.repository.ProductoUsuarioRepository;
 import com.service.IProductoService;
 import com.service.ISkinService;
@@ -33,13 +36,29 @@ public class TestController {
 	private EfectoRepository repoEfectos;
 	@Autowired
 	private ProductoUsuarioRepository repoProductoUsuario;
+	@Autowired
+	private EnergiaRepository repoEnergia;
 	
 	@GetMapping("/")
-	@ResponseBody
 	private String test(HttpSession sesion) {
+		test();
+		Usuario usr = ((Usuario)sesion.getAttribute("usuario"));
+		if(usr!=null) {
+			//usr.getEnergia().aumentarEnergiaMaxima(200);
+			usr.getEnergia().recargar(100);
+			serviceUsuario.guardar(usr);
+		}
 
-		return "fin";
+		return "/test";
 	} 
+	
+	@GetMapping("/user")
+	@ResponseBody
+	public String verUser(HttpSession sesion) {
+		return sesion.getAttribute("usuario").toString();
+	}
+	private void test() {
+	}
 	
 	private void testComprarCantidad() {
 		ProductoUsuarioId puID = new ProductoUsuarioId();
@@ -51,6 +70,7 @@ public class TestController {
 		pu.setCantidad(6000);
 		
 		repoProductoUsuario.save(pu);
-		System.out.println(pu);
 	}
+
+
 }

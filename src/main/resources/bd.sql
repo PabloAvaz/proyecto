@@ -9,6 +9,13 @@ sonido varchar(50),
 CONSTRAINT pk_skin PRIMARY KEY(idSkin)
 );
 
+CREATE TABLE energia (
+idEnergia int NOT NULL AUTO_INCREMENT,
+total int not null,
+actual int not null,
+CONSTRAINT pk_energia PRIMARY KEY(idEnergia)
+);
+
 CREATE TABLE usuario(
 id int NOT NULL AUTO_INCREMENT,
 username varchar(50),
@@ -17,9 +24,11 @@ nombre varchar(50),
 puntos int,
 estatus boolean,
 skin int default 1,
+energia int,
 CONSTRAINT pk_usuarios PRIMARY KEY(id),
 CONSTRAINT UC_usuarios UNIQUE (username),
-constraint fk_UC_usuarios foreign key (skin) references skin(idSkin)
+constraint fk_usuarios_skin foreign key (skin) references skin(idSkin),
+constraint fk_usuarios_energia foreign key (energia) references energia(idEnergia)
 );
 
 CREATE TABLE producto(
@@ -90,3 +99,4 @@ poder int,
 tipo varchar(20),
 CONSTRAINT pk_efecto PRIMARY KEY(idEfecto)
 );
+

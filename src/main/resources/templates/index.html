@@ -11,12 +11,11 @@
 	 -->
 	 
 	<h1 id="salida"></h1>
-	<image th:if="${usuario!=null}" class="" id="clicker" th:src="@{/img/{img} (img=${usuario.skin.imagen})}" />
-	<image th:if="${usuario==null}" class="" id="clicker" th:src="@{/img/default.png}" />
+	<image class="" id="clicker" th:src="@{/img/{img} (img=${usuario!=null?usuario.skin.imagen:'default.png'})}" />
 
-	<script  th:if="${usuario!=null}" th:inline="javascript">
+	<script th:inline="javascript">
 	audio = /*[[
-		@{/sounds/{sonido} (sonido=${usuario.skin.sonido})}
+		@{/sounds/{sonido} (sonido=${usuario!=null?usuario.skin.sonido:'default.wav'})}
 		]]*/ "default.wav";
 
 	veces = 0;
@@ -39,19 +38,5 @@
 		})
 	</script>
 	
-<script  th:if="${usuario==null}" th:inline="javascript">
-	audio = "/sounds/default.wav";
-
-	veces = 0;
-	audio = new Audio(audio)
-	$("#clicker").click(function(){
-		$("#salida").text("Total: " + ++veces);
-		audio.play();
-		if(veces%50==0){
-			$("#clicker").addClass("animado");
-			setTimeout(function(){$("#clicker").removeClass("animado");}, 4000);
-		};
-		})
-	</script>
 </body>
 </html>

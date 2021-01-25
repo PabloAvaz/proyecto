@@ -23,6 +23,9 @@ public class Usuario extends User {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "skin", referencedColumnName ="idSkin")
 	private Skin skin;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "energia", referencedColumnName ="idEnergia")
+	private Energia energia;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
@@ -45,6 +48,7 @@ public class Usuario extends User {
 		this.nombre = nombre;
 		this.puntos = puntos;
 		this.articulos = new LinkedList<Producto>();
+		this.energia = new Energia(25,25);
 	}
 	public int getPuntos() {
 		return puntos;
@@ -64,6 +68,12 @@ public class Usuario extends User {
 	public void setSkin(Skin skin) {
 		this.skin = skin;
 	}
+	public Energia getEnergia() {
+		return energia;
+	}
+	public void setEnergia(Energia energia) {
+		this.energia = energia;
+	}
 
 	public void anotar() {
 		this.puntos++;
@@ -75,9 +85,10 @@ public class Usuario extends User {
 		this.puntos -= cantidad;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Usuario [puntos=" + puntos + ", skin=" + skin + ", articulos=" + articulos 
+		return "Usuario [puntos=" + puntos + ", skin=" + skin + ", energia=" + energia + ", articulos=" + articulos
 				+ ", id=" + id + ", nombre=" + nombre + ", estatus=" + estatus + ", username=" + username
 				+ ", password=" + password + "]";
 	}
