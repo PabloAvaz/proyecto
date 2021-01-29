@@ -22,6 +22,7 @@ import com.service.IUsuarioService;
 
 @Controller
 @RequestMapping("/test")
+@SuppressWarnings("unused")
 public class TestController {
 	@Autowired
 	private ISkinService serviceSkin;
@@ -43,11 +44,10 @@ public class TestController {
 	private String test(HttpSession sesion) {
 		test();
 		Usuario usr = ((Usuario)sesion.getAttribute("usuario"));
-		if(usr!=null) {
-			//usr.getEnergia().aumentarEnergiaMaxima(200);
-			usr.getEnergia().recargar(100);
-			serviceUsuario.guardar(usr);
-		}
+		
+		//usr.getEnergia().aumentarEnergiaMaxima(200);
+		usr.getEnergia().recargar(100);
+		serviceUsuario.guardar(usr);
 
 		return "/test";
 	} 

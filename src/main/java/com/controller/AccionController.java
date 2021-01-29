@@ -34,7 +34,6 @@ public class AccionController {
 	}
 	@PostMapping("/create")
 	public String crearForm(AccionEquipable accion) {
-		System.out.println(accion);
 		serviceAccionEquipable.save(accion);
 
 		return "redirect:/action/list";

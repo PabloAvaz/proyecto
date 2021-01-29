@@ -26,12 +26,10 @@ public class TiendaController {
 	
 	@ModelAttribute
 	public void init(HttpSession sesion) {
-		usuario= (Usuario)  sesion.getAttribute("usuario");		
+		usuario= (Usuario) sesion.getAttribute("usuario");		
 	}
 	@GetMapping("/")
 	public String tienda(Model modelo) {
-		if(usuario == null) return "redirect:/login";
-		
 		modelo.addAttribute("usuario", usuario);
 		modelo.addAttribute("productos", serviceProductos.getListaCompraByUser(usuario));
 
@@ -40,15 +38,11 @@ public class TiendaController {
 	
 	@GetMapping("/comprar/{id}")
 	public String comprar(@PathVariable int id, HttpSession sesion) {
-		if(usuario == null) return "redirect:/login";
-		
 		if(serviceUsuario.comprar(usuario, serviceProductos.getById(id))) {
 			serviceUsuario.modificar(usuario);
 			sesion.setAttribute("usuario", usuario);
-		} else {
-			
-		}
-		
+		} 
+
 		return "redirect:/tienda/";
 	}
 	

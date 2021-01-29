@@ -15,7 +15,7 @@
 		<label>Password</label>
 		<input th:field="*{password}" name="password" type="password"><br>
 		
-		<select name="skin" th:if="${admin}">
+		<select name="skin" sec:authorize="hasAnyAuthority('ADMIN')">
 			<option th:text="'Elige una opcion'" value></option>
 			<option th:each="skin:${skins}" th:value="${skin.id}" th:text="${skin.imagen}">
 		</select>

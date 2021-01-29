@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.model.acciones.Accion;
 import com.model.enums.Tipo;
 
 @Entity

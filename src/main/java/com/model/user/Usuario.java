@@ -12,6 +12,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.model.producto.Producto;
 import com.model.producto.Skin;
 
@@ -34,7 +37,15 @@ public class Usuario extends User {
 			inverseJoinColumns = @JoinColumn(name="idProducto"))
 	private List<Producto> articulos;
 	
-
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "PerfilUsuario",
+			joinColumns = @JoinColumn(name = "idUsuario"),
+			inverseJoinColumns = @JoinColumn(name = "idPerfil")
+			)
+	@Fetch(FetchMode.SELECT)
+	private List<Perfil> perfiles;
+	
 	public Usuario() {
 		this(0,"","",true,"",0);
 		//this.skin = new Skin();
@@ -50,6 +61,7 @@ public class Usuario extends User {
 		this.articulos = new LinkedList<Producto>();
 		this.energia = new Energia(25,25);
 	}
+
 	public int getPuntos() {
 		return puntos;
 	}
@@ -74,7 +86,19 @@ public class Usuario extends User {
 	public void setEnergia(Energia energia) {
 		this.energia = energia;
 	}
+	public List<Perfil> getPerfiles() {
+		return perfiles;
+	}
+	public void setPerfiles(List<Perfil> perfiles) {
+		this.perfiles = perfiles;
+	}
 
+	public void agregarPerfil(Perfil tempPerfil) {
+		if(perfiles==null) {
+			perfiles = new LinkedList<Perfil>();
+		}
+		perfiles.add(tempPerfil);
+	}
 	public void anotar() {
 		this.puntos++;
 	}
@@ -85,12 +109,11 @@ public class Usuario extends User {
 		this.puntos -= cantidad;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Usuario [puntos=" + puntos + ", skin=" + skin + ", energia=" + energia + ", articulos=" + articulos
-				+ ", id=" + id + ", nombre=" + nombre + ", estatus=" + estatus + ", username=" + username
-				+ ", password=" + password + "]";
+				+ ", perfiles=" + perfiles + ", id=" + id + ", nombre=" + nombre + ", estatus=" + estatus
+				+ ", username=" + username + ", password=" + password + "]";
 	}
 
 	@Override

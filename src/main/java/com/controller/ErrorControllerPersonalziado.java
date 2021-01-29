@@ -21,6 +21,9 @@ public class ErrorControllerPersonalziado implements ErrorController {
 	        if(statusCode == HttpStatus.NOT_FOUND.value()) {
 	            return "/error/error-404";
 	        }
+	        if(statusCode == HttpStatus.FORBIDDEN.value()) {
+	            return "/error/error-403";
+	        }
 	        //else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
 	            //return "/error/error-500";
 	        //}

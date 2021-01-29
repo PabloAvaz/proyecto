@@ -53,7 +53,6 @@ public class UserController {
 	private String edit(@PathVariable int id, Model modelo) {
 		modelo.addAttribute("user", serviceUsuarios.getById(id));
 		modelo.addAttribute("skins", serviceSkins.getAll());
-		modelo.addAttribute("admin", true);
 		modelo.addAttribute("action", "usuarios/edit");
 		return "/usuarios/userForm.html";
 	}

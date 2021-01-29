@@ -14,6 +14,7 @@ import com.model.user.Usuario;
 
 @Embeddable
 public class ProductoUsuarioId implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idProducto", table="productousuario")

@@ -6,7 +6,7 @@
 	<nav th:insert="fragments/menu :: menu-principal"/>
 
 	<h1 th:text="'Bienvenido ' + ${usuario.nombre}"></h1>
-	<h2><span th:text="'Tienes ' + ${usuario.puntos} + ' Ricoins'"></span><span style="color:lime"><i class="fas fa-money-bill-wave"></i></span></h2>
+	<h2><span th:text="'Tienes ' + ${usuario.puntos} + ' Kilucoins'"></span><span style="color:lime"><i class="fas fa-money-bill-wave"></i></span></h2>
 	
 	<div class="flex">
 		<div class="card" style="width: 18rem;" th:each="producto:${productos}" th:object="${producto}">
@@ -14,7 +14,7 @@
 		  <div class="card-body">
 		    <h5 class="card-title" th:text="*{nombre}">Traje guay</h5>
 		    <p class="card-text" th:text="*{descripcion}">Traje mamadisimo</p>
-		    <a th:href="@{/tienda/comprar/{id}(id=*{id})}" th:text="*{precio} + ' Ricoins'" onclick="return confirm('¿Estas seguro?')"  class="btn btn-primary">50 Ricoins</a>
+		    <a th:href="@{/tienda/comprar/{id}(id=*{id})}" th:text="*{precio} + ' Kilucoins'" onclick="return confirm('¿Estas seguro?')"  class="btn btn-primary">50 Ricoins</a>
 		  </div>
 		</div>
 	</div>

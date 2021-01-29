@@ -23,11 +23,9 @@ public class TextoController {
 		Usuario usr = (Usuario) sesion.getAttribute("usuario");
 		HashMap<String, Object> datos = new HashMap<String,Object>();
 
-		if(usr != null && usr.getId() != null) {
-			serviceUsuarios.punto(usr);
-			datos.put("user", usr.getNombre());
-			datos.put("puntos", usr.getPuntos());
-		}
+		serviceUsuarios.punto(usr);
+		datos.put("user", usr.getNombre());
+		datos.put("puntos", usr.getPuntos());
 
 		return datos;
 	}

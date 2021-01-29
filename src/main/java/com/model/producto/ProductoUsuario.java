@@ -3,12 +3,7 @@ package com.model.producto;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.model.user.Usuario;
 
 @Entity
 @Table(name="productousuario")
