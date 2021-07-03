@@ -29,6 +29,41 @@
 		<div class="col">
 			<div class="card mb-4 shadow-sm">
 				<div class="card-header">
+			    	<h4 class="my-0 fw-normal">Skins</h4>
+				</div>
+				<div class="card-body">
+					<h1 class="card-title pricing-card-title">Administrar las skins</h1>
+					<ul class="list-unstyled mt-3 mb-4">
+					   <li><a th:href="@{/skin/create}">Crear skin</a></li>
+					   <li><a th:href="@{/skin/list}">Ver skins</a></li>
+					   <li></li>
+					   <li></li>
+					</ul>
+					<a th:href="@{/skin/list}" class="w-100 btn btn-lg btn-outline-primary">Inicio</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col">
+			<div class="card mb-4 shadow-sm">
+				<div class="card-header">
+			    	<h4 class="my-0 fw-normal">Recompensas</h4>
+				</div>
+				<div class="card-body">
+					<h1 class="card-title pricing-card-title">Administrar las recompensas</h1>
+					<ul class="list-unstyled mt-3 mb-4">
+					   <li><a th:href="@{/admin/daily}">Recompensas diarias</a></li>
+					   <li><a href="#">Misiones[Proximamente]</a></li>
+
+					</ul>
+					<a th:href="@{/admin/daily}" class="w-100 btn btn-lg btn-outline-primary">Inicio</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col">
+			<div class="card mb-4 shadow-sm">
+				<div class="card-header">
 			    	<h4 class="my-0 fw-normal">Productos</h4>
 				</div>
 				<div class="card-body">
@@ -43,24 +78,5 @@
 				</div>
 			</div>
 		</div>
-		
-		<div class="col">
-			<div class="card mb-4 shadow-sm">
-				<div class="card-header">
-			    	<h4 class="my-0 fw-normal">Skins</h4>
-				</div>
-				<div class="card-body">
-					<h1 class="card-title pricing-card-title">Administrar las skins</h1>
-					<ul class="list-unstyled mt-3 mb-4">
-					   <li><a th:href="@{/skin/create}">Crear skin</li>
-					   <li><a th:href="@{/skin/list}">Ver skins</li>
-					   <li></li>
-					   <li></li>
-					</ul>
-					<a th:href="@{/skin/list}" class="w-100 btn btn-lg btn-outline-primary">Inicio</a>
-				</div>
-			</div>
-		</div>
-		
 	</div>
 </div>

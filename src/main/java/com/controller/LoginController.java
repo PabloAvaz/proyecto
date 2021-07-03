@@ -3,7 +3,6 @@ package com.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.model.user.Usuario;
-import com.service.IPerfilService;
+import com.domain.entity.user.Usuario;
+import com.dto.producto.SkinDto;
+import com.dto.user.UsuarioDto;
 import com.service.ISkinService;
 import com.service.IUsuarioService;
 
@@ -25,23 +25,18 @@ public class LoginController {
 	@Autowired
 	private ISkinService serviceSkin;
 
-	@Autowired 
-	IPerfilService servicePerfil;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 
-	private Usuario usuario;
+	private UsuarioDto usuario;
 
 	@ModelAttribute
 	public void init(Model modelo, HttpSession sesion) {
-		usuario =  (Usuario) sesion.getAttribute("usuario");
-
+		usuario =  (UsuarioDto) sesion.getAttribute("usuario");
 	}
 
 	@GetMapping("/signup")
 	private String registrar(Model modelo) {
-		modelo.addAttribute("user",new Usuario());
+		modelo.addAttribute("user",new UsuarioDto());
 		modelo.addAttribute("action","signup");
 		return usuario != null ? "redirect:/play" : "/usuarios/userForm.html";
 	}
@@ -53,11 +48,8 @@ public class LoginController {
 	 * @return
 	 */
 	@PostMapping("/signup")
-	private String registro(Usuario user, RedirectAttributes atrib, HttpSession sesion) {
-		if(user.getSkin() == null)user.setSkin(serviceSkin.getById(1));
-		user.agregarPerfil(servicePerfil.getPerfil(2));
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		serviceUsuarios.guardar(user);
+	private String registro(UsuarioDto user, RedirectAttributes atrib, HttpSession sesion) {
+		serviceUsuarios.crear(user);
 		return "redirect:/login";
 	}
 
@@ -67,8 +59,8 @@ public class LoginController {
 	}
 
 	@GetMapping("/login/error")
-	private String loginForm(Usuario user, Model modelo, HttpSession sesion, RedirectAttributes atrib) {
-		Usuario usr = serviceUsuarios.validar(user);
+	private String loginForm(UsuarioDto user, Model modelo, HttpSession sesion, RedirectAttributes atrib) {
+		UsuarioDto usr = serviceUsuarios.validar(user);
 		if(usr != null) {
 			sesion.setAttribute("usuario", usr);
 			return "redirect:/play";

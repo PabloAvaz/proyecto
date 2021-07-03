@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.model.acciones.AccionEquipable;
-import com.model.enums.Tipo;
+import com.constants.Tipo;
+import com.domain.entity.acciones.AccionEquipable;
 import com.service.IAccionEquipableService;
 import com.service.IProductoService;
 import com.service.ISkinService;

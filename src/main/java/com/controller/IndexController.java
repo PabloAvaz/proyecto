@@ -10,7 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.model.user.Usuario;
+import com.domain.entity.user.Usuario;
+import com.dto.user.UsuarioDto;
 import com.service.IUsuarioService;
 
 
@@ -19,11 +20,6 @@ import com.service.IUsuarioService;
 public class IndexController {
 	@Autowired
 	private IUsuarioService serviceUsuario;
-	
-	@ModelAttribute
-	public void init(Model modelo, HttpSession sesion) {
-		modelo.addAttribute("usuario",sesion.getAttribute("usuario"));
-	}
 	
 	@GetMapping("/")
 	public String defaultIndex() {
@@ -36,11 +32,13 @@ public class IndexController {
 	}
 	
 	@GetMapping("/play")
-	public String play(Authentication auth, HttpSession sesion) {
+	public String play(Authentication auth, HttpSession sesion, Model modelo) {
 		if(sesion.getAttribute("usuario")==null && auth != null) {
-			Usuario usr = serviceUsuario.getByUserName(auth.getName());
+			UsuarioDto usr = serviceUsuario.getByUserName(auth.getName());
 			sesion.setAttribute("usuario", usr);
 		}
+		modelo.addAttribute("usuario",sesion.getAttribute("usuario"));
+
 		return "index.html";
 	}
 

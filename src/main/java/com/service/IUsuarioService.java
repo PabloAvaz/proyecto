@@ -2,20 +2,31 @@ package com.service;
 
 import java.util.List;
 
-import com.model.producto.Producto;
-import com.model.producto.ProductoUsuario;
-import com.model.user.Usuario;
+import com.domain.entity.producto.Producto;
+import com.domain.entity.producto.ProductoUsuario;
+import com.domain.entity.user.Usuario;
+import com.dto.producto.ProductoDto;
+import com.dto.producto.ProductoUsuarioDto;
+import com.dto.user.UsuarioDto;
 
 public interface IUsuarioService {
-	List<Usuario> getAll();
-	Usuario getById(Integer id);
-	Usuario getByUserName(String username);
-	void guardar(Usuario user);
-	void borrar(Usuario user);
-	void modificar(Usuario user);
-	void punto(Usuario user);
-	Usuario validar(Usuario user);
-	boolean usar(Usuario user, Producto producto);
-	boolean comprar(Usuario user, Producto prod);
-	List<ProductoUsuario> getProductos(Usuario user);
+	//Busqueda
+	List<UsuarioDto> getAll();
+	UsuarioDto getById(Integer id);
+	UsuarioDto getByUserName(String username);
+	//CRUD
+	void crear(UsuarioDto user);
+	void guardar(UsuarioDto user);
+	void borrar(UsuarioDto user);
+	void modificar(UsuarioDto user);
+	//Acciones
+	boolean usar(UsuarioDto user, ProductoDto producto);
+	boolean comprar(UsuarioDto user, ProductoDto prod);
+	void punto(UsuarioDto user);
+	UsuarioDto validar(UsuarioDto user);
+	//Productos
+	List<ProductoUsuarioDto> getProductos(UsuarioDto user);
+	//Recompensas diarias
+	boolean reclamarDaily(UsuarioDto user);
+	void reiniciarDaily();
 }

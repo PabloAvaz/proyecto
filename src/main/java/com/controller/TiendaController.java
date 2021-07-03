@@ -3,6 +3,7 @@ package com.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.model.user.Usuario;
+import com.domain.entity.user.Usuario;
+import com.dto.user.UsuarioDto;
 import com.service.IProductoService;
 import com.service.IUsuarioService;
 
@@ -22,12 +24,13 @@ public class TiendaController {
 	@Autowired
 	IUsuarioService serviceUsuario;
 	
-	private Usuario usuario;
+	private UsuarioDto usuario;
 	
 	@ModelAttribute
 	public void init(HttpSession sesion) {
-		usuario= (Usuario) sesion.getAttribute("usuario");		
+		usuario = (UsuarioDto) sesion.getAttribute("usuario");		
 	}
+	
 	@GetMapping("/")
 	public String tienda(Model modelo) {
 		modelo.addAttribute("usuario", usuario);
@@ -39,8 +42,7 @@ public class TiendaController {
 	@GetMapping("/comprar/{id}")
 	public String comprar(@PathVariable int id, HttpSession sesion) {
 		if(serviceUsuario.comprar(usuario, serviceProductos.getById(id))) {
-			serviceUsuario.modificar(usuario);
-			sesion.setAttribute("usuario", usuario);
+			sesion.setAttribute("usuario", serviceUsuario.getById(usuario.getId()));
 		} 
 
 		return "redirect:/tienda/";

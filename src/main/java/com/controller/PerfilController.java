@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.model.user.Usuario;
+import com.domain.entity.user.Usuario;
+import com.dto.user.UsuarioDto;
 import com.service.IProductoService;
 import com.service.IUsuarioService;
 
@@ -25,11 +26,11 @@ public class PerfilController {
 
 	
 	private boolean logeado;
-	private Usuario usr;
+	private UsuarioDto usr;
 
 	@ModelAttribute
 	public void init(Model modelo, HttpSession sesion) {
-		usr = (Usuario) sesion.getAttribute("usuario");
+		usr = (UsuarioDto) sesion.getAttribute("usuario");
 		logeado = (usr != null);
 		modelo.addAttribute("usuario",usr);
 
@@ -47,8 +48,7 @@ public class PerfilController {
 		if(!logeado) return "redirect:/login";
 		
 		if(serviceUsuario.usar(usr, serviceProducto.getById(id))) {
-			serviceUsuario.modificar(usr);
-			sesion.setAttribute("usuario", usr);
+			sesion.setAttribute("usuario", serviceUsuario.getById(usr.getId()));
 		}
 
 		return "redirect:/perfil/list";

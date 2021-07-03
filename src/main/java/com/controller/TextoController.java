@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.user.Usuario;
+import com.domain.entity.user.Usuario;
+import com.dto.user.UsuarioDto;
 import com.service.IUsuarioService;
 
 @RestController
@@ -20,7 +21,7 @@ public class TextoController {
 	
 	@RequestMapping(value="/enviar",produces="application/json")
 	public @ResponseBody HashMap<String,Object> sumar(HttpSession sesion) {
-		Usuario usr = (Usuario) sesion.getAttribute("usuario");
+		UsuarioDto usr = (UsuarioDto) sesion.getAttribute("usuario");
 		HashMap<String, Object> datos = new HashMap<String,Object>();
 
 		serviceUsuarios.punto(usr);
@@ -31,7 +32,7 @@ public class TextoController {
 	}
 	
 	@RequestMapping("/view/{id}")
-	private Usuario verUsuario(@PathVariable int id) {
+	private UsuarioDto verUsuario(@PathVariable int id) {
 		return serviceUsuarios.getById(id);
 	}
 }

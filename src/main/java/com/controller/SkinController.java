@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.model.producto.Skin;
+import com.domain.entity.producto.Skin;
+import com.dto.producto.SkinDto;
 import com.service.ISkinService;
 import com.util.Utilidades;
 
@@ -35,11 +36,11 @@ public class SkinController {
 	
 	@GetMapping("/create")
 	public String create(Model modelo) {
-		modelo.addAttribute("skin",new Skin());
+		modelo.addAttribute("skin", new SkinDto());
 		return "skin/skinForm.html";
 	}
 	@PostMapping("/create")
-	public String crear(Model modelo,@ModelAttribute Skin skin, MultipartFile archivoImagen, BindingResult resultadoImg, MultipartFile archivoSonido, BindingResult resultadoAudio) {
+	public String crear(Model modelo,@ModelAttribute SkinDto skin, MultipartFile archivoImagen, BindingResult resultadoImg, MultipartFile archivoSonido, BindingResult resultadoAudio) {
 		if(resultadoImg.hasErrors() || resultadoAudio.hasErrors()) return "redirect:/skin/create";
 		String img = Utilidades.guardarArchivo(archivoImagen, rutaImagen);
 		String audio = Utilidades.guardarArchivo(archivoSonido, rutaSonido);

@@ -1,0 +1,34 @@
+@media (min-width: 768px) {
+	div.content {
+	grid-template-areas:
+						"juego juego aside"
+						"juego juego aside"
+						"footer footer footer";
+	}
+}
+@media (max-width: 768px){
+	div.content {
+	grid-template-areas:
+						"juego"
+						"aside"
+						"footer";
+	}
+	#clicker{
+		display: grid;
+		max-width: 500px;
+	}
+	
+}
+div.content {
+	display:grid;
+}
+main {
+	grid-area: juego;
+}
+aside {
+	grid-area: aside;
+}
+footer {
+	grid-area: footer;
+	background-color: orange;
+}

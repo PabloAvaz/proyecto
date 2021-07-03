@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.model.enums.Tipo;
-import com.model.producto.Producto;
-import com.model.user.Usuario;
+import com.constants.Tipo;
+import com.domain.entity.producto.Producto;
+import com.domain.entity.user.Usuario;
+import com.dto.producto.ProductoDto;
+import com.dto.user.UsuarioDto;
 import com.service.IProductoService;
 import com.util.Utilidades;
 
@@ -27,7 +29,7 @@ public class ProductoController {
 	
 	@Value("${ruta.imagenes}")
 	private String ruta;
-	private Usuario usuario;
+	private UsuarioDto usuario;
 	
 
 	@Autowired
@@ -35,7 +37,7 @@ public class ProductoController {
 	
 	@ModelAttribute
 	public void init(Model modelo, HttpSession sesion) {
-		usuario =  (Usuario) sesion.getAttribute("usuario");
+		usuario =  (UsuarioDto) sesion.getAttribute("usuario");
 		modelo.addAttribute("usuario", usuario);
 	}
 	
@@ -46,11 +48,11 @@ public class ProductoController {
 	}
 	@GetMapping("/create")
 	public String create(Model modelo) {
-		modelo.addAttribute("producto",new Producto());
+		modelo.addAttribute("producto",new ProductoDto());
 		return "/producto/productoForm";
 	}
 	@PostMapping("/create")
-	public String createForm(Producto producto, BindingResult resultado,@RequestParam("archivoImagen") MultipartFile imagen) {
+	public String createForm(ProductoDto producto, BindingResult resultado,@RequestParam("archivoImagen") MultipartFile imagen) {
 		if(resultado.hasErrors()) {
 			System.out.println(resultado.getAllErrors());
 			return "redirect:/productos/create";

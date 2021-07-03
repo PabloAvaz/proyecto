@@ -1,3 +1,5 @@
+drop database lovelive;
+
 CREATE DATABASE lovelive;
 USE lovelive;
 
@@ -28,8 +30,8 @@ energia int,
 CONSTRAINT pk_usuarios PRIMARY KEY(id),
 CONSTRAINT UC_usuarios_Username UNIQUE (username),
 CONSTRAINT UC_usuarios_energia UNIQUE (energia),
-constraint fk_usuarios_skin foreign key (skin) references skin(idSkin),
-constraint fk_usuarios_energia foreign key (energia) references energia(idEnergia)
+CONSTRAINT fk_usuarios_skin foreign key (skin) references skin(idSkin) ON DELETE SET NULL,
+CONSTRAINT fk_usuarios_energia foreign key (energia) references energia(idEnergia) ON DELETE CASCADE
 );
 
 CREATE TABLE perfil(
@@ -41,8 +43,8 @@ constraint pk_perfil primary key(idPerfil)
 CREATE TABLE perfilUsuario(
 idUsuario int not null AUTO_INCREMENT,
 idPerfil int not null default 2,
-constraint fk_perfilUsuario_usr foreign key(idUsuario) references usuario(id),
-constraint fk_perfilUsuario_per foreign key(idPerfil) references perfil(idPerfil)
+constraint fk_perfilUsuario_usr foreign key(idUsuario) references usuario(id) ON DELETE CASCADE,
+constraint fk_perfilUsuario_per foreign key(idPerfil) references perfil(idPerfil) ON DELETE NO ACTION 
 );
 
 CREATE TABLE producto(
@@ -60,16 +62,25 @@ id int not null,
 idProducto int not null,
 cantidad int default 1,
 CONSTRAINT pk_productoUsuario PRIMARY KEY(id,idproducto),
-constraint fk_productousuario1 foreign key (id) references usuario(id),
-constraint fk_productousuario2 foreign key (idProducto) references producto(idproducto)
+constraint fk_productousuario1 foreign key (id) references usuario(id) ON DELETE CASCADE,
+constraint fk_productousuario2 foreign key (idProducto) references producto(idproducto) ON DELETE CASCADE
 );
 
 CREATE TABLE accionEquipable(
 idProducto int NOT NULL AUTO_INCREMENT,
 idSkin int not null,
 CONSTRAINT pk_accion PRIMARY KEY(idProducto),
-constraint fk_accionEquipable1 foreign key (idSkin) references skin(idSkin),
-constraint fk_accionEquipable2 foreign key (idProducto) references producto(idproducto)
+constraint fk_accionEquipable1 foreign key (idSkin) references skin(idSkin) ON DELETE CASCADE,
+constraint fk_accionEquipable2 foreign key (idProducto) references producto(idproducto) ON DELETE CASCADE
+);
+
+create table daily(
+idUsuario int not null,
+total int default 0 not null,
+consecutivos int default 0 not null,
+reclamado boolean default false,
+constraint pk_recompensaDiaria primary key (idUsuario),
+constraint fk_recompensaDiaria foreign key (idUsuario) references usuario(id) ON DELETE CASCADE
 );
 
 -- drop table accionEquipable;
@@ -109,7 +120,7 @@ insert into productoUsuario values(1,4,10);
 insert into accionEquipable values(1,1);
 insert into accionEquipable values(2,2);
 insert into accionEquipable values(3,3);
-
+/*
 -- Consulta productos tienda por usuario;
 select * from producto where idProducto not in (
 	select p.idProducto from productousuario p
@@ -125,3 +136,16 @@ poder int,
 tipo varchar(20),
 CONSTRAINT pk_efecto PRIMARY KEY(idEfecto)
 );
+
+
+
+-- drop table efecto;
+
+/*
+select u.username, p.perfil from UsuarioPerfil up 
+					inner join Usuarios u on u.id = up.idUsuario 
+					inner join Perfiles p on p.id = up.idPerfil 
+					where u.username = "pablo";
+					
+SELECT username, password, estatus from Usuarios where username="pablo";
+*/

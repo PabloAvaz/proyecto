@@ -1,6 +1,6 @@
 package com.service;
 
-import com.model.user.Perfil;
+import com.domain.entity.user.Perfil;
 
 public interface IPerfilService {
 	

@@ -1,40 +1,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Pruebas</title>
 	<div th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/index.css}" rel="stylesheet">
 </head>
 <body>
 	<nav th:replace="fragments/menu :: menu-principal"/>
 	
-	<!-- 
-	<h1 th:text="${usuario}"></h1>
-	 -->
-	 
-	<h1 id="salida"></h1>
-	<image class="" id="clicker" th:src="@{/img/{img} (img=${usuario!=null?usuario.skin.imagen:'default.png'})}" />
+	<h2 class="alert alert-info" th:if="${msg!=null}" th:text="${msg}"></h2>
+	
+	<div class="content">
+		<main>
+			<image id="clicker" th:src="@{/img/{img} (img=${usuario!=null && usuario.skin != null? usuario.skin.imagen: T(com.constants.Constants).DEFAULT_SKIN.imagen})}" />
+		</main>
+		<aside>
+			<div>
+				<h1 id="salida"></h1>
+			</div>
+			<div class="col">
+			<div class="card mb-4 shadow-sm">
+				<div class="card-body">
+					<h1 class="card-title pricing-card-title">Recompensa diaria</h1>
+					<a  th:href="@{/daily/claim}" class="w-100 btn btn-lg btn-outline-primary">Reclamar</a>
+				</div>
+			</div>
+		</div>
+		</aside>
+	</div> 
+
 
 	<script th:inline="javascript">
-	audio = /*[[
-		@{/sounds/{sonido} (sonido=${usuario!=null?usuario.skin.sonido:'default.wav'})}
-		]]*/ "default.wav";
-
-	veces = 0;
-	audio = new Audio(audio)
-	$("#clicker").click(function(){
-		$("#salida").text("Total: " + ++veces);
-		audio.play();
-		$.ajax({
-			url : '/enviar',
-			type : 'GET',
-			dataType : 'json',
-		    success : function(json) {
-		    	console.log("Enviado: " , json)
-		    }
-		});
-		if(veces%50==0){
-			$("#clicker").addClass("animado");
-			setTimeout(function(){$("#clicker").removeClass("animado");}, 4000);
-		};
+		audio = /*[[
+			@{/sounds/{sonido} (sonido=${usuario!=null && usuario.skin != null  ? usuario.skin.sonido : T(com.constants.Constants).DEFAULT_SKIN.sonido})}
+			]]*/ "default.wav";
+	
+		veces = 0;
+		audio = new Audio(audio)
+		$("#clicker").click(function(){
+			$("#salida").text("Total: " + ++veces);
+			audio.play();
+			$.ajax({
+				url : '/enviar',
+				type : 'GET',
+				dataType : 'json',
+			    success : function(json) {
+			    	console.log("Enviado: " , json)
+			    }
+			});
+			if(veces%50==0){
+				$("#clicker").addClass("animado");
+				setTimeout(function(){$("#clicker").removeClass("animado");}, 4000);
+			};
 		})
 	</script>
 	

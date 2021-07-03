@@ -47,11 +47,14 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				).permitAll()
 		
 		//Permisos por roles
-		.antMatchers("/usuarios/**").hasAnyAuthority("ADMIN")
-		.antMatchers("/admin/**").hasAuthority("ADMIN")
 		.antMatchers("/tienda/**").hasAnyAuthority("ADMIN","USER")
 		.antMatchers("/perfil/**").hasAnyAuthority("ADMIN","USER")
 		.antMatchers("/enviar").hasAnyAuthority("ADMIN","USER")
+		.antMatchers("/daily/**").hasAnyAuthority("ADMIN","USER")
+		.antMatchers("/admin/**").hasAuthority("ADMIN")
+		.antMatchers("/usuarios/**").hasAnyAuthority("ADMIN")
+		.antMatchers("/test/**").hasAnyAuthority("ADMIN")
+		
 
 		//El resto autenticarse
 		.anyRequest().authenticated()

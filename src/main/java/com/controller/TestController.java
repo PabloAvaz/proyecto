@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.model.producto.ProductoUsuario;
-import com.model.producto.ProductoUsuarioId;
-import com.model.user.Energia;
-import com.model.user.Usuario;
-import com.repository.AccionEquipableRepository;
-import com.repository.EfectoRepository;
-import com.repository.EnergiaRepository;
-import com.repository.ProductoUsuarioRepository;
+import com.domain.entity.producto.ProductoUsuario;
+import com.domain.entity.producto.ProductoUsuarioId;
+import com.domain.entity.user.Energia;
+import com.domain.entity.user.Usuario;
+import com.domain.repository.AccionEquipableRepository;
+import com.domain.repository.EfectoRepository;
+import com.domain.repository.EnergiaRepository;
+import com.domain.repository.ProductoUsuarioRepository;
+import com.dto.user.UsuarioDto;
 import com.service.IProductoService;
 import com.service.ISkinService;
 import com.service.IUsuarioService;
@@ -40,14 +41,22 @@ public class TestController {
 	@Autowired
 	private EnergiaRepository repoEnergia;
 	
+	private UsuarioDto usr;
+	
 	@GetMapping("/")
 	private String test(HttpSession sesion) {
+		usr = ((UsuarioDto)sesion.getAttribute("usuario"));
+		System.out.println(usr);
+
 		test();
-		Usuario usr = ((Usuario)sesion.getAttribute("usuario"));
+
+		return "/test";
+	} 
+	@GetMapping("/energia")
+	private String energia(HttpSession sesion) {
+		usr = ((UsuarioDto)sesion.getAttribute("usuario"));
 		
-		//usr.getEnergia().aumentarEnergiaMaxima(200);
-		usr.getEnergia().recargar(100);
-		serviceUsuario.guardar(usr);
+		test();
 
 		return "/test";
 	} 
@@ -58,19 +67,25 @@ public class TestController {
 		return sesion.getAttribute("usuario").toString();
 	}
 	private void test() {
+		serviceUsuario.reclamarDaily(usr);
+		//serviceUsuario.reiniciarDaily();
 	}
 	
 	private void testComprarCantidad() {
 		ProductoUsuarioId puID = new ProductoUsuarioId();
 		ProductoUsuario pu = new ProductoUsuario();
 
-		puID.setUser(serviceUsuario.getById(1));
-		puID.setProducto(serviceProducto.getById(3));
-		pu.setProductoUsuario(puID);
+		//puID.setUser(serviceUsuario.getById(1));
+		//puID.setProducto(serviceProducto.getById(3));
+		pu.setProductoUsuarioId(puID);
 		pu.setCantidad(6000);
 		
 		repoProductoUsuario.save(pu);
 	}
-
+	private void testEnergia() {
+		//usr.getEnergia().aumentarEnergiaMaxima(200);
+		usr.getEnergia().recargar(100);
+		serviceUsuario.guardar(usr);
+	}
 
 }

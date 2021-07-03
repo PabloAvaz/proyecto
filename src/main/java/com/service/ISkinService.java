@@ -2,13 +2,13 @@ package com.service;
 
 import java.util.List;
 
-import com.model.producto.Skin;
+import com.dto.producto.SkinDto;
 
 public interface ISkinService {
-	List<Skin> getAll();
-	Skin getById(Integer id);
-	void guardar(Skin skin);
-	void modificar(Skin skin);
-	void borrar(Skin skin);
+	List<SkinDto> getAll();
+	SkinDto getById(Integer id);
+	void guardar(SkinDto skin);
+	void modificar(SkinDto skin);
+	void borrar(SkinDto skin);
 	
 }

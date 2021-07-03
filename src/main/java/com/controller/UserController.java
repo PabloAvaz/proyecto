@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.model.user.Usuario;
+import com.domain.entity.user.Usuario;
+import com.dto.user.UsuarioDto;
 import com.service.ISkinService;
 import com.service.IUsuarioService;
 
@@ -23,11 +24,11 @@ public class UserController {
 	@Autowired
 	private ISkinService serviceSkins;
 	
-	private Usuario usuario;
+	private UsuarioDto usuario;
 	
 	@ModelAttribute
 	public void init(Model modelo, HttpSession sesion) {
-		usuario =  (Usuario) sesion.getAttribute("usuario");
+		usuario = (UsuarioDto) sesion.getAttribute("usuario");
 		modelo.addAttribute("usuario", usuario);
 	}
 	
@@ -58,7 +59,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/edit")
-	private String edit(@ModelAttribute("user") Usuario user) {
+	private String edit(@ModelAttribute("user") UsuarioDto user) {
 		serviceUsuarios.modificar(user);
 		return "redirect:/usuarios/adminList";
 	}

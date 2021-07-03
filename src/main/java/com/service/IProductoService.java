@@ -2,17 +2,19 @@ package com.service;
 
 import java.util.List;
 
-import com.model.enums.Tipo;
-import com.model.producto.Producto;
-import com.model.user.Usuario;
+import com.constants.Tipo;
+import com.domain.entity.producto.Producto;
+import com.domain.entity.user.Usuario;
+import com.dto.producto.ProductoDto;
+import com.dto.user.UsuarioDto;
 
 public interface IProductoService {
-	List<Producto> getAll();
-	List<Producto> getByTipo(Tipo tipo);
-	Producto getById(int id);
-	void guardar(Producto producto);
-	void eliminar(Producto producto);
+	List<ProductoDto> getAll();
+	List<ProductoDto> getByTipo(Tipo tipo);
+	ProductoDto getById(int id);
+	void guardar(ProductoDto producto);
+	void eliminar(ProductoDto producto);
 	void eliminar(int id);
-	void update(Producto producto);
-	List<Producto> getListaCompraByUser(Usuario user);
+	void update(ProductoDto producto);
+	List<ProductoDto> getListaCompraByUser(UsuarioDto user);
 }
