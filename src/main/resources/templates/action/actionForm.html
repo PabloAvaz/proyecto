@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/head:: head"/>
+</head>
+<body>
+	<nav th:insert="fragments/menu :: menu-principal"/>
+	<div class="row">
+		<div class="col col-lg-6">
+			<form th:action="@{/action/create}"  method="post" th:object="${accion}">
+
+				<select th:field="${accion.id}">
+					<option th:each="producto:${productos}" th:object="${producto}" th:value="*{id}" th:text="*{nombre}"></option>
+				</select>
+				
+				<select th:field="${accion.skin}">
+					<option th:each="skin:${skins}" th:object="${skin}" th:value="*{id}" th:text="*{nombre}"></option>
+				</select>
+			  <button type="submit" class="btn btn-primary">Enviar</button>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

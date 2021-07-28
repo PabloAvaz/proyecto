@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/head:: head"/>
+</head>
+<body>
+	<nav th:insert="fragments/menu :: menu-principal"/>
+
+	<form th:action="@{/{act} (act=${action})}" method="post" th:object="${user}">
+		<label>Apodo</label>
+		<input th:field="*{nombre}" name="nombre" type="text"><br>
+		
+		<label>Username</label>
+		<input th:field="*{username}" name="username" type="text"><br>
+		
+		<label>Password</label>
+		<input th:field="*{password}" name="password" type="password"><br>
+		
+		<select name="skin" sec:authorize="hasAnyAuthority('ADMIN')">
+			<option th:text="'Elige una opcion'" value></option>
+			<option th:each="skin:${skins}" th:value="${skin.id}" th:text="${skin.imagen}">
+		</select>
+		
+		<input th:field="*{id}" name="id" type="hidden">
+		<input th:field="*{skin.id}" type="hidden">
+		
+		<button type="submit">Enviar</button>
+	</form>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/head:: head" />
+</head>
+<body>
+	<nav th:insert="fragments/menu :: menu-principal" />
+
+	
+	<div class="row">
+		<div class="col col-lg-4"></div>
+		<div class="col col-lg-4">
+			<h1>Login</h1>
+			<div th:if="${msg!=null}">
+				<p class="alert alert-danger" th:text="${msg}"></p>
+			</div>
+			<form name="form" th:action="@{/login}" method="post" class="form-signin">
+				<div class="form-group">
+					<label for="username" class="sr-only">Usuario</label>
+					<input type="text" name="username" id="username" class="form-control" placeholder="Nombre de usuario" required autofocus>
+				</div>
+				<div class="form-group">
+           			<label for="password" class="sr-only">Password</label>
+					<input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required>
+				</div>
+				<input class="btn btn-lg btn-primary btn-block" name="submit" type="submit" value="Enviar"></input>
+			</form>
+			<h5>
+				Si todavia no tienes una cuenta haz click <a th:href="@{/signup}">aqui</a>
+				para registrate
+			</h5>
+		</div>
+	</div>
+
+
+</body>
+</html>

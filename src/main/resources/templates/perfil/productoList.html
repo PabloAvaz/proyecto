@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/head:: head"/>
+</head>
+<body>
+	<nav th:insert="fragments/menu :: menu-principal"/>
+	<table class="table">
+		<tr>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th>Descripcion</th>
+			<th>Tipo</th>
+			<th>Cantidad</th>
+			<th>Acción</th>
+		</tr>
+		<tr th:each="prdUsr:${productos}" th:object="${prdUsr}">
+			<td th:text="*{productoUsuarioId.producto.id}"></td>
+			<td th:text="*{productoUsuarioId.producto.nombre}"></td>
+			<td th:text="*{productoUsuarioId.producto.descripcion}"></td>
+			<td th:text="*{productoUsuarioId.producto.tipo}"></td>
+			<td th:text="*{cantidad}"></td>
+			<td>
+				<a class="btn btn-success" th:href="@{/perfil/usar/{prd} (prd=*{productoUsuarioId.producto.id})}">Usar</a>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

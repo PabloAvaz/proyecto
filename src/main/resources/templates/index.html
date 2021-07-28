@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/index.css}" rel="stylesheet">
+    <link th:href="@{/css/clicker.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="grid-container">
+
+<header th:replace="fragments/menu :: menu-principal"></header>
+     
+
+      <main class="main juego">
+        <aside class="lateral lateral-izquierda">
+			<section class="ventanita daily">
+				<div class="ventanita-header">
+					<h1>Recompensa diaria</h1>
+				</div>
+				
+				<a  th:href="@{/daily/claim}" class="w-100 btn btn-lg btn-outline-primary">Reclamar</a>
+				<small th:if="${msg!=null}" th:text="${msg}"></small>
+			</section>
+			<section class="ventanita novedades">
+				<div class="ventanita-header">
+					<h1>Noticias</h1>
+				</div>
+				<span>Nuevo personaje disponible</span>
+				<span>Actualizacion 1.0</span>
+			</section>
+		</aside>
+      
+      	<section>
+      	    <img id="clicker" th:src="@{/img/{img} (img=${usuario!=null && usuario.skin != null? usuario.skin.imagen: T(com.constants.Constants).DEFAULT_SKIN.imagen})}" />
+			<h1 id="salida"></h1>
+			<button class="myButton">REGISTRATE!</button>
+		</section>
+		
+		<aside class="lateral lateral-derecha">
+			<section class="ventanita perfil">
+				<div class="ventanita-header">
+					<h1>Perfil</h1>
+				</div>
+			</section>
+			
+			<section class="ventanita amigos">
+				<div class="ventanita-header">
+					<h1>Amigos</h1>
+				</div>
+			</section>
+		</aside>
+      </main>
+
+
+<footer th:replace="fragments/footer :: footer"></footer>
+	
+</div>
+      
+	<script th:inline="javascript">
+	$(window).on("load", function(){
+		audio = /*[[
+			@{/sounds/{sonido} (sonido=${usuario!=null && usuario.skin != null  ? usuario.skin.sonido : T(com.constants.Constants).DEFAULT_SKIN.sonido})}
+			]]*/ "default.wav";
+	
+		veces = 0;
+		audio = new Audio(audio)
+		$("#clicker").on("click",function(){
+			$("#salida").text("Total: " + ++veces);
+			audio.play();
+			$.ajax({
+				url : '/enviar',
+				type : 'GET',
+				dataType : 'json',
+			    success : function(json) {
+			    	console.log("Enviado: " , json)
+			    }
+			});
+			if(veces%50==0){
+				$("#clicker").addClass("animado");
+				setTimeout(function(){$("#clicker").removeClass("animado");}, 4000);
+			};
+		})
+	})
+		
+	</script>
+	
+</body>
+</html>

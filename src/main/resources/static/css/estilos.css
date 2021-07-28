@@ -1,0 +1,58 @@
+@import
+	url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+@import url("nav.css");
+
+@import url("footer.css");
+
+@import url("genericos.css");
+
+body {
+	background: rgb(232, 183, 183);
+	background: linear-gradient(90deg, rgba(232, 183, 183, 1) 0%,
+		rgba(183, 205, 232, 1) 100%);
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 10vh 90vh 10vh;
+	grid-template-areas: "header" "main" "aside" "footer";
+}
+
+.header {
+	grid-area: header;
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr;
+	color: white;
+	background: rgb(248, 255, 0);
+	background: linear-gradient(90deg, rgba(248, 255, 0, 0.5)
+		0%, rgba(255, 94, 35, 0.5) 50%,
+		rgba(230, 0, 255, 0.5) 100%);
+}
+
+.footer {
+	width: 100%;
+	grid-area: footer;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	color: white;
+}
+
+.main {
+	grid-area: main;
+	background-image: url(../img/fondo1.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+}
+
+.aside {
+	grid-area: aside;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+	background-attachment: fixed;
+	background-image:url("https://1.bp.blogspot.com/-Fo3iRt97ZXY/XvSG4EMwi0I/AAAAAAAAVEo/mrApRTcVVRk1m-fX9K-ffNwRUXlHUocdwCLcBGAsYHQ/s1600/h.jpg");
+}

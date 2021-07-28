@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/index.css}" rel="stylesheet">
+    <link th:href="@{/css/tienda.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="grid-container">
+	
+	<header th:replace="fragments/menu :: menu-principal"></header>
+     
+
+	<main class="main">
+		<section>
+			<h1 th:text="'Bienvenido ' + ${usuario.nombre}"></h1>
+			<h2><span th:text="'Tienes ' + ${usuario.puntos} + ' Kilucoins'"></span><span style="color:lime"><i class="fas fa-money-bill-wave"></i></span></h2>
+		</section>
+	    
+		<section>
+			<div class="tienda">
+				<div class="carta" style="width: 18rem;" th:each="producto:${productos}" th:object="${producto}">
+					<div class="carta-header">
+						<h3 class="carta-title" th:text="*{nombre}"></h3>
+					 		<img th:src="@{/img/{img} (img=*{imagen})}" class="carta-img" alt="...">
+					</div>
+					<div class="carta-body">
+					   <p class="card-text" th:text="*{descripcion}"></p>
+					   <a th:href="@{/tienda/comprar/{id}(id=*{id})}" class="btn btn-redondo btn-rosa-hover" onclick="return confirm('¿Estás seguro?')"  th:text="*{precio} + ' Kilucoins'"></a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	
+	
+	<footer th:replace="fragments/footer :: footer"></footer>
+</div>
+
+</body>
+</html>

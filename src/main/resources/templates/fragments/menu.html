@@ -1,0 +1,45 @@
+<header class="header" th:fragment="menu-principal">
+        <div>
+            <a class="logo" th:href="@{/play}">
+           		<span>OneClick</span> 
+            	<img th:src="@{/img/logo.png}" />
+          	</a>
+        </div>
+
+        <nav>
+          <ul class="navbar">
+          
+            <li class="centrar" sec:authorize="hasAnyAuthority('USER','ADMIN')">
+              <a th:href="@{/tienda/}">Tienda</a></a>
+            </li>
+            <li class="centrar"  sec:authorize="hasAnyAuthority('USER','ADMIN')">
+            <a th:href="@{/perfil/list}">Perfil</a>
+            </li>
+            <li class="centrar">
+              <a th:href="@{/usuarios/list/}">Usuarios</a>
+            </li>
+            <li class="centrar" sec:authorize="hasAnyAuthority('USER','ADMIN')">
+              <a th:href="@{/admin/}">Admin</a>
+            </li>
+            <li class="centrar" sec:authorize="hasAnyAuthority('USER','ADMIN')">
+              <a th:href="@{/test/}">Test</a>
+            </li>
+          </ul>
+        </nav>
+        
+        <div class="login centrar">
+		    <button class="btn btn-principal btn-round" sec:authorize="isAnonymous()">
+		    	<a th:href="@{/login}">Login</a>
+		    </button>&nbsp;
+		    <button class="btn btn-secundario btn-round" sec:authorize="isAnonymous()">
+		    	<a  th:href="@{/signup}">Registrarse</a>
+		    </button>&nbsp;
+		    <button class="btn btn-redondo btn-rosa-hover" sec:authorize="isAuthenticated()">
+		    	<a th:href="@{/logout}">Salir</a>
+		    </button>
+        </div>
+        
+        <div class="hamburguesa">
+          <i class="fas fa-bars"></i>
+        </div>
+</header>
