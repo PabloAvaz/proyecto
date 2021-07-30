@@ -1,6 +1,6 @@
 :root {
 	
-	--color-texto-principal: #7482AB;
+	--color-texto-principal: var(--color-negro);
 	--color-texto-secundario: var(--color-blanco);
 	
 	--color-fondo-principal: #FEE1A2;
@@ -8,6 +8,14 @@
 	
 	--color-boton-rosa: #EC1362;
 
+
+   	--color-success-text: var(--color-blanco);
+    --color-success-fondo: #5cb85c;
+
+	--color-error-text: var(--color-blanco);
+    --color-error-fondo: #dc3545;
+    
+     --duracion-anim: 0.1s;
 	
 	--color-rosa: rgba(230, 0, 255, 0.5087451720505618);
 	--color-amarillo: rgba(248, 255, 0, 0.5536889922752809);
@@ -37,10 +45,6 @@
     --danger: #dc3545;
     --light: #f8f9fa;
     --dark: #343a40;
-    
-    
-
-	
 }
 
 

@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<th:block th:replace="fragments/head:: head"/>
-    <link th:href="@{/css/index.css}" rel="stylesheet">
-    <link th:href="@{/css/clicker.css}" rel="stylesheet">
+    <link th:href="@{/css/propios/clicker.css}" rel="stylesheet">
 </head>
-<body>
-
-<div class="grid-container">
+<body class="juego-template">
 
 <header th:replace="fragments/menu :: menu-principal"></header>
+     <th:block th:replace="fragments/modals :: modal-login"></th:block>
      
 
-      <main class="main juego">
+      <main class="juego">
         <aside class="lateral lateral-izquierda">
 			<section class="ventanita daily">
 				<div class="ventanita-header">
 					<h1>Recompensa diaria</h1>
 				</div>
-				
-				<a  th:href="@{/daily/claim}" class="w-100 btn btn-lg btn-outline-primary">Reclamar</a>
-				<small th:if="${msg!=null}" th:text="${msg}"></small>
+				<div class="ventanita-body">
+					<small>Disponible todos los días partir de las 00:00</small>
+					<a th:href="@{/daily/claim}" class="btn btn-redondo btn-principal-hover" sec:authorize="isAuthenticated()">Reclamar</a>
+					<small th:if="${msg!=null}" th:text="${msg}"></small>
+				</div>
 			</section>
 			<section class="ventanita novedades">
 				<div class="ventanita-header">
 					<h1>Noticias</h1>
 				</div>
-				<span>Nuevo personaje disponible</span>
-				<span>Actualizacion 1.0</span>
+				<div class="ventanita-body">
+					<span>Nuevo personaje disponible</span>
+					<span>Actualizacion 1.0</span>
+				</div>
 			</section>
 		</aside>
       
-      	<section>
+      	<section class="clicker">
       	    <img id="clicker" th:src="@{/img/{img} (img=${usuario!=null && usuario.skin != null? usuario.skin.imagen: T(com.constants.Constants).DEFAULT_SKIN.imagen})}" />
 			<h1 id="salida"></h1>
-			<button class="myButton">REGISTRATE!</button>
+			<button class="myButton" sec:authorize="isAnonymous()">REGISTRATE!</button>
 		</section>
 		
 		<aside class="lateral lateral-derecha">
@@ -45,21 +44,25 @@
 				<div class="ventanita-header">
 					<h1>Perfil</h1>
 				</div>
+				<div class="ventanita-body">
+					<span th:text="${'Nombre: ' +  usuario.nombre}" sec:authorize="isAuthenticated()"></span><br>
+					<span th:text="${'Dinero: ' +  (usuario!=null?usuario.puntos:'')}" id="puntosTotales"></span><br>
+					<span th:text="${'Energía: ' +  (usuario.energia.actual + ' / ' + usuario.energia.total)}" sec:authorize="isAuthenticated()"></span><br>
+					
+				</div>
 			</section>
 			
 			<section class="ventanita amigos">
 				<div class="ventanita-header">
 					<h1>Amigos</h1>
 				</div>
+				<div class="ventanita-body">
+					<span>Proximamente</span>
+				</div>
 			</section>
 		</aside>
       </main>
-
-
-<footer th:replace="fragments/footer :: footer"></footer>
 	
-</div>
-      
 	<script th:inline="javascript">
 	$(window).on("load", function(){
 		audio = /*[[
@@ -76,6 +79,7 @@
 				type : 'GET',
 				dataType : 'json',
 			    success : function(json) {
+			    	$('#puntosTotales').text(`Dinero: ${json.puntos} Berry`);
 			    	console.log("Enviado: " , json)
 			    }
 			});

@@ -1,21 +1,28 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-	<div th:replace="fragments/head:: head"/>
+	<th:block th:replace="fragments/head:: head"/>
 </head>
-<body>
-	<nav th:insert="fragments/menu :: menu-principal"/>
-		
-	<table class="table table-striped">
-		<tr>
-			<th>Id</th>
-			<th>Nombre</th>
-			<th>Puntos</th>
-		</tr>
-		<tr th:each="user:${usuarios}">
-			<td th:text="${user.id}"></td>
-			<td th:text="${user.nombre}"></td>
-			<td th:text="${user.puntos}"></td>
-		</tr>
-	</table>
+<body class="default-plantilla">
+
+<header th:replace="fragments/menu :: menu-principal"></header>
+	
+	<main>
+		<table>
+			<tr>
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Puntos</th>
+			</tr>
+			<tr th:each="user:${usuarios}">
+				<td th:text="${user.id}"></td>
+				<td th:text="${user.nombre}"></td>
+				<td th:text="${user.puntos}"></td>
+			</tr>
+		</table>
+	</main>
+
+	<footer th:replace="fragments/footer :: footer"></footer>
+
 </body>
 </html>

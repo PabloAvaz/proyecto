@@ -1,0 +1,54 @@
+<!-- Fragmento para una modal cualquiera -->
+<div th:fragment="modal(id, header, body, footer)" th:id="${id}" class="modal oculto">
+	<div class="modal-content">
+	
+	    <div th:replace="${header}"></div>
+	
+		<div th:replace="${body}"></div>
+	    
+	    <div th:replace="${footer}"></div>
+	</div>
+</div>
+
+<!-- Modal login -->
+<div th:fragment="modal-login">
+	<div th:replace ="~{::modal('modalLogin', ~{::login-header}, ~{::login-body}, ~{::modal-default-botones})}"></div>
+</div>
+
+<div th:fragment="login-header">
+	<div class="modal-header centrar">
+		<h1>Login</h1>
+	</div>
+</div>
+
+<div th:fragment="login-body">
+    <div class="modal-body">
+    	<div th:if="${msg!=null}">
+			<p class="alert alert-danger" th:text="${msg}"></p>
+		</div>
+		
+		<form th:action="@{/login}" method="post" id="form" class="formulario form-login">
+			<img th:src="@{/images/login.jpg}">
+			
+			<div class="form-grupo">
+				<label for="username" class="form-etiqueta">Usuario</label>
+				<input type="text" name="username" id="username" class="form-campo" placeholder="Nombre de usuario" required autofocus>
+			</div>
+			
+			<div class="form-grupo">
+          			<label for="password" class="form-etiqueta">Password</label>
+				<input type="password" name="password" id="password" class="form-campo" placeholder="Contraseña" required>
+			</div>
+			
+			<h5>
+				Si todavia no tienes una cuenta haz click <a th:href="@{/signup}">aqui</a>
+				para registrate
+			</h5>
+		</form>
+    </div>
+</div>
+
+<div class="modal-footer" th:fragment="modal-default-botones">
+    <button class="btn btn-rosa-hover" id="modal-cancelar">Cancelar</button>
+    <button class="btn btn-secundario-hover" th:form="form">Enviar</button>
+</div>

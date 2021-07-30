@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
-public class ErrorControllerPersonalziado implements ErrorController {
+public class ErrorControllerPro implements ErrorController {
 
 	@RequestMapping("/error")
 	public String controlarErrores(HttpServletRequest request){
@@ -24,9 +24,9 @@ public class ErrorControllerPersonalziado implements ErrorController {
 	        if(statusCode == HttpStatus.FORBIDDEN.value()) {
 	            return "/error/error-403";
 	        }
-	        //else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-	            //return "/error/error-500";
-	        //}
+	        else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+	            return "/error/error-500";
+	        }
 	    }
 	    return "/error/error";
 	}

@@ -1,0 +1,90 @@
+.juego-template {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 10vh 90vh;
+	grid-template-areas: "header" "main";
+}
+
+
+@media screen and (max-width: 1025px) and (min-width: 720px) {
+	.lateral {
+		min-width: 100vw;
+		display: flex;
+		flex-direction: row;
+	}
+	.clicker {
+		width: 100vw;
+	}
+}
+
+@media screen and (max-width: 720px) {
+	.lateral {
+		min-width: 100vw;
+	}
+	.lateral .ventanita {
+		min-width: 420px;
+		max-width: 90vw;
+	}
+	.clicker {
+		width: 100vw;
+	}
+}
+
+section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.juego {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	
+}
+
+.ventanita {
+	display: block;
+	width: 200px;
+	height: 200px;
+	margin: 1px solid black;
+	box-shadow: 2px 0px 5px black;
+	border-radius: 10px;
+	background-color: rgb(255, 255, 255, 0.8);
+	color: black;
+}
+
+.ventanita-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: blue;
+	color: white;
+	border-radius: 10px;
+}
+
+.lateral {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	max-width: 20vw;
+	gap: 10px;
+}
+
+.clicker {
+	width: 60vw;
+}
+
+.clicker img {
+	object-fit: contain;
+	max-width: 70vh;
+	max-height: 70vh;
+}
+
+

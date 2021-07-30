@@ -1,4 +1,4 @@
-<header class="header" th:fragment="menu-principal">
+<header th:fragment="menu-principal">
         <div>
             <a class="logo" th:href="@{/play}">
            		<span>OneClick</span> 
@@ -18,25 +18,19 @@
             <li class="centrar">
               <a th:href="@{/usuarios/list/}">Usuarios</a>
             </li>
-            <li class="centrar" sec:authorize="hasAnyAuthority('USER','ADMIN')">
+            <li class="centrar" sec:authorize="hasAnyAuthority('ADMIN')">
               <a th:href="@{/admin/}">Admin</a>
             </li>
-            <li class="centrar" sec:authorize="hasAnyAuthority('USER','ADMIN')">
+            <li class="centrar" sec:authorize="hasAnyAuthority('ADMIN')">
               <a th:href="@{/test/}">Test</a>
             </li>
           </ul>
         </nav>
         
         <div class="login centrar">
-		    <button class="btn btn-principal btn-round" sec:authorize="isAnonymous()">
-		    	<a th:href="@{/login}">Login</a>
-		    </button>&nbsp;
-		    <button class="btn btn-secundario btn-round" sec:authorize="isAnonymous()">
-		    	<a  th:href="@{/signup}">Registrarse</a>
-		    </button>&nbsp;
-		    <button class="btn btn-redondo btn-rosa-hover" sec:authorize="isAuthenticated()">
-		    	<a th:href="@{/logout}">Salir</a>
-		    </button>
+		    <a class="btn btn-principal btn-round" sec:authorize="isAnonymous()" th:data-url="@{/login}" data-toggle="#modalLogin">Login</a>&nbsp;
+		    <a class="btn btn-secundario btn-round" sec:authorize="isAnonymous()"  th:href="@{/signup}">Registrarse</a>&nbsp;
+		    <a class="btn btn-redondo btn-rosa-hover" sec:authorize="isAuthenticated()" th:href="@{/logout}">Salir</a>
         </div>
         
         <div class="hamburguesa">

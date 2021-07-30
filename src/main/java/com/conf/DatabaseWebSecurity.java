@@ -36,7 +36,8 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				"/css/**",
 				"/js/**",
 				"/sounds/**",
-				"/bootstrap/**"
+				"/bootstrap/**",
+				"/lib/**"
 				).permitAll()
 		//Vistas publicas
 		.antMatchers(

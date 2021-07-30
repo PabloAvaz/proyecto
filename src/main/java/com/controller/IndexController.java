@@ -8,9 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.domain.entity.user.Usuario;
 import com.dto.user.UsuarioDto;
 import com.service.IUsuarioService;
 
@@ -37,7 +35,7 @@ public class IndexController {
 			UsuarioDto usr = serviceUsuario.getByUserName(auth.getName());
 			sesion.setAttribute("usuario", usr);
 		}
-		modelo.addAttribute("usuario",sesion.getAttribute("usuario"));
+		modelo.addAttribute("usuario", sesion.getAttribute("usuario"));
 
 		return "index.html";
 	}

@@ -11,9 +11,10 @@
     position: relative;
     border-width: 1px;
     border-style: solid;
-    transition: all .3s ease;
+    transition: background .3s ease, color .3s ease, border-color .3s ease;
     font-style: none;
 	text-decoration: none;
+	min-width: 100px;
 }
 
 button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled) {
@@ -48,10 +49,6 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
     background: var(--color-fondo-principal);
 }
 
-
-
-
-
 .btn-secundario {
     color: var(--color-texto-secundario);
     border-color: var(--color-fondo-secundario);
@@ -59,14 +56,14 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
 }
 
 .btn-secundario-hover{
-    color: var(--color-secundario);
-    border-color: #ec8f6a;
-    background: #ec8f6a;
+    color: var(--color-fondo-secundario);
+    border-color: var(--color-fondo-secundario);
+    background: var(--color-texto-secundario);
 }
 
 .btn-secundario-hover:hover{
-    color: var(--color-blanco);
-    background: #ec8f6a;
+    color: var(--color-texto-secundario);
+    background: var(--color-fondo-secundario);
 }
 
 
@@ -82,10 +79,29 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
     background: var(--color-boton-rosa);
 }
 
+.btn-violeta-hover{
+    color: var(--color-boton-rosa);
+    border-color: var(--color-boton-rosa);
+    background: var(--color-blanco);
+}
+
+.btn-violeta-hover:hover{
+    color: var(--purple);
+    background: var(--purple);
+}
 
 
+.btn-success{
+    color: var(--color-success-text);
+    background: var(--color-success-fondo);
+    border: 1px solid var(--color-negro);
+}
 
-
+.btn-error{
+    color: var(--color-error-text);
+    background: var(--color-error-fondo);
+    border: 1px solid var(--color-negro);
+}
 
 .myButton {
 	box-shadow: 0px 1px 0px 0px #fff6af;
