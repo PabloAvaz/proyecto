@@ -6,14 +6,18 @@
 }
 
 
-@media screen and (max-width: 1025px) and (min-width: 720px) {
+@media screen and (max-width: 1025px) {
 	.lateral {
 		min-width: 100vw;
 		display: flex;
 		flex-direction: row;
 	}
 	.clicker {
-		width: 100vw;
+		width: 100vw!important;
+	}
+	.lateral .ventanita {
+		min-width: 70vw;
+		max-width: 80vw;
 	}
 }
 
@@ -21,13 +25,7 @@
 	.lateral {
 		min-width: 100vw;
 	}
-	.lateral .ventanita {
-		min-width: 420px;
-		max-width: 90vw;
-	}
-	.clicker {
-		width: 100vw;
-	}
+
 }
 
 section {
@@ -57,6 +55,7 @@ section {
 	border-radius: 10px;
 	background-color: rgb(255, 255, 255, 0.8);
 	color: black;
+	transition: min-width 0.4s ease;
 }
 
 .ventanita-header {
@@ -66,6 +65,9 @@ section {
 	background-color: blue;
 	color: white;
 	border-radius: 10px;
+}
+.ventanita-body {
+	padding: 5px 10px;
 }
 
 .lateral {

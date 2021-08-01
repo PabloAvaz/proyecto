@@ -6,23 +6,22 @@
 </head>
 <body class="juego-template">
 
-<header th:replace="fragments/menu :: menu-principal"></header>
-     <th:block th:replace="fragments/modals :: modal-login"></th:block>
+	<header th:replace="fragments/menu :: menu-principal"></header>
+    <th:block th:replace="fragments/modals :: modal-login"></th:block>
      
-
       <main class="juego">
         <aside class="lateral lateral-izquierda">
-			<section class="ventanita daily">
+			<section class="ventanita daily" sec:authorize="isAuthenticated()">
 				<div class="ventanita-header">
 					<h1>Recompensa diaria</h1>
 				</div>
 				<div class="ventanita-body">
 					<small>Disponible todos los días partir de las 00:00</small>
-					<a th:href="@{/daily/claim}" class="btn btn-redondo btn-principal-hover" sec:authorize="isAuthenticated()">Reclamar</a>
+					<a th:href="@{/daily/claim}" class="btn btn-redondo btn-principal-hover">Reclamar</a>
 					<small th:if="${msg!=null}" th:text="${msg}"></small>
 				</div>
 			</section>
-			<section class="ventanita novedades">
+			<section class="ventanita novedades" sec:authorize="isAuthenticated()">
 				<div class="ventanita-header">
 					<h1>Noticias</h1>
 				</div>
@@ -40,19 +39,27 @@
 		</section>
 		
 		<aside class="lateral lateral-derecha">
-			<section class="ventanita perfil">
+			<section class="ventanita perfil" sec:authorize="isAuthenticated()">
 				<div class="ventanita-header">
 					<h1>Perfil</h1>
 				</div>
 				<div class="ventanita-body">
-					<span th:text="${'Nombre: ' +  usuario.nombre}" sec:authorize="isAuthenticated()"></span><br>
-					<span th:text="${'Dinero: ' +  (usuario!=null?usuario.puntos:'')}" id="puntosTotales"></span><br>
-					<span th:text="${'Energía: ' +  (usuario.energia.actual + ' / ' + usuario.energia.total)}" sec:authorize="isAuthenticated()"></span><br>
-					
+					<div>
+						<span th:text="${'Nombre: ' +  usuario.nombre}"></span>
+						<br>
+					</div>
+					<div>
+						<span th:text="${'Dinero: ' +  (usuario !=null ? usuario.puntos:'')}" id="puntosTotales"></span>
+						<br>
+					</div>
+					<div>
+						<span th:text="${'Energía: ' +  (usuario.energia.actual + ' / ' + usuario.energia.total)}"></span>
+						<br>
+					</div>
 				</div>
 			</section>
 			
-			<section class="ventanita amigos">
+			<section class="ventanita amigos" sec:authorize="isAuthenticated()">
 				<div class="ventanita-header">
 					<h1>Amigos</h1>
 				</div>
@@ -89,7 +96,6 @@
 			};
 		})
 	})
-		
 	</script>
 	
 </body>

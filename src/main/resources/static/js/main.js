@@ -80,8 +80,12 @@ $(window).on('load',function(){
     $(".modal-content").on("click", (evt) => {
         evt.stopPropagation()
     })
+
+
+	$(".hamburguesa").on('click', function(){
+		$('nav').toggleClass('expandido')
+		console.log($('nav'))
+	})
 })
 
-$("#clicker").on('click', function() {
-	alert('ola')
-})
+	

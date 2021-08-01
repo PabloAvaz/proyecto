@@ -1,10 +1,15 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-	<div th:replace="fragments/head:: head"/>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/propios/clicker.css}" rel="stylesheet">
 </head>
-<body>
-	<nav th:insert="fragments/menu :: menu-principal"/>
-	<table class="table">
+<body class="default-plantilla">
+
+	<header th:replace="fragments/menu :: menu-principal"></header>
+     
+      <main>
+        <table class="table">
 		<tr>
 			<th>Id</th>
 			<th>Nombre</th>
@@ -23,6 +28,10 @@
 				<a class="btn btn-success" th:href="@{/perfil/usar/{prd} (prd=*{productoUsuarioId.producto.id})}">Usar</a>
 			</td>
 		</tr>
-	</table>
+		</table>
+    </main>
+
+	<footer th:replace="fragments/footer :: footer"></footer>
+	<th:block th:replace="fragments/modals :: modal-login"></th:block>
 </body>
 </html>

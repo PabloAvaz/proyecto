@@ -1,13 +1,15 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-	<div th:replace="fragments/head:: head"/>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/propios/clicker.css}" rel="stylesheet">
 </head>
-<body>
-	<nav th:replace="fragments/menu :: menu-principal"/>
+<body class="default-plantilla">
 
-<div class="container">
-	<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-	
+	<header th:replace="fragments/menu :: menu-principal"></header>
+    <th:block th:replace="fragments/modals :: modal-login"></th:block>
+     
+	<main>
 		<div class="col">
 			<div class="card mb-4 shadow-sm">
 				<div class="card-header">
@@ -78,5 +80,15 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+    </main>
+
+	<footer th:replace="fragments/footer :: footer"></footer>
+	<th:block th:replace="fragments/modals :: modal-login"></th:block>
+</body>
+</html>
+
+
+
+
+
+

@@ -26,6 +26,15 @@
     }
 }
 
+@keyframes deslizar-derecha {
+  0% {
+    transform: translateX(-30vw);
+  }
+  100% {
+    transform: translateY(0vw);
+  }
+}
+
 
 .animado {
 	animation: clicker 4s linear 0s infinite alternate;	

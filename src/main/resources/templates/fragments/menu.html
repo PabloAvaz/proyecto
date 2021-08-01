@@ -25,13 +25,13 @@
               <a th:href="@{/test/}">Test</a>
             </li>
           </ul>
+          
+	        <div class="login">
+			    <a class="btn btn-principal btn-round" sec:authorize="isAnonymous()" th:data-url="@{/login}" data-toggle="#modalLogin">Login</a>&nbsp;
+			    <a class="btn btn-secundario btn-round" sec:authorize="isAnonymous()"  th:href="@{/signup}">Registrarse</a>&nbsp;
+			    <a class="btn btn-rosa-hover btn-round " sec:authorize="isAuthenticated()" th:href="@{/logout}">Salir</a>
+	        </div>
         </nav>
-        
-        <div class="login centrar">
-		    <a class="btn btn-principal btn-round" sec:authorize="isAnonymous()" th:data-url="@{/login}" data-toggle="#modalLogin">Login</a>&nbsp;
-		    <a class="btn btn-secundario btn-round" sec:authorize="isAnonymous()"  th:href="@{/signup}">Registrarse</a>&nbsp;
-		    <a class="btn btn-redondo btn-rosa-hover" sec:authorize="isAuthenticated()" th:href="@{/logout}">Salir</a>
-        </div>
         
         <div class="hamburguesa">
           <i class="fas fa-bars"></i>

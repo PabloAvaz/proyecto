@@ -150,13 +150,15 @@ tbody td:hover:before {
 
 .modal-content {
     display: grid;
-    grid-template-columns: 40vw;
-    grid-template-rows: 10vh 30vh 10vh;
+    grid-template-columns: minmax(320px, 30vw);
+    grid-template-rows: 10vh 50vh 10vh;
     color: var(--color-negro);
     background-color: var(--color-blanco);
     border-radius: 1vw;
 }
-
+.modal-body{
+	width: 100%;
+}
 .modal-footer {
     display: flex;
     align-items: center;
@@ -165,6 +167,14 @@ tbody td:hover:before {
 
 .modal-footer button {
     margin-right: 10px;
+}
+
+@media screen and (max-width: 720px) {
+	.modal-footer {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }
 
 
