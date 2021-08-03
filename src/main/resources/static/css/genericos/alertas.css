@@ -19,3 +19,14 @@
 	border-color: rgb(255, 118, 118, 0.6);
 	
 }
+
+.alert-success{
+	color: darkgreen;
+	background-color: rgb(123, 255, 118, 0.3);
+	border-color: rgb(123, 255, 118, 0.5);
+}
+.alert-success:hover{
+	background-color: rgb(123, 255, 118, 0.5);
+	border-color: rgb(123, 255, 118, 0.6);
+	
+}

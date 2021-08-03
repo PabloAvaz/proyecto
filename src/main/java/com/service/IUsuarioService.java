@@ -2,9 +2,6 @@ package com.service;
 
 import java.util.List;
 
-import com.domain.entity.producto.Producto;
-import com.domain.entity.producto.ProductoUsuario;
-import com.domain.entity.user.Usuario;
 import com.dto.producto.ProductoDto;
 import com.dto.producto.ProductoUsuarioDto;
 import com.dto.user.UsuarioDto;

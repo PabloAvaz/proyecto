@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.domain.entity.user.Usuario;
 import com.dto.user.UsuarioDto;
 import com.service.ISkinService;
 import com.service.IUsuarioService;

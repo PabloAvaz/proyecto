@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.constants.Constants;
 import com.domain.entity.acciones.AccionEquipable;
-import com.domain.entity.producto.Producto;
 import com.domain.entity.producto.ProductoUsuario;
 import com.domain.entity.producto.ProductoUsuarioId;
 import com.domain.entity.user.Daily;
@@ -27,7 +25,6 @@ import com.dto.producto.SkinDto;
 import com.dto.user.UsuarioDto;
 import com.mapper.producto.ProductoMapper;
 import com.mapper.producto.ProductoUsuarioMapper;
-import com.mapper.producto.SkinMapper;
 import com.mapper.user.PerfilMapper;
 import com.mapper.user.UsuarioMapper;
 import com.service.IPerfilService;

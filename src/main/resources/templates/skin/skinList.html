@@ -20,7 +20,7 @@
 			<td><button th:id="${skin.sonido}">Tocar</td>
 			<td>
 				<a th:href="@{/skin/edit/{id} (id=${skin.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                <a th:href="@{/skin/delete/{id} (id=${skin.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+                <a th:href="@{/skin/delete/{id} (id=${skin.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-error" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
 			</td>
 		</tr>
 	</table>

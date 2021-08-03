@@ -1,0 +1,5 @@
+<!-- Nombre mapa por defecto : alertas -->
+
+<div th:fragment="alert(alert)" th:class="alert" th:classappend="${'alert-' + alert.tipo.clase}" th:if="${alert!=null}">
+ 	<small th:class="${alert.tipo.clase}" th:text="${alert.contenido}"></small>
+</div>

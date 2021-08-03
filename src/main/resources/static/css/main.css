@@ -6,7 +6,13 @@
 
 @import url("genericos/genericos.css");
 
+@import url("genericos/ventanita.css");
+
+@import url("genericos/modal.css");
+
 @import url("propios/plantillas.css");
+
+
 
 body {
 	background: rgb(232, 183, 183);

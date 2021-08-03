@@ -7,8 +7,7 @@
 <body class="juego-template">
 
 	<header th:replace="fragments/menu :: menu-principal"></header>
-    <th:block th:replace="fragments/modals :: modal-login"></th:block>
-     
+        
       <main class="juego">
         <aside class="lateral lateral-izquierda">
 			<section class="ventanita daily" sec:authorize="isAuthenticated()">
@@ -19,8 +18,9 @@
 					<div class="alert alert-error" th:if="${msg!=null}">
 						<small th:text="${msg}"></small>
 					</div>
+					<div th:replace="fragments/validacion/alertas :: alert(${msgDaily})"></div>
 					<small>Disponible todos los días partir de las 00:00</small>
-					<a th:href="@{/daily/claim}" class="btn btn-redondo btn-principal-hover">Reclamar</a>
+					<a th:href="@{/daily/claim}" class="btn btn-redondo btn-principal-hover abajo">Reclamar</a>
 				</div>
 			</section>
 			<section class="ventanita novedades" sec:authorize="isAuthenticated()">
@@ -100,5 +100,7 @@
 	})
 	</script>
 	
+	    <th:block th:replace="fragments/modals :: modal-login"></th:block>
+
 </body>
 </html>

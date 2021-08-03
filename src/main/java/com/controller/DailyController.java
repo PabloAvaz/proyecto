@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dto.user.UsuarioDto;
+import com.dto.util.Alert;
+import com.dto.util.Mensaje;
+import com.enums.TipoMensaje;
 import com.service.IUsuarioService;
 
 import lombok.RequiredArgsConstructor;
@@ -33,10 +36,11 @@ public class DailyController {
 	public String claim(RedirectAttributes atrib) {
 
 	if(serviceUsuario.reclamarDaily(usr)) {
-		atrib.addFlashAttribute("msg","Recompensa reclamada con éxito");
+		atrib.addFlashAttribute("msgDaily", new Alert("Recompensa reclamada con éxito", TipoMensaje.SUCCESS));
 	} else {
-		atrib.addFlashAttribute("msg","Error al reclamar la recompensa diaria");
+		atrib.addFlashAttribute("msgDaily",new Alert("Error al reclamar la recompensa diaria", TipoMensaje.ERROR));
 	}
+	
 	
 	return "redirect:/play";
 	}

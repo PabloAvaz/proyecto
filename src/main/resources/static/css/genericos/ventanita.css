@@ -1,0 +1,41 @@
+.ventanita {
+	display: block;
+	width: 200px;
+	height: 200px;
+	margin: 1px solid black;
+	box-shadow: 2px 0px 5px black;
+	border-radius: 10px;
+	background-color: rgb(255, 255, 255, 0.8);
+	color: black;
+	transition: min-width 0.4s ease;
+	box-shadow: -1px 4px 14px 2px black, -7px 7px 20px 4px #d636e99e, inset -5px -5px 11px 3px #fcff0826;
+	position: relative;
+}
+
+.ventanita-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: blue;
+	color: white;
+	border-radius: 10px 10px 0px 0px;
+}
+.ventanita-body {
+	padding: 5px 10px;
+}
+
+.ventanita ul li a {
+	color: royalblue!important;
+}
+.ventanita a:hover {
+	text-decoration: underline;
+}
+
+.abajo {
+	position: absolute;
+    bottom: 10px;
+    left:0;
+    right:0;
+	margin-left: 10%;
+	margin-right: 10%;
+}

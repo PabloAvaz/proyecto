@@ -2,84 +2,71 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
 	<th:block th:replace="fragments/head:: head"/>
-    <link th:href="@{/css/propios/clicker.css}" rel="stylesheet">
 </head>
 <body class="default-plantilla">
 
 	<header th:replace="fragments/menu :: menu-principal"></header>
      
-	<main>
-		<div class="col">
-			<div class="card mb-4 shadow-sm">
-				<div class="card-header">
-			    	<h4 class="my-0 fw-normal">Usuarios</h4>
-				</div>
-				<div class="card-body">
-					<h1 class="card-title pricing-card-title">Administrar los usuarios</h1>
-					<ul class="list-unstyled mt-3 mb-4">
-					   <li><a href="#">Crear usuario</a></li>
-					   <li><a th:href="@{/usuarios/adminList}">Ver usuarios</a></li>
-					   <li></li>
-					   <li></li>
-					</ul>
-					<a th:href="@{/usuarios/adminList}" class="w-100 btn btn-lg btn-outline-primary">Inicio</a>
-				</div>
+	<main class="columna">
+		<div class="ventanita">
+			<div class="ventanita-header">
+		    	<h4>Usuarios</h4>
+			</div>
+			<div class="ventanita-body">
+				<ul class="sin-estilo">
+				   <li><a href="#">Crear usuario</a></li>
+				   <li><a th:href="@{/usuarios/adminList}">Ver usuarios</a></li>
+				   <li></li>
+				   <li></li>
+				</ul>
+				<a th:href="@{/usuarios/adminList}" class="btn btn btn-redondo btn-principal-hover abajo">Inicio</a>
 			</div>
 		</div>
-		
-		<div class="col">
-			<div class="card mb-4 shadow-sm">
-				<div class="card-header">
-			    	<h4 class="my-0 fw-normal">Skins</h4>
-				</div>
-				<div class="card-body">
-					<h1 class="card-title pricing-card-title">Administrar las skins</h1>
-					<ul class="list-unstyled mt-3 mb-4">
-					   <li><a th:href="@{/skin/create}">Crear skin</a></li>
-					   <li><a th:href="@{/skin/list}">Ver skins</a></li>
-					   <li></li>
-					   <li></li>
-					</ul>
-					<a th:href="@{/skin/list}" class="w-100 btn btn-lg btn-outline-primary">Inicio</a>
-				</div>
+	
+		<div class="ventanita">
+			<div class="ventanita-header">
+		    	<h4 class="my-0 fw-normal">Skins</h4>
+			</div>
+			<div class="ventanita-body">
+				<ul class="sin-estilo">
+				   <li><a th:href="@{/skin/create}">Crear skin</a></li>
+				   <li><a th:href="@{/skin/list}">Ver skins</a></li>
+				   <li></li>
+				   <li></li>
+				</ul>
+				<a th:href="@{/skin/list}" class="btn btn btn-redondo btn-principal-hover abajo">Inicio</a>
 			</div>
 		</div>
-		
-		<div class="col">
-			<div class="card mb-4 shadow-sm">
-				<div class="card-header">
-			    	<h4 class="my-0 fw-normal">Recompensas</h4>
-				</div>
-				<div class="card-body">
-					<h1 class="card-title pricing-card-title">Administrar las recompensas</h1>
-					<ul class="list-unstyled mt-3 mb-4">
-					   <li><a th:href="@{/admin/daily}">Recompensas diarias</a></li>
-					   <li><a href="#">Misiones[Proximamente]</a></li>
+	
+		<div class="ventanita">
+			<div class="ventanita-header">
+		    	<h4>Recompensas</h4>
+			</div>
+			<div class="ventanita-body">
+				<ul class="sin-estilo">
+				   <li><a th:href="@{/admin/daily}">Recompensas diarias</a></li>
+				   <li><a href="#">Misiones[Proximamente]</a></li>
 
-					</ul>
-					<a th:href="@{/admin/daily}" class="w-100 btn btn-lg btn-outline-primary">Inicio</a>
-				</div>
+				</ul>
+				<a th:href="@{/admin/daily}" class="btn btn btn-redondo btn-principal-hover abajo">Inicio</a>
 			</div>
 		</div>
-		
-		<div class="col">
-			<div class="card mb-4 shadow-sm">
-				<div class="card-header">
-			    	<h4 class="my-0 fw-normal">Productos</h4>
-				</div>
-				<div class="card-body">
-					<h1 class="card-title pricing-card-title">Administrar los productos</h1>
-					<ul class="list-unstyled mt-3 mb-4">
-					   <li><a th:href="@{/productos/create}">Crear producto</a></li>
-					   <li><a th:href="@{/productos/list}">Ver productos</a></li>
-					   <li><a th:href="@{/action/list}">Modificar Skins</a></li>
-					   <li></li>
-					</ul>
-					<a th:href="@{/productos/list}" class="w-100 btn btn-lg btn-outline-primary">Inicio</a>
-				</div>
+	
+		<div class="ventanita">
+			<div class="ventanita-header">
+		    	<h4>Productos</h4>
+			</div>
+			<div class="ventanita-body">
+				<ul class="sin-estilo">
+				   <li><a th:href="@{/productos/create}">Crear producto</a></li>
+				   <li><a th:href="@{/productos/list}">Ver productos</a></li>
+				   <li><a th:href="@{/action/list}">Modificar Skins</a></li>
+				   <li></li>
+				</ul>
+				<a th:href="@{/productos/list}" class="btn btn btn-redondo btn-principal-hover abajo">Inicio</a>
 			</div>
 		</div>
-    </main>
+   	</main>
 
 	<footer th:replace="fragments/footer :: footer"></footer>
 </body>

@@ -18,7 +18,6 @@ import org.hibernate.annotations.FetchMode;
 import com.domain.entity.producto.Producto;
 import com.domain.entity.producto.Skin;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

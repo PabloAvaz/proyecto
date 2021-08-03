@@ -21,7 +21,7 @@
 			<td th:text="${producto.precio}"></td>
 			<td>
 				<a th:href="@{/productos/edit/{id} (id=${producto.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                <a th:href="@{/productos/delete/{id} (id=${producto.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+                <a th:href="@{/productos/delete/{id} (id=${producto.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-error" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
 			</td>
 		</tr>
 	</table>
