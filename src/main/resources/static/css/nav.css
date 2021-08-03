@@ -60,6 +60,7 @@ nav ul.navbar li a:hover {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	margin: 10px;
 }
 
 @media screen and (max-width: 1079px) {
@@ -79,15 +80,20 @@ nav ul.navbar li a:hover {
 	nav.expandido {
 		display: block;
 		position: absolute;
-		width: 30vw;
+		width: 100vw;
 		top: 10vh;
-		background-color: rgb(20, 20, 20, 0.5);
+		background-color: rgb(20, 20, 20, 1);
 		animation: deslizar-derecha var(--duracion-anim) linear;
-		z-index: 10;
+		z-index: 50;
 	}
 	nav.expandido ul {
 		display: flex;
 		flex-direction: column;
+	}
+	nav.expandido li {
+		padding: 10px;
+			background: linear-gradient(90deg, rgba(248, 255, 0, 0.5) 0%,
+		rgba(255, 94, 35, 0.5) 50%, rgba(230, 0, 255, 0.5) 100%);
 	}
 	nav.expandido .login {
 		display: none;

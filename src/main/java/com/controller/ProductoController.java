@@ -2,7 +2,6 @@ package com.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,25 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.domain.entity.producto.Producto;
-import com.domain.entity.user.Usuario;
 import com.dto.producto.ProductoDto;
 import com.dto.user.UsuarioDto;
 import com.enums.Tipo;
 import com.service.IProductoService;
 import com.util.Utilidades;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequestMapping("/productos")
-public class ProductoController {
+@RequiredArgsConstructor
+public class ProductoController extends BaseController {
 	
 	@Value("${ruta.imagenes}")
 	private String ruta;
 	private UsuarioDto usuario;
 	
-
-	@Autowired
-	private IProductoService serviceProducto;
+	private final IProductoService serviceProducto;
 	
 	@ModelAttribute
 	public void init(Model modelo, HttpSession sesion) {

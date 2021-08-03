@@ -3,21 +3,28 @@ package com.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.dto.user.UsuarioDto;
 import com.service.IUsuarioService;
 
+import lombok.RequiredArgsConstructor;
+
 
 
 @Controller
-public class IndexController {
-	@Autowired
-	private IUsuarioService serviceUsuario;
+@RequiredArgsConstructor
+public class IndexController extends BaseController{
+	private final IUsuarioService serviceUsuario;
+	
+	@ModelAttribute
+	public void init(Model model) {
+	    model.addAttribute("newUser", new UsuarioDto());
+	}
 	
 	@GetMapping("/")
 	public String defaultIndex() {
@@ -36,7 +43,7 @@ public class IndexController {
 			sesion.setAttribute("usuario", usr);
 		}
 		modelo.addAttribute("usuario", sesion.getAttribute("usuario"));
-
+		modelo.addAttribute("newUser", new UsuarioDto());
 		return "index.html";
 	}
 

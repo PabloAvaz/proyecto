@@ -1,6 +1,5 @@
 package com.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,15 +13,15 @@ import com.service.IAccionEquipableService;
 import com.service.IProductoService;
 import com.service.ISkinService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequestMapping("/action")
+@RequiredArgsConstructor
 public class AccionController {
-	@Autowired
-	private IAccionEquipableService serviceAccionEquipable;
-	@Autowired
-	private IProductoService serviceProducto;
-	@Autowired
-	private ISkinService serviceSkins;
+	private final IAccionEquipableService serviceAccionEquipable;
+	private final IProductoService serviceProducto;
+	private final ISkinService serviceSkins;
 	
 	@GetMapping("/create")
 	public String crear(Model modelo) {

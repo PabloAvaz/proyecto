@@ -2,7 +2,7 @@
         <div>
             <a class="logo" th:href="@{/play}">
            		<span>OneClick</span> 
-            	<img th:src="@{/img/logo.png}" />
+            	<img th:src="@{/img/logo.png}" alt="logo"/>
           	</a>
         </div>
 
@@ -28,7 +28,7 @@
           
 	        <div class="login">
 			    <a class="btn btn-principal btn-round" sec:authorize="isAnonymous()" th:data-url="@{/login}" data-toggle="#modalLogin">Login</a>&nbsp;
-			    <a class="btn btn-secundario btn-round" sec:authorize="isAnonymous()"  th:href="@{/signup}">Registrarse</a>&nbsp;
+			    <a class="btn btn-secundario btn-round" sec:authorize="isAnonymous()" th:data-url="@{/signup}" data-toggle="#modalRegister">Registrarse</a>&nbsp;
 			    <a class="btn btn-rosa-hover btn-round " sec:authorize="isAuthenticated()" th:href="@{/logout}">Salir</a>
 	        </div>
         </nav>

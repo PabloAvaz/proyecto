@@ -3,15 +3,27 @@ package com.controller;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.dto.user.UsuarioDto;
+
+import lombok.RequiredArgsConstructor;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
+@RequiredArgsConstructor
 public class ErrorControllerPro implements ErrorController {
 
+	@ModelAttribute
+	public void init(Model model) {
+	    model.addAttribute("newUser", new UsuarioDto());
+	}
+	
 	@RequestMapping("/error")
 	public String controlarErrores(HttpServletRequest request){
 	    Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);

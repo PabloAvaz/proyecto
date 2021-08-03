@@ -1,7 +1,7 @@
 @import url(variables.css);
 @import url(botones.css);
 @import url(animaciones.css);
-
+@import url(alertas.css);
 * {
   font-family: "Roboto", sans-serif;
   margin: 0;
@@ -56,7 +56,8 @@ button {
 	background-color: rgb(255,255,255,0.3);
 	
 	width: 20vw;
-	max-height: 55vh;	
+	max-height: 55vh;
+	padding: 10px;	
 }
 
 .carta-header {
@@ -151,7 +152,7 @@ tbody td:hover:before {
 .modal-content {
     display: grid;
     grid-template-columns: minmax(320px, 30vw);
-    grid-template-rows: 10vh 50vh 10vh;
+    grid-template-rows: 10vh 1fr 10vh;
     color: var(--color-negro);
     background-color: var(--color-blanco);
     border-radius: 1vw;
@@ -176,6 +177,8 @@ tbody td:hover:before {
 		align-items: center;
 	}
 }
+
+
 
 
 .form-login {  

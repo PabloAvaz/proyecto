@@ -107,7 +107,7 @@ insert into perfilUsuario values(2, 1);
 insert into perfilUsuario values(3, 2);
 insert into perfilUsuario values(4, 1);
 
-insert into producto values(1,"Vestido de rico","El vestido inicial","default.png", 0, 0);
+insert into producto values(1,"Traje de Luffy","El vestido inicial","default.png", 0, 0);
 insert into producto values(2,"Vestido de kanan","El vestido kanan","kanan.webp", 10, 0);
 insert into producto values(3,"Traje de gato","Woki woki <3","woki.jpg", 10, 0);
 insert into producto values(4,"Cereales Crunchy crunchy","Los mejores cereales para el mejor gato","crunchy.jpg", 10, 1);

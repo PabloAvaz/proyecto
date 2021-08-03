@@ -18,7 +18,7 @@ import com.service.IUsuarioService;
 
 @Controller
 @RequestMapping("/usuarios")
-public class UserController {
+public class UserController extends BaseController {
 	@Autowired
 	private IUsuarioService serviceUsuarios;
 	@Autowired
@@ -30,7 +30,9 @@ public class UserController {
 	public void init(Model modelo, HttpSession sesion) {
 		usuario = (UsuarioDto) sesion.getAttribute("usuario");
 		modelo.addAttribute("usuario", usuario);
+		modelo.addAttribute("newUser", new UsuarioDto());
 	}
+	
 	
 	@GetMapping("/list")
 	private String listar(Model modelo) {

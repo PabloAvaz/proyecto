@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +11,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.domain.entity.user.Usuario;
 import com.dto.user.UsuarioDto;
 import com.service.IUsuarioService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequestMapping("/daily")
+@RequiredArgsConstructor
 public class DailyController {
-	@Autowired
-	private IUsuarioService serviceUsuario;
+	private final IUsuarioService serviceUsuario;
 	
 	private UsuarioDto usr;
 	

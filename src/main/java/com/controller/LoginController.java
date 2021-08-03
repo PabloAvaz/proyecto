@@ -2,7 +2,6 @@ package com.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,22 +9,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.domain.entity.user.Usuario;
-import com.dto.producto.SkinDto;
 import com.dto.user.UsuarioDto;
-import com.service.ISkinService;
 import com.service.IUsuarioService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
-public class LoginController {
+@RequiredArgsConstructor
+public class LoginController extends BaseController {
 
-	@Autowired
-	private IUsuarioService serviceUsuarios;
+	private final IUsuarioService serviceUsuarios;
 
-	@Autowired
-	private ISkinService serviceSkin;
-
-
+	@ModelAttribute
+	public void init(Model model) {
+	    model.addAttribute("newUser", new UsuarioDto());
+	}
 
 	private UsuarioDto usuario;
 
@@ -36,7 +34,7 @@ public class LoginController {
 
 	@GetMapping("/signup")
 	private String registrar(Model modelo) {
-		modelo.addAttribute("user",new UsuarioDto());
+	    modelo.addAttribute("user", new UsuarioDto());
 		modelo.addAttribute("action","signup");
 		return usuario != null ? "redirect:/play" : "/usuarios/userForm.html";
 	}
@@ -48,8 +46,8 @@ public class LoginController {
 	 * @return
 	 */
 	@PostMapping("/signup")
-	private String registro(UsuarioDto user, RedirectAttributes atrib, HttpSession sesion) {
-		serviceUsuarios.crear(user);
+	private String registro(UsuarioDto newUser, RedirectAttributes atrib, HttpSession sesion) {
+		serviceUsuarios.crear(newUser);
 		return "redirect:/login";
 	}
 

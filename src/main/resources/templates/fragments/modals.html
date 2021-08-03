@@ -1,7 +1,6 @@
 <!-- Fragmento para una modal cualquiera -->
 <div th:fragment="modal(id, header, body, footer)" th:id="${id}" class="modal oculto">
 	<div class="modal-content">
-	
 	    <div th:replace="${header}"></div>
 	
 		<div th:replace="${body}"></div>
@@ -10,45 +9,79 @@
 	</div>
 </div>
 
-<!-- Modal login -->
+<!-- Modales login -->
 <div th:fragment="modal-login">
-	<div th:replace ="~{::modal('modalLogin', ~{::login-header}, ~{::login-body}, ~{::modal-default-botones})}"></div>
+	<div th:replace ="~{::modal('modalLogin', ~{::login-header}, ~{::login-body}, ~{::modal-default-botones(formLogin)})}"></div>
+	<div th:replace ="~{::modal('modalRegister', ~{::register-header}, ~{::register-body}, ~{::modal-default-botones(formRegister)})}"></div>
 </div>
 
-<div th:fragment="login-header">
-	<div class="modal-header centrar">
-		<h1>Login</h1>
+<div th:fragment="login-header" class="modal-header centrar" >
+	<h1>Login</h1>
+</div>
+
+ <div th:fragment="login-body" class="modal-body">
+  	<div th:if="${msg!=null}">
+		<p class="alert alert-danger" th:text="${msg}"></p>
 	</div>
-</div>
 
-<div th:fragment="login-body">
-    <div class="modal-body">
-    	<div th:if="${msg!=null}">
-			<p class="alert alert-danger" th:text="${msg}"></p>
+	<form th:action="@{/login}" method="post" id="formLogin" class="formulario form-login">
+		<img th:src="@{/images/login.jpg}">
+		
+		<div class="form-grupo">
+			<label for="username" class="form-etiqueta">Usuario</label>
+			<input type="text" name="username" id="username" class="form-campo" placeholder="Nombre de usuario" required autofocus>
 		</div>
 		
-		<form th:action="@{/login}" method="post" id="form" class="formulario form-login">
-			<img th:src="@{/images/login.jpg}">
-			
-			<div class="form-grupo">
-				<label for="username" class="form-etiqueta">Usuario</label>
-				<input type="text" name="username" id="username" class="form-campo" placeholder="Nombre de usuario" required autofocus>
-			</div>
-			
-			<div class="form-grupo">
-          			<label for="password" class="form-etiqueta">Password</label>
-				<input type="password" name="password" id="password" class="form-campo" placeholder="Contraseña" required>
-			</div>
-			
-			<h5>
-				Si todavia no tienes una cuenta haz click <a th:href="@{/signup}">aqui</a>
-				para registrate
-			</h5>
-		</form>
-    </div>
+		<div class="form-grupo">
+	        			<label for="password" class="form-etiqueta">Password</label>
+			<input type="password" name="password" id="password" class="form-campo" placeholder="Contraseña" required>
+		</div>
+		
+		<h5>
+			Si todavia no tienes una cuenta haz click <a th:href="@{/signup}">aqui</a>
+			para registrate
+		</h5>
+	</form>
+ </div>
+
+
+<div th:fragment="register-header" class="modal-header centrar">
+	<h1>Crea una cuenta</h1>
 </div>
 
-<div class="modal-footer" th:fragment="modal-default-botones">
+ <div th:fragment="register-body" class="modal-body">
+ 	<div th:if="${msg!=null}">
+		<p class="alert alert-danger" th:text="${msg}"></p>
+	</div>
+
+	<form th:action="@{/signup}"  method="post" id="formRegister" class="formulario form-login" th:object="${newUser}">
+		<img th:src="@{/images/login.jpg}">
+		
+		<div class="form-grupo">
+			<label for="apodo" class="form-etiqueta">Apodo</label>
+			<input type="text" th:field="*{nombre}" class="form-campo" placeholder="Nombre de usuario" required autofocus>
+		</div>
+		
+		<div class="form-grupo">
+	        		<label for="usernameReg" class="form-etiqueta">Username</label>
+			<input type="text" id="usernameRef" th:field="*{username}" class="form-campo" placeholder="Contraseña" required>
+		</div>
+		
+		<div class="form-grupo">
+	        		<label for="passwordReg" class="form-etiqueta">Password</label>
+			<input type="password" id="passwordReg" th:field="*{password}" class="form-campo" placeholder="Contraseña" required>
+		</div>
+		
+		<h5>
+			Si ya tienes una cuenta haz click <a th:href="@{/login}">aqui</a>
+			para registrate
+		</h5>
+		
+	</form>
+
+</div>
+
+<div class="modal-footer" th:fragment="modal-default-botones(formId)">
     <button class="btn btn-rosa-hover" id="modal-cancelar">Cancelar</button>
-    <button class="btn btn-secundario-hover" th:form="form">Enviar</button>
+    <button class="btn btn-secundario-hover" th:form="${formId}">Enviar</button>
 </div>

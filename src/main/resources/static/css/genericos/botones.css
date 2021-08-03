@@ -8,7 +8,6 @@
     font-size: 14px;
     font-weight: 500;
     overflow: hidden;
-    position: relative;
     border-width: 1px;
     border-style: solid;
     transition: background .3s ease, color .3s ease, border-color .3s ease;
@@ -104,7 +103,7 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
     border: 1px solid var(--color-negro);
 }
 
-.myButton {
+.botonEspecial {
 	box-shadow: 0px 1px 0px 0px #fff6af;
 	background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
 	background-color: #ffec64;
@@ -121,12 +120,12 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
 	text-shadow: 0px 1px 0px #ffee66;
 }
 
-.myButton:hover {
+.botonEspecial:hover {
 	background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
 	background-color: #ffab23;
 }
 
-.myButton:active {
+.botonEspecial:active {
 	position: relative;
 	top: 1px;
 }

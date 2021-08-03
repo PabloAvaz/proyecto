@@ -16,9 +16,11 @@
 					<h1>Recompensa diaria</h1>
 				</div>
 				<div class="ventanita-body">
+					<div class="alert alert-error" th:if="${msg!=null}">
+						<small th:text="${msg}"></small>
+					</div>
 					<small>Disponible todos los días partir de las 00:00</small>
 					<a th:href="@{/daily/claim}" class="btn btn-redondo btn-principal-hover">Reclamar</a>
-					<small th:if="${msg!=null}" th:text="${msg}"></small>
 				</div>
 			</section>
 			<section class="ventanita novedades" sec:authorize="isAuthenticated()">
@@ -33,9 +35,9 @@
 		</aside>
       
       	<section class="clicker">
-      	    <img id="clicker" th:src="@{/img/{img} (img=${usuario!=null && usuario.skin != null? usuario.skin.imagen: T(com.constants.Constants).DEFAULT_SKIN.imagen})}" />
-			<h1 id="salida"></h1>
-			<button class="myButton" sec:authorize="isAnonymous()">REGISTRATE!</button>
+      		<h1 id="salida"></h1>
+      	    <img id="clicker" alt="Skin seleccionada" th:src="@{/img/{img} (img=${usuario!=null && usuario.skin != null? usuario.skin.imagen: T(com.constants.Constants).DEFAULT_SKIN.imagen})}" />
+			<button class="botonEspecial" th:data-url="@{/signup}" data-toggle="#modalRegister" sec:authorize="isAnonymous()">REGISTRATE!</button>
 		</section>
 		
 		<aside class="lateral lateral-derecha">
