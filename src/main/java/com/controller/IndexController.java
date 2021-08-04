@@ -1,7 +1,5 @@
 package com.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.dto.user.UsuarioDto;
-import com.dto.util.Alert;
-import com.enums.TipoMensaje;
 import com.service.IUsuarioService;
 
 import lombok.RequiredArgsConstructor;
@@ -42,10 +38,10 @@ public class IndexController extends BaseController{
 	
 	@GetMapping("/play")
 	public String play(Authentication auth, HttpSession sesion, Model modelo) {
-		if(sesion.getAttribute("usuario")==null && auth != null) {
+		if(auth != null) {
 			UsuarioDto usr = serviceUsuario.getByUserName(auth.getName());
 			sesion.setAttribute("usuario", usr);
-		}
+		} 
 		modelo.addAttribute("usuario", sesion.getAttribute("usuario"));
 		return "index.html";
 	}

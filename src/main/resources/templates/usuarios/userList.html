@@ -20,11 +20,12 @@
 				<td th:text="${user.puntos}"></td>
 			</tr>
 		</table>
+		<div th:replace="fragments/paginacion :: paginacion(${usuarios},@{/usuarios/list/})"></div>
 	</main>
-
+	
 	<footer th:replace="fragments/footer :: footer"></footer>
 	
-	    <th:block th:replace="fragments/modals :: modal-login"></th:block>
+	<th:block th:replace="fragments/modals :: modal-login"></th:block>
 
 </body>
 </html>

@@ -120,6 +120,12 @@ insert into productoUsuario values(1,4,10);
 insert into accionEquipable values(1,1);
 insert into accionEquipable values(2,2);
 insert into accionEquipable values(3,3);
+
+insert into daily values(1,0,0,0);
+insert into daily values(2,0,0,0);
+insert into daily values(3,0,0,0);
+insert into daily values(4,0,0,0);
+
 /*
 -- Consulta productos tienda por usuario;
 select * from producto where idProducto not in (

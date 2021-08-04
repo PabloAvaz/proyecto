@@ -37,7 +37,7 @@ public class PerfilController extends BaseController {
 	@GetMapping("/list")
 	public String productos(Model modelo) {
 		if(!logeado) return "redirect:/login";
-		modelo.addAttribute("productos",serviceUsuario.getProductos(usr));
+		modelo.addAttribute("productos", serviceUsuario.getProductos(usr));
 		return "/perfil/productoList";
 	}
 	

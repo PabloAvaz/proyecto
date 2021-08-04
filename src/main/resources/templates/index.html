@@ -20,7 +20,7 @@
 					</div>
 					<div th:replace="fragments/validacion/alertas :: alert(${msgDaily})"></div>
 					<small>Disponible todos los días partir de las 00:00</small>
-					<a th:href="@{/daily/claim}" class="btn btn-redondo btn-principal-hover abajo">Reclamar</a>
+					<a th:href="@{/daily/claim}" class="btn btn-redondo btn-principal-hover abajo" th:if="${!usuario.daily.reclamado}">Reclamar</a>
 				</div>
 			</section>
 			<section class="ventanita novedades" sec:authorize="isAuthenticated()">

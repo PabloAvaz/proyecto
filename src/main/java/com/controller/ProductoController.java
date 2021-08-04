@@ -58,7 +58,7 @@ public class ProductoController extends BaseController {
 		if(rutaImg.endsWith("png")||rutaImg.endsWith("jpg")) {
 			producto.setImagen(rutaImg);
 		}
-		serviceProducto.guardar(producto);
+		producto = serviceProducto.guardar(producto);
 		
 		if(producto.getTipo().equals(Tipo.EQUIPABLE)) {
 			return"redirect:/action/edit/" + producto.getId();

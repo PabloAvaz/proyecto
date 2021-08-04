@@ -39,8 +39,8 @@ public class ProductoServicempl implements IProductoService {
 	}
 
 	@Override
-	public void guardar(ProductoDto producto) {
-		repoProductos.save(productoMapper.toEntity(producto));
+	public ProductoDto guardar(ProductoDto producto) {
+		return productoMapper.toDto(repoProductos.save(productoMapper.toEntity(producto)));
 	}
 
 	@Override

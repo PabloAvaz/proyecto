@@ -198,3 +198,29 @@ ul.sin-estilo li a {
 	justify-content: space-around;
 	gap:10px;
 }
+
+
+.paginacion {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.paginacion li {
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	min-width: 33px;
+	height: 33px;
+	margin: 5px;
+	padding: 5px;
+	border: 1px solid black;
+}
+
+.paginacion li.activo {
+	background-color: black;
+}
+
+.paginacion li:hover {
+	background-color: gray;
+}

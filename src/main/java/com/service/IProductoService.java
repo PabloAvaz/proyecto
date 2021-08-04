@@ -10,7 +10,7 @@ public interface IProductoService {
 	List<ProductoDto> getAll();
 	List<ProductoDto> getByTipo(Tipo tipo);
 	ProductoDto getById(int id);
-	void guardar(ProductoDto producto);
+	ProductoDto guardar(ProductoDto producto);
 	void eliminar(ProductoDto producto);
 	void eliminar(int id);
 	void update(ProductoDto producto);

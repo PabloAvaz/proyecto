@@ -17,8 +17,10 @@ public class UsuarioDto extends UserDto {
 	private int puntos;
 	private SkinDto skin;
 	private EnergiaDto energia;
+	private DailyDto daily;
 	private List<ProductoDto> articulos;
 	private List<PerfilDto> perfiles;
+	
 	
 	public UsuarioDto() {
 		this(0, "", "", true, "", 0);
@@ -53,6 +55,13 @@ public class UsuarioDto extends UserDto {
 	}
 	public void gastar(int cantidad) {
 		this.puntos -= cantidad;
+	}
+
+	@Override
+	public String toString() {
+		return "UsuarioDto [puntos=" + puntos + ", skin=" + skin + ", energia=" + energia + ", daily=" + daily
+				+ ", articulos=" + articulos + ", perfiles=" + perfiles + ", id=" + id + ", nombre=" + nombre
+				+ ", estatus=" + estatus + ", username=" + username + ", password=" + password + "]";
 	}
 
 }

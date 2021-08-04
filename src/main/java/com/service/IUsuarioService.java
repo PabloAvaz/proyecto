@@ -2,6 +2,9 @@ package com.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.dto.producto.ProductoDto;
 import com.dto.producto.ProductoUsuarioDto;
 import com.dto.user.UsuarioDto;
@@ -9,6 +12,7 @@ import com.dto.user.UsuarioDto;
 public interface IUsuarioService {
 	//Busqueda
 	List<UsuarioDto> getAll();
+	Page<UsuarioDto> getAll(Pageable page);
 	UsuarioDto getById(Integer id);
 	UsuarioDto getByUserName(String username);
 	//CRUD

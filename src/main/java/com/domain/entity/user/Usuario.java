@@ -34,6 +34,9 @@ public class Usuario extends User {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "energia", referencedColumnName ="idEnergia")
 	private Energia energia;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id" ,referencedColumnName ="idUsuario")
+	private Daily daily;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "productousuario",
@@ -48,6 +51,8 @@ public class Usuario extends User {
 			)
 	@Fetch(FetchMode.SELECT)
 	private List<Perfil> perfiles;
+	
+
 	
 	public Usuario() {
 		this(0,"","",true,"",0);
@@ -86,10 +91,12 @@ public class Usuario extends User {
 
 	@Override
 	public String toString() {
-		return "Usuario [puntos=" + puntos + ", skin=" + skin + ", energia=" + energia + ", articulos=" + articulos
-				+ ", perfiles=" + perfiles + ", id=" + id + ", nombre=" + nombre + ", estatus=" + estatus
-				+ ", username=" + username + ", password=" + password + "]";
+		return "Usuario [puntos=" + puntos + ", skin=" + skin + ", energia=" + energia + ", daily=" + daily
+				+ ", articulos=" + articulos + ", perfiles=" + perfiles + ", id=" + id + ", nombre=" + nombre
+				+ ", estatus=" + estatus + ", username=" + username + ", password=" + password + "]";
 	}
+
+
 	
 
 }

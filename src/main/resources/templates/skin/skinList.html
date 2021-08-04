@@ -4,7 +4,7 @@
 </head>
 <body>
 	<nav th:insert="fragments/menu :: menu-principal"/>
-	<a class="btn btn-primary" th:href="@{/skin/create}">Crear</a>
+	<a class="btn btn-secundario-hover" th:href="@{/skin/create}">Crear</a>
 	<table class="table">
 		<tr>
 			<th>Id</th>
@@ -24,11 +24,15 @@
 			</td>
 		</tr>
 	</table>
-	<script>
+	<script th:inline="javascript">
 	$("button").click(function(evt){
-		a = new Audio('/sounds/' + evt.target.id);
+		let ruta = /*[[@{/sounds/}]]*/ "/sounds/"
+		a = new Audio(ruta + evt.target.id);
 		a.play();
 	})
+	
+	 ;
 	</script>
+
 </body>
 </html>
