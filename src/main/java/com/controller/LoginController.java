@@ -1,7 +1,10 @@
 package com.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dto.user.UsuarioDto;
+import com.dto.util.Alert;
+import com.enums.TipoMensaje;
 import com.service.IUsuarioService;
+import com.validator.user.UsuarioValidator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +25,8 @@ import lombok.RequiredArgsConstructor;
 public class LoginController extends BaseController {
 
 	private final IUsuarioService serviceUsuarios;
+	private final UsuarioValidator validatorUsuarios;
+
 
 	@ModelAttribute
 	public void init(Model model) {
@@ -46,9 +54,22 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@PostMapping("/signup")
-	private String registro(UsuarioDto newUser, RedirectAttributes atrib, HttpSession sesion) {
-		serviceUsuarios.crear(newUser);
-		return "redirect:/login";
+	private String registro(UsuarioDto newUser, RedirectAttributes atrib, HttpSession sesion, Model modelo) {
+		Map<String, String> errores = validatorUsuarios.validarUsuario(newUser);
+		if(!errores.isEmpty()) {
+			modelo.addAttribute("errores", errores);
+		    modelo.addAttribute("user", newUser);
+			modelo.addAttribute("action","signup");
+			return "/usuarios/userForm.html";
+		} else if (serviceUsuarios.existe(newUser)) {
+			modelo.addAttribute("usuarioInvalido", new Alert("Ya existe un usuario con el mismo username", TipoMensaje.ERROR));
+		    modelo.addAttribute("user", newUser);
+			modelo.addAttribute("action","signup");
+			return "/usuarios/userForm.html";
+		}
+
+			serviceUsuarios.crear(newUser);
+			return "redirect:/login";
 	}
 
 	@GetMapping("/login")
@@ -63,7 +84,7 @@ public class LoginController extends BaseController {
 			sesion.setAttribute("usuario", usr);
 			return "redirect:/play";
 		} else {
-			atrib.addFlashAttribute("msg","Error al iniciar sesion: ");
+			atrib.addFlashAttribute("msgLogin", new Alert("Error al iniciar sesion: ", TipoMensaje.ERROR));
 			return "redirect:/login";
 		}
 	}

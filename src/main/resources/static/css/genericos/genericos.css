@@ -168,7 +168,6 @@ tbody td:hover:before {
   border-color:red!important;
 }
 
-
 @media (max-width: 800px) {
   .form-inline input {
     margin: 10px 0;
@@ -223,4 +222,8 @@ ul.sin-estilo li a {
 
 .paginacion li:hover {
 	background-color: gray;
+}
+
+.error {
+	color: red;
 }

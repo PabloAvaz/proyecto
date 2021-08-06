@@ -3,7 +3,12 @@ package com.domain.repository;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.domain.entity.user.Usuario;
@@ -13,6 +18,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	public Optional<Usuario> findByUsernameAndPassword(String username, String password);
 	public Optional<Usuario> findByUsername(String username);
 	
+	@Transactional
+	@Modifying(flushAutomatically = true, clearAutomatically = true)
+	@Query("UPDATE Usuario SET username = :#{#usuario.username}")
+	public void update(@Param(value = "usuario") Usuario usuario);
 	/*
     @Transactional
 	@Modifying

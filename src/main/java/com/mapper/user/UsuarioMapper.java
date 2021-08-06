@@ -3,14 +3,17 @@ package com.mapper.user;
 import java.util.List;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.springframework.data.domain.Page;
 
 import com.domain.entity.user.Usuario;
 import com.dto.user.UsuarioDto;
+import com.mapper.producto.ProductoMapper;
+import com.mapper.producto.SkinMapper;
 
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {SkinMapper.class})
 public interface UsuarioMapper {
 
 	

@@ -7,7 +7,8 @@
 
 <header th:replace="fragments/menu :: menu-principal"></header>
 	
-	<main>
+	<main>		
+	
 		<form th:action="@{/{act} (act=${action})}"  method="post" id="formRegister" class="formulario form-login" th:object="${newUser}">
 			<img th:src="@{/images/login.jpg}">
 			
@@ -18,18 +19,13 @@
 			
 			<div class="form-grupo">
 		        <label for="usernameReg" class="form-etiqueta">Username</label>
-				<input type="text" id="usernameRef" th:field="*{username}" class="form-campo" placeholder="Username" required>
+				<input type="text" id="usernameReg" th:field="*{username}" class="form-campo" placeholder="Username" required>
 			</div>
 			
 			<div class="form-grupo">
-		        		<label for="passwordReg" class="form-etiqueta">Password</label>
+		        <label for="passwordReg" class="form-etiqueta">Password</label>
 				<input type="password" id="passwordReg" th:field="*{password}" class="form-campo" placeholder="Contraseña" required>
 			</div>
-			
-			<select name="skin" sec:authorize="hasAnyAuthority('ADMIN')">
-				<option th:text="'Elige una opcion'" value></option>
-				<option th:each="skin:${skins}" th:value="${skin.id}" th:text="${skin.imagen}">
-			</select>
 			
 			<h5>
 				Si ya tienes una cuenta haz click <a th:href="@{/login}">aqui</a>
@@ -38,14 +34,12 @@
 			
 			<input th:field="*{id}" name="id" type="hidden">
 			<input th:field="*{skin.id}" type="hidden">
+			<input th:field="*{energia.id}" type="hidden">
 			
 			<button class="btn btn-secundario-hover" type="submit">Enviar</button>
 		</form>
 	</main>
 	
 	<footer th:replace="fragments/footer :: footer"></footer>
-
-	<th:block th:replace="fragments/modals :: modal-login"></th:block>
-
 </body>
 </html>

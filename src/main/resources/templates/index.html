@@ -15,9 +15,6 @@
 					<h1>Recompensa diaria</h1>
 				</div>
 				<div class="ventanita-body">
-					<div class="alert alert-error" th:if="${msg!=null}">
-						<small th:text="${msg}"></small>
-					</div>
 					<div th:replace="fragments/validacion/alertas :: alert(${msgDaily})"></div>
 					<small>Disponible todos los días partir de las 00:00</small>
 					<a th:href="@{/daily/claim}" class="btn btn-redondo btn-principal-hover abajo" th:if="${!usuario.daily.reclamado}">Reclamar</a>

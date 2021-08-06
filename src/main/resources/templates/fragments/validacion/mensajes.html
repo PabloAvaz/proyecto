@@ -1,4 +1,4 @@
-<div th:fragment="error(mensaje)">
- 	<small class="error" th:text="${mensaje.contenido}"></small>
+<div th:fragment="error(nombre)" th:if="${errores!=null && errores.containsKey(nombre)}">
+ 	<small class="error" th:text="${errores.get(nombre)}"></small>
 </div>
 

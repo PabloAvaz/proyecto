@@ -27,6 +27,7 @@ import com.dto.producto.SkinDto;
 import com.dto.user.UsuarioDto;
 import com.mapper.producto.ProductoMapper;
 import com.mapper.producto.ProductoUsuarioMapper;
+import com.mapper.producto.SkinMapper;
 import com.mapper.user.PerfilMapper;
 import com.mapper.user.UsuarioMapper;
 import com.service.IPerfilService;
@@ -52,7 +53,7 @@ public class UsuariosServiceImpl implements IUsuarioService {
 	private final ProductoMapper productoMapper;
 	private final ProductoUsuarioMapper productoUsuarioMapper;
 	private final ISkinService serviceSkin;
-	
+	private final SkinMapper skinMapper;
 	@Override
 	public List<UsuarioDto> getAll() {
 		return usuarioMapper.toDtoList(repoUsuarios.findAll());
@@ -100,9 +101,12 @@ public class UsuariosServiceImpl implements IUsuarioService {
 	@Override
 	public void modificar(UsuarioDto user) {
 		Optional<Usuario> tmp = repoUsuarios.findById(user.getId());
+
 		if(tmp.isPresent()) {
+			System.out.println(tmp.get());
 			Usuario userFinal = usuarioMapper.merge(user, tmp.get());
-			repoUsuarios.save(userFinal);
+			System.out.println(userFinal);
+			repoUsuarios.saveAndFlush(userFinal);
 		}
 	}
 
@@ -211,6 +215,11 @@ public class UsuariosServiceImpl implements IUsuarioService {
 	@Override
 	public void reiniciarDaily() {
 		repoDaily.reset();
+	}
+
+	@Override
+	public Boolean existe(UsuarioDto user) {
+		return repoUsuarios.findByUsername(user.getUsername()).isPresent();
 	}
 
 

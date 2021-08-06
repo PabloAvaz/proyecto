@@ -30,4 +30,6 @@ public interface IUsuarioService {
 	//Recompensas diarias
 	boolean reclamarDaily(UsuarioDto user);
 	void reiniciarDaily();
+	//Validaciones
+	Boolean existe(UsuarioDto user);
 }

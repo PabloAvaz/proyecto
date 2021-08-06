@@ -20,28 +20,9 @@
 </div>
 
  <div th:fragment="login-body" class="modal-body">
-  	<div th:if="${msg!=null}">
-		<p class="alert alert-danger" th:text="${msg}"></p>
-	</div>
-
-	<form th:action="@{/login}" method="post" id="formLogin" class="formulario form-login">
-		<img th:src="@{/images/login.jpg}">
-		
-		<div class="form-grupo">
-			<label for="username" class="form-etiqueta">Usuario</label>
-			<input type="text" name="username" id="username" class="form-campo" placeholder="Nombre de usuario" required autofocus>
-		</div>
-		
-		<div class="form-grupo">
-	        			<label for="password" class="form-etiqueta">Password</label>
-			<input type="password" name="password" id="password" class="form-campo" placeholder="Contraseña" required>
-		</div>
-		
-		<h5>
-			Si todavia no tienes una cuenta haz click <a th:href="@{/signup}">aqui</a>
-			para registrate
-		</h5>
-	</form>
+	<div th:replace="fragments/validacion/alertas :: alert(${msgLogin})"></div>
+	
+	<form th:replace="fragments/elementos/forms :: login"></form>
  </div>
 
 
@@ -50,35 +31,11 @@
 </div>
 
  <div th:fragment="register-body" class="modal-body">
- 	<div th:if="${msg!=null}">
-		<p class="alert alert-danger" th:text="${msg}"></p>
-	</div>
+ 	<div th:replace="fragments/validacion/alertas :: alert(${usuarioInvalido})"></div>
+  	<div th:replace="fragments/validacion/alertas :: alert(${msg})"></div>
 
-	<form th:action="@{/signup}"  method="post" id="formRegister" class="formulario form-login" th:object="${newUser}">
-		<img th:src="@{/images/login.jpg}">
-		
-		<div class="form-grupo">
-			<label for="apodo" class="form-etiqueta">Apodo</label>
-			<input type="text" th:field="*{nombre}" class="form-campo" placeholder="Nombre de usuario" required autofocus>
-		</div>
-		
-		<div class="form-grupo">
-	        		<label for="usernameReg" class="form-etiqueta">Username</label>
-			<input type="text" id="usernameRef" th:field="*{username}" class="form-campo" placeholder="Contraseña" required>
-		</div>
-		
-		<div class="form-grupo">
-	        		<label for="passwordReg" class="form-etiqueta">Password</label>
-			<input type="password" id="passwordReg" th:field="*{password}" class="form-campo" placeholder="Contraseña" required>
-		</div>
-		
-		<h5>
-			Si ya tienes una cuenta haz click <a th:href="@{/login}">aqui</a>
-			para registrate
-		</h5>
-		
-	</form>
 
+	<form th:replace="fragments/elementos/forms :: signup"></form>
 </div>
 
 <div class="modal-footer" th:fragment="modal-default-botones(formId)">

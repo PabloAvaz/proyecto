@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,8 +29,8 @@ import lombok.Setter;
 public class Usuario extends User {
 	
 	private int puntos;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "skin", referencedColumnName ="idSkin")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "skin")
 	private Skin skin;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "energia", referencedColumnName ="idEnergia")

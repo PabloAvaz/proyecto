@@ -1,23 +1,33 @@
 package com.validator.user;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
 import com.dto.user.UserDto;
-import com.dto.util.Mensaje;
+
 
 @Component
 public class UsuarioValidator {
 	
-	public List<Mensaje> validarUsuario(UserDto usuario) {
+	public Map<String, String> validarUsuario(UserDto usuario) {
 		
-		List<Mensaje> mensajes = new ArrayList<Mensaje>();
+		Map<String, String> mensajes = new HashMap<>();
 		
 		if(usuario.getNombre() == null || usuario.getNombre().equals("")) {
-			mensajes.add(new Mensaje("e", "e"));
+			mensajes.put("nombre.obl", "Campo Apodo obligatorio");
 		}
-		return null;
+		
+		if(usuario.getUsername() == null || usuario.getUsername().equals("")) {
+			mensajes.put("usr.obl", "Campo Username obligatorio");
+		}
+		
+		if(usuario.getPassword() == null || usuario.getPassword().equals("")) {
+			mensajes.put("pass.obl", "Campo Contraseña obligatorio");
+		}
+		
+		
+		return mensajes;
 	}
 }

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +19,16 @@ import com.dto.user.UsuarioDto;
 import com.service.ISkinService;
 import com.service.IUsuarioService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequestMapping("/usuarios")
+@RequiredArgsConstructor
 public class UserController extends BaseController {
-	@Autowired
-	private IUsuarioService serviceUsuarios;
-	@Autowired
-	private ISkinService serviceSkins;
-	
+	private final IUsuarioService serviceUsuarios;
+	private final ISkinService serviceSkins;
+	private final PasswordEncoder passwordEncoder;
+
 	private UsuarioDto usuario;
 	
 	@ModelAttribute
@@ -56,15 +59,20 @@ public class UserController extends BaseController {
 	
 	@GetMapping("/edit/{id}")
 	private String edit(@PathVariable int id, Model modelo) {
-		modelo.addAttribute("user", serviceUsuarios.getById(id));
+		modelo.addAttribute("newUser", serviceUsuarios.getById(id));
 		modelo.addAttribute("skins", serviceSkins.getAll());
 		modelo.addAttribute("action", "usuarios/edit");
 		return "/usuarios/userForm.html";
 	}
 	
 	@PostMapping("/edit")
-	private String edit(@ModelAttribute("user") UsuarioDto user) {
-		serviceUsuarios.modificar(user);
+	private String edit(@ModelAttribute("newUser") UsuarioDto newUser) {
+		UsuarioDto usrModificado = serviceUsuarios.getById(newUser.getId());
+		usrModificado.setUsername(newUser.getUsername());
+		usrModificado.setPassword(passwordEncoder.encode(newUser.getPassword()));
+		usrModificado.setNombre(newUser.getNombre());
+
+		serviceUsuarios.modificar(usrModificado);
 		return "redirect:/usuarios/adminList";
 	}
 }
