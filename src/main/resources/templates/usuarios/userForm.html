@@ -8,7 +8,6 @@
 <header th:replace="fragments/menu :: menu-principal"></header>
 	
 	<main>		
-	
 		<form th:action="@{/{act} (act=${action})}"  method="post" id="formRegister" class="formulario form-login" th:object="${newUser}">
 			<img th:src="@{/images/login.jpg}">
 			

@@ -1,26 +1,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<div th:replace="fragments/head:: head"/>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/propios/tienda.css}" rel="stylesheet">
 </head>
-<body>
-	<nav th:insert="fragments/menu :: menu-principal"/>
-	<a class="btn btn-primary" th:href="@{/action/create}">Crear</a>
-	<table class="table">
-		<tr>
-			<th>Id</th>
-			<th>Producto</th>
-			<th>Skin</th>
-			<th>Accion</th>
-		</tr>
-		<tr th:each="accion:${acciones}" th:object="${accion}">
-			<td th:text="*{producto.id}"></td>
-			<td th:text="*{producto.nombre}"></td>
-			<td th:text="*{skin.nombre}"></td>
-			<td>
-				<a th:href="@{/action/edit/{id} (id=*{producto.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                <a th:href="@{/action/delete/{id} (id=*{producto.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-error" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
-			</td>
-		</tr>
-	</table>
+<body class="default-plantilla">
+
+	<header th:replace="fragments/menu :: menu-principal"></header>
+
+	<main class="main">
+		<a class="btn btn-primary" th:href="@{/action/create}">Crear</a>
+		<table class="table">
+			<tr>
+				<th>Id</th>
+				<th>Producto</th>
+				<th>Skin</th>
+				<th>Accion</th>
+			</tr>
+			<tr th:each="accion:${acciones}" th:object="${accion}">
+				<td th:text="*{producto.id}"></td>
+				<td th:text="*{producto.nombre}"></td>
+				<td th:text="*{skin.nombre}"></td>
+				<td>
+					<a th:href="@{/action/edit/{id} (id=*{producto.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+	                <a th:href="@{/action/delete/{id} (id=*{producto.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-error" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+				</td>
+			</tr>
+		</table>
+	</main>
+	
+	<footer th:replace="fragments/footer :: footer"></footer>
+
 </body>
 </html>

@@ -1,15 +1,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Pruebas</title>
-	<div th:replace="fragments/head:: head"/>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/propios/tienda.css}" rel="stylesheet">
 </head>
-<body>
-	<nav th:replace="fragments/menu :: menu-principal"/>
-	
-	<ul>
-		<li><a th:href="@{/test/user}">User</li>
-	</ul>
+<body class="default-plantilla">
 
+	<header th:replace="fragments/menu :: menu-principal"></header>
+
+	<main class="main">
+		<ul>
+			<li><a th:href="@{/test/user}">User</li>
+		</ul>
+	</main>
 	
+	<footer th:replace="fragments/footer :: footer"></footer>
+
 </body>
 </html>

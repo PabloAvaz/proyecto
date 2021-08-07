@@ -53,7 +53,7 @@ public class UsuariosServiceImpl implements IUsuarioService {
 	private final ProductoMapper productoMapper;
 	private final ProductoUsuarioMapper productoUsuarioMapper;
 	private final ISkinService serviceSkin;
-	private final SkinMapper skinMapper;
+	
 	@Override
 	public List<UsuarioDto> getAll() {
 		return usuarioMapper.toDtoList(repoUsuarios.findAll());
@@ -103,9 +103,7 @@ public class UsuariosServiceImpl implements IUsuarioService {
 		Optional<Usuario> tmp = repoUsuarios.findById(user.getId());
 
 		if(tmp.isPresent()) {
-			System.out.println(tmp.get());
 			Usuario userFinal = usuarioMapper.merge(user, tmp.get());
-			System.out.println(userFinal);
 			repoUsuarios.saveAndFlush(userFinal);
 		}
 	}

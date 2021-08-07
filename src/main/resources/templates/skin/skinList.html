@@ -1,38 +1,47 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-	<div th:replace="fragments/head:: head"/>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/propios/clicker.css}" rel="stylesheet">
 </head>
-<body>
-	<nav th:insert="fragments/menu :: menu-principal"/>
-	<a class="btn btn-secundario-hover" th:href="@{/skin/create}">Crear</a>
-	<table class="table">
-		<tr>
-			<th>Id</th>
-			<th>Nombre</th>
-			<th>Imagen</th>
-			<th>Audio</th>
-			<th>Acciones</th>
-		</tr>
-		<tr th:each="skin:${skins}">
-			<td th:text="${skin.id}"></td>
-			<td th:text="${skin.nombre}"></td>
-			<td><img style="max-width:200px;max-height:200px" th:src="@{/img/{img} (img=${skin.imagen})}"></td>
-			<td><button th:id="${skin.sonido}">Tocar</td>
-			<td>
-				<a th:href="@{/skin/edit/{id} (id=${skin.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                <a th:href="@{/skin/delete/{id} (id=${skin.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-error" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
-			</td>
-		</tr>
-	</table>
-	<script th:inline="javascript">
-	$("button").click(function(evt){
-		let ruta = /*[[@{/sounds/}]]*/ "/sounds/"
-		a = new Audio(ruta + evt.target.id);
-		a.play();
-	})
-	
-	 ;
-	</script>
+<body class="default-plantilla">
 
+	<header th:replace="fragments/menu :: menu-principal"></header>
+     
+    <main>
+    	<section>
+    		<a class="btn btn-secundario-hover" th:href="@{/skin/create}">Crear</a>
+    	</section>
+		<table class="table">
+			<tr>
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Imagen</th>
+				<th>Audio</th>
+				<th>Acciones</th>
+			</tr>
+			<tr th:each="skin:${skins}">
+				<td th:text="${skin.id}"></td>
+				<td th:text="${skin.nombre}"></td>
+				<td><img style="max-width:200px;max-height:200px" th:src="@{/img/{img} (img=${skin.imagen})}"></td>
+				<td><button th:id="${skin.sonido}">Tocar</td>
+				<td>
+					<a th:href="@{/skin/edit/{id} (id=${skin.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+	                <a th:href="@{/skin/delete/{id} (id=${skin.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-error" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+				</td>
+			</tr>
+		</table>
+	</main>
+	
+	<footer th:replace="fragments/footer :: footer"></footer>
+	<script th:inline="javascript">
+		$("button").click(function(evt){
+			let ruta = /*[[@{/sounds/}]]*/ "/sounds/"
+			a = new Audio(ruta + evt.target.id);
+			a.play();
+		})
+		
+		 ;
+	</script>
 </body>
 </html>

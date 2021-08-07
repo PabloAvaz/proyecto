@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<th:block th:replace="fragments/head:: head"/>
-	<link th:href="@{/css/propios/error.css}" rel="stylesheet">
+    <link th:href="@{/css/propios/tienda.css}" rel="stylesheet">
 </head>
-<body>
-	<nav th:insert="fragments/menu :: menu-principal"></nav>
+<body class="default-plantilla">
+
+	<header th:replace="fragments/menu :: menu-principal"></header>
+
+	<main class="main">
+		<h1>La pagina a la que intentas acceder no existe o se ha cambiado de lugar</h1>
+		<a th:href="@{/}">Ir al inicio</a>
+	</main>
 	
-	<h1>La pagina a la que intentas acceder no existe o se ha cambiado de lugar</h1>
-	<a th:href="@{/}">Ir al inicio</a>
+	<footer th:replace="fragments/footer :: footer"></footer>
+
 </body>
 </html>

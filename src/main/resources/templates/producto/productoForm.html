@@ -1,41 +1,45 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-	<div th:replace="fragments/head:: head"/>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/propios/clicker.css}" rel="stylesheet">
 </head>
-<body>
-	<nav th:insert="fragments/menu :: menu-principal"/>
-	<div class="row">
-		<div class="col col-lg-6">
-			<form th:action="@{/productos/create}" enctype="multipart/form-data" method="post" th:object="${producto}">
-			  <div class="form-group">
-			    <label>Nombre</label>
-			    <input type="text" name="nombre" th:field="*{nombre}" class="form-control"  aria-describedby="emailHelp" placeholder="Nombre del producto">
+<body class="default-plantilla">
+
+	<header th:replace="fragments/menu :: menu-principal"></header>
+     
+      <main>
+		<form th:action="@{/productos/create}" enctype="multipart/form-data" method="post" th:object="${producto}">
+		  <div class="form-group">
+		    <label>Nombre</label>
+		    <input type="text" name="nombre" th:field="*{nombre}" class="form-control"  aria-describedby="emailHelp" placeholder="Nombre del producto">
+		  </div>
+		  <div class="form-group">
+		    <label>Descripcion</label>
+		    <input type="text" name="descripcion" th:field="*{descripcion}" class="form-control"  placeholder="Descripcion del producto">
+		  </div>
+		  <div class="form-check">
+		  	Tipo<br>
+		    <input type="radio" name="tipo" th:field="*{tipo}" class="form-check-input" value="CONSUMIBLE">CONSUMIBLE<br>
+		    <input type="radio" name="tipo" th:field="*{tipo}" class="form-check-input" value="EQUIPABLE" checked>EQUIPABLE
+		  </div>
+		  <div class="form-group">
+		    <label>Precio</label>
+		    <input type="number" name="precio" th:field="*{precio}" class="form-control" placeholder="Precio" value="0" step="1">
+		  </div>
+		  <div class="form-group">
+			  <div class="custom-file">
+				  <input name="archivoImagen" type="file" class="custom-file-input" id="customFile">
+				  <label class="custom-file-label" for="customFile">Elige una iagen</label>
 			  </div>
-			  <div class="form-group">
-			    <label>Descripcion</label>
-			    <input type="text" name="descripcion" th:field="*{descripcion}" class="form-control"  placeholder="Descripcion del producto">
-			  </div>
-			  <div class="form-check">
-			  	Tipo<br>
-			    <input type="radio" name="tipo" th:field="*{tipo}" class="form-check-input" value="CONSUMIBLE">CONSUMIBLE<br>
-			    <input type="radio" name="tipo" th:field="*{tipo}" class="form-check-input" value="EQUIPABLE" checked>EQUIPABLE
-			  </div>
-			  <div class="form-group">
-			    <label>Precio</label>
-			    <input type="number" name="precio" th:field="*{precio}" class="form-control" placeholder="Precio" value="0" step="1">
-			  </div>
-			  <div class="form-group">
-				  <div class="custom-file">
-					  <input name="archivoImagen" type="file" class="custom-file-input" id="customFile">
-					  <label class="custom-file-label" for="customFile">Elige una iagen</label>
-				  </div>
-			  </div>
-			  <input type="hidden" th:field="*{imagen}"></input>
-			  <input type="hidden" th:field="*{id}"></input>
-			  <button type="submit" class="btn btn-primary">Enviar</button>
-			</form>
-		</div>
-	</div>
+		  </div>
+		  <input type="hidden" th:field="*{imagen}"></input>
+		  <input type="hidden" th:field="*{id}"></input>
+		  <button type="submit" class="btn btn-primary">Enviar</button>
+		</form>
+	</main>
+	
+	<footer th:replace="fragments/footer :: footer"></footer>
 
 </body>
 </html>

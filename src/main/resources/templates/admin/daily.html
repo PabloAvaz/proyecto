@@ -1,11 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<div th:replace="fragments/head:: head"/>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/propios/tienda.css}" rel="stylesheet">
 </head>
-<body>
-	<nav th:replace="fragments/menu :: menu-principal"/>
+<body class="default-plantilla">
+
+	<header th:replace="fragments/menu :: menu-principal"></header>
+
+	<main class="main">
+		<h4 class="my-0 fw-normal">Recompensas diarias</h4>
+		<a th:href="@{/admin/daily/restart}">Reiniciar</a>
+	</main>
 	
-	<h4 class="my-0 fw-normal">Recompensas diarias</h4>
-	<a th:href="@{/admin/daily/restart}">Reiniciar</a>
+	<footer th:replace="fragments/footer :: footer"></footer>
+
 </body>
 </html>

@@ -1,24 +1,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<div th:replace="fragments/head:: head"/>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/propios/tienda.css}" rel="stylesheet">
 </head>
-<body>
-	<nav th:insert="fragments/menu :: menu-principal"/>
-	<div class="row">
-		<div class="col col-lg-6">
-			<form th:action="@{/action/create}"  method="post" th:object="${accion}">
+<body  class="default-plantilla">
 
-				<select th:field="${accion.id}">
-					<option th:each="producto:${productos}" th:object="${producto}" th:value="*{id}" th:text="*{nombre}"></option>
-				</select>
-				
-				<select th:field="${accion.skin}">
-					<option th:each="skin:${skins}" th:object="${skin}" th:value="*{id}" th:text="*{nombre}"></option>
-				</select>
-			  <button type="submit" class="btn btn-primary">Enviar</button>
-			</form>
-		</div>
-	</div>
+	<header th:replace="fragments/menu :: menu-principal"></header>
+
+	<main class="main">
+		<form th:action="@{/action/create}"  method="post" th:object="${accion}">
+	
+			<select th:field="${accion.id}">
+				<option th:each="producto:${productos}" th:object="${producto}" th:value="*{id}" th:text="*{nombre}"></option>
+			</select>
+			
+			<select th:field="${accion.skin}">
+				<option th:each="skin:${skins}" th:object="${skin}" th:value="*{id}" th:text="*{nombre}"></option>
+			</select>
+		  <button type="submit" class="btn btn-primary">Enviar</button>
+		</form>
+	</main>
+	
+	<footer th:replace="fragments/footer :: footer"></footer>
 
 </body>
 </html>

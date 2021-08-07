@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<th:block th:replace="fragments/head:: head"/>
-	<link th:href="@{/css/propios/error.css}" rel="stylesheet">
+    <link th:href="@{/css/propios/tienda.css}" rel="stylesheet">
 </head>
-<body>
-	<nav th:insert="fragments/menu :: menu-principal"></nav>
+<body class="default-plantilla">
+
+	<header th:replace="fragments/menu :: menu-principal"></header>
+
+	<main class="main">
+		<h1>No tienes permiso para ver el contenido de esta página</h1>
+		<a th:href="@{/}">Ir al inicio</a>
+	</main>
 	
-	<h1>No tienes permiso para ver el contenido de esta página</h1>
+	<footer th:replace="fragments/footer :: footer"></footer>
+
 </body>
 </html>
