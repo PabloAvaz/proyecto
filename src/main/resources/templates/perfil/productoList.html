@@ -11,7 +11,7 @@
       <main>
         <table class="table">
 		<tr>
-			<th>Id</th>
+			<th sec:authorize="hasAnyAuthority('ADMIN')">Id</th>
 			<th>Nombre</th>
 			<th>Descripcion</th>
 			<th>Tipo</th>
@@ -19,7 +19,7 @@
 			<th>Acción</th>
 		</tr>
 		<tr th:each="prdUsr:${productos}" th:object="${prdUsr}">
-			<td th:text="*{productoUsuarioId.producto.id}"></td>
+			<td sec:authorize="hasAnyAuthority('ADMIN')" th:text="*{productoUsuarioId.producto.id}"></td>
 			<td th:text="*{productoUsuarioId.producto.nombre}"></td>
 			<td th:text="*{productoUsuarioId.producto.descripcion}"></td>
 			<td th:text="*{productoUsuarioId.producto.tipo}"></td>

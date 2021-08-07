@@ -5,13 +5,17 @@
 </head>
 <body class="default-plantilla">
 
-<header th:replace="fragments/menu :: menu-principal"></header>
+	<header th:replace="fragments/menu :: menu-principal"></header>
 	
 	<main>
-	
-		<div th:replace="fragments/validacion/alertas :: alert(${msgLogin})"></div>
+		<section th:replace="fragments/validacion/alertas :: alert(${msgLogin})"></section>
 		
-		<form th:replace="fragments/elementos/forms :: login"></form>
+		<section>
+				<form th:replace="fragments/elementos/forms :: login"></form>
+				<div class="centrar">
+					<button class="btn  btn-secundario-hover" form="formLogin">Enviar</button>
+				</div>
+		</section>
 		
 	</main>
 	

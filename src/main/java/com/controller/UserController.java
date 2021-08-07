@@ -42,19 +42,13 @@ public class UserController extends BaseController {
 	@GetMapping("/list")
 	private String listar(Model modelo, Pageable page) {
 		modelo.addAttribute("usuarios", serviceUsuarios.getAll(page));
-		return "/usuarios/userList.html";
-	}
-	
-	@GetMapping("/adminList")
-	private String listarAdmin(Model modelo) {
-		modelo.addAttribute("usuarios", serviceUsuarios.getAll());
-		return "/usuarios/userListAdmin.html";
+		return "/usuarios/userList";
 	}
 	
 	@GetMapping("/delete/{id}")
 	private String delete(@PathVariable int id) {
 		serviceUsuarios.borrar(serviceUsuarios.getById(id));
-		return "redirect:/usuarios/adminList";
+		return "redirect:/usuarios/list";
 	}
 	
 	@GetMapping("/edit/{id}")
@@ -62,7 +56,7 @@ public class UserController extends BaseController {
 		modelo.addAttribute("newUser", serviceUsuarios.getById(id));
 		modelo.addAttribute("skins", serviceSkins.getAll());
 		modelo.addAttribute("action", "usuarios/edit");
-		return "/usuarios/userForm.html";
+		return "/usuarios/userForm";
 	}
 	
 	@PostMapping("/edit")
@@ -73,6 +67,6 @@ public class UserController extends BaseController {
 		usrModificado.setNombre(newUser.getNombre());
 
 		serviceUsuarios.modificar(usrModificado);
-		return "redirect:/usuarios/adminList";
+		return "redirect:/usuarios/list";
 	}
 }
