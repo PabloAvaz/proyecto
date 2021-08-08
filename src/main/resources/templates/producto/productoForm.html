@@ -9,34 +9,44 @@
 	<header th:replace="fragments/menu :: menu-principal"></header>
      
       <main>
-		<form th:action="@{/productos/create}" enctype="multipart/form-data" method="post" th:object="${producto}">
-		  <div class="form-group">
-		    <label>Nombre</label>
-		    <input type="text" name="nombre" th:field="*{nombre}" class="form-control"  aria-describedby="emailHelp" placeholder="Nombre del producto">
-		  </div>
-		  <div class="form-group">
-		    <label>Descripcion</label>
-		    <input type="text" name="descripcion" th:field="*{descripcion}" class="form-control"  placeholder="Descripcion del producto">
-		  </div>
-		  <div class="form-check">
-		  	Tipo<br>
-		    <input type="radio" name="tipo" th:field="*{tipo}" class="form-check-input" value="CONSUMIBLE">CONSUMIBLE<br>
-		    <input type="radio" name="tipo" th:field="*{tipo}" class="form-check-input" value="EQUIPABLE" checked>EQUIPABLE
-		  </div>
-		  <div class="form-group">
-		    <label>Precio</label>
-		    <input type="number" name="precio" th:field="*{precio}" class="form-control" placeholder="Precio" value="0" step="1">
-		  </div>
-		  <div class="form-group">
-			  <div class="custom-file">
-				  <input name="archivoImagen" type="file" class="custom-file-input" id="customFile">
-				  <label class="custom-file-label" for="customFile">Elige una iagen</label>
+      <section th:replace="fragments/validacion/alertas :: alert(${msgProducto})"></section>
+      <section>
+	      <form th:action="@{/productos/create}" enctype="multipart/form-data" method="post" th:object="${producto}">
+			  <div class="form-grupo">
+			    <label class="form-etiqueta">Nombre</label>
+			    <input type="text" name="nombre" th:field="*{nombre}" class="form-campo" placeholder="Nombre del producto">
+			    <div th:replace="fragments/validacion/mensajes :: error(prod.nombre.obl)"></div>
 			  </div>
-		  </div>
-		  <input type="hidden" th:field="*{imagen}"></input>
-		  <input type="hidden" th:field="*{id}"></input>
-		  <button type="submit" class="btn btn-primary">Enviar</button>
-		</form>
+			  <div class="form-grupo">
+			    <label class="form-etiqueta">Descripcion</label>
+			    <input type="text" name="descripcion" class="form-campo" th:field="*{descripcion}" placeholder="Descripcion del producto">
+			   	<div th:replace="fragments/validacion/mensajes :: error(prod.descr.obl)"></div>
+			  </div>
+			  <div class="form-check">
+			  	<label class="form-etiqueta">Tipo</label>
+			    <input type="radio" name="tipo" th:field="*{tipo}" class="form-campo" value="CONSUMIBLE"><label for="tipo1" class="form-etiqueta">CONSUMIBLE</label>
+			    <input type="radio" name="tipo" th:field="*{tipo}" class="form-campo" value="EQUIPABLE"><label for="tipo2" class="form-etiqueta">EQUIPABLE</label>
+			    <div th:replace="fragments/validacion/mensajes :: error(prod.tipo.obl)"></div>
+			  </div>
+			  <div class="form-grupo">
+			    <label class="form-etiqueta">Precio</label>
+			    <input type="number" name="precio" th:field="*{precio}" class="form-campo" placeholder="Precio" min="0" value="0" step="1">
+			    <div th:replace="fragments/validacion/mensajes :: error(prod.precio.neg)"></div>
+			  </div>
+			  <div class="form-grupo-archivo">
+				  <input name="archivoImagen" type="file" id="customFile">
+				  <label class="btn btn-rosa-hover" for="customFile">
+				  <pre><i class="fa fa-upload" aria-hidden="true"></i> Elige una imagen</label></pre>
+			  </div>
+			  <input type="hidden" th:field="*{imagen}"></input>
+			  <input type="hidden" th:field="*{id}"></input>
+			  
+			  <div class="centrar">
+			  		<button type="submit" class="btn btn-secundario-hover">Enviar</button>
+			  </div>
+			</form>
+      </section>
+		
 	</main>
 	
 	<footer th:replace="fragments/footer :: footer"></footer>

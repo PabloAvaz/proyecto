@@ -16,7 +16,8 @@ table th, td {
 }
 
 table.tabla-hover thead th {
-	background-color: #55608f;
+	background-color: var(--color-fondo-secundario);
+	color: var(--color-texto-secundario)
 }
 
 table.tabla-hover tbody tr:hover {

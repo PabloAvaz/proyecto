@@ -12,7 +12,7 @@
 <!-- Modales login -->
 <div th:fragment="modal-login">
 	<div th:replace ="~{::modal('modalLogin', ~{::modal-header('Login')}, ~{::login-body}, ~{::modal-default-botones(formLogin)})}"></div>
-	<div th:replace ="~{::modal('modalRegister', ~{::modal-header('Crea una cuenta')}, ~{::login-body}, ~{::modal-default-botones(formRegister)})}"></div>
+	<div th:replace ="~{::modal('modalRegister', ~{::modal-header('Crea una cuenta')}, ~{::register-body}, ~{::modal-default-botones(formRegister)})}"></div>
 </div>
 
 <!-- Modal Comprar -->

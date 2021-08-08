@@ -28,5 +28,15 @@
 .alert-success:hover{
 	background-color: rgb(123, 255, 118, 0.5);
 	border-color: rgb(123, 255, 118, 0.6);
-	
+}
+
+
+.alert-info{
+	color: darkblue;
+	background-color: rgb(0, 123, 255, 0.3);
+	border-color: rgb(0, 123, 255, 0.5);
+}
+.alert-info:hover{
+	background-color:rgb(0, 123, 255, 0.5);
+	border-color: rgb(0, 123, 255, 0.6);
 }

@@ -8,10 +8,12 @@
 <header th:replace="fragments/menu :: menu-principal"></header>
 	
 	<main>		
-		<form th:replace="fragments/elementos/forms :: signup(${action})"></form>
-	
-
-		<button class="btn btn-secundario-hover" form="formRegister" type="submit">Enviar</button>
+		<section>
+			<form th:replace="fragments/elementos/forms :: signup(${action})"></form>
+			<div class="centrar">
+				<button class="btn btn-secundario-hover" form="formRegister" type="submit">Enviar</button>
+			</div>
+		</section>
 	</main>
 	
 	<footer th:replace="fragments/footer :: footer"></footer>

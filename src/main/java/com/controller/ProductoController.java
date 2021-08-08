@@ -1,5 +1,7 @@
 package com.controller; 
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -16,9 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dto.producto.ProductoDto;
 import com.dto.user.UsuarioDto;
+import com.dto.util.Alert;
 import com.enums.Tipo;
+import com.enums.TipoMensaje;
 import com.service.IProductoService;
 import com.util.Utilidades;
+import com.validator.producto.ProductoValidator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,7 +37,8 @@ public class ProductoController extends BaseController {
 	private UsuarioDto usuario;
 	
 	private final IProductoService serviceProducto;
-	
+	private final ProductoValidator productoValidator;
+
 	@ModelAttribute
 	public void init(Model modelo, HttpSession sesion) {
 		usuario =  (UsuarioDto) sesion.getAttribute("usuario");
@@ -50,9 +56,14 @@ public class ProductoController extends BaseController {
 		return "/producto/productoForm";
 	}
 	@PostMapping("/create")
-	public String createForm(ProductoDto producto, BindingResult resultado,@RequestParam("archivoImagen") MultipartFile imagen) {
-		if(resultado.hasErrors()) {
-			return "redirect:/productos/create";
+	public String createForm(ProductoDto producto, BindingResult resultado, @RequestParam("archivoImagen") MultipartFile imagen, Model modelo) {
+		 Map<String, String> errores = productoValidator.validarProducto(producto);
+		 
+		if(resultado.hasErrors() || !errores.isEmpty()) {
+			modelo.addAttribute("errores", errores);
+			modelo.addAttribute("producto", producto);
+			modelo.addAttribute("msgProducto", new Alert("Error al crear el producto", TipoMensaje.ERROR));
+			return "/producto/productoForm";
 		}
 		String rutaImg = Utilidades.guardarArchivo(imagen, ruta);
 		if(rutaImg.endsWith("png")||rutaImg.endsWith("jpg")) {

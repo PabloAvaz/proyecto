@@ -19,7 +19,6 @@
 						<th>Id</th>
 						<th>Nombre</th>
 						<th>Imagen</th>
-						<th>Audio</th>
 						<th>Acciones</th>
 					</tr>
 				</thead>
@@ -28,9 +27,9 @@
 						<td th:text="${skin.id}"></td>
 						<td th:text="${skin.nombre}"></td>
 						<td><img style="max-width:200px;max-height:200px" th:src="@{/img/{img} (img=${skin.imagen})}"></td>
-						<td><button th:id="${skin.sonido}">Tocar</button></td>
 						<td>
 							<div class="centrar gap">
+								<span class="btn btn-mini btn-info" th:data-sonido="${skin.sonido}"><i th:data-sonido="${skin.sonido}" class="fas fa-play" ></i></span>
 								<a th:href="@{/skin/edit/{id} (id=${skin.id})}" class="btn btn-mini btn-success" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
 			               	 	<a th:href="@{/skin/delete/{id} (id=${skin.id})}" class="btn btn-mini btn-error" onclick="return confirm('¿Estas seguro?')" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
 							</div>
@@ -43,13 +42,11 @@
 	
 	<footer th:replace="fragments/footer :: footer"></footer>
 	<script th:inline="javascript">
-		$("button").click(function(evt){
+		$("*[data-sonido]").click(function(evt){
 			let ruta = /*[[@{/sounds/}]]*/ "/sounds/"
-			a = new Audio(ruta + evt.target.id);
+			a = new Audio(ruta + evt.target.dataset.sonido);
 			a.play();
-		})
-		
-		 ;
+		});
 	</script>
 </body>
 </html>

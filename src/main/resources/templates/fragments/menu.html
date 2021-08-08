@@ -28,7 +28,7 @@
 	        <div class="login">
 			    <button class="btn btn-principal btn-round" sec:authorize="isAnonymous()" th:data-url="@{/login}" data-toggle="#modalLogin">Login</button>&nbsp;
 			    <button class="btn btn-secundario btn-round" sec:authorize="isAnonymous()" th:data-url="@{/signup}" data-toggle="#modalRegister">Registrarse</button>&nbsp;
-			    <a class="btn btn-rosa-hover btn-round " sec:authorize="isAuthenticated()" th:href="@{/logout}">Salir</a>
+			    <a class="btn btn-rosa-hover btn-round" sec:authorize="isAuthenticated()" th:href="@{/logout}">Salir</a>
 	        </div>
         </nav>
         
