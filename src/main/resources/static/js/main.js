@@ -10,6 +10,7 @@ $(window).on('load',function(){
         $(".modal-content").removeClass("a-subir")
         $(".modal-content").addClass("a-bajar")
   		$(modal).removeClass('oculto');
+		$(modal).trigger('mostrar');
   })
   
       $(".modal, .close, #modal-cancelar").on("click", () => {

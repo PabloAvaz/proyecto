@@ -3,12 +3,12 @@
 	
 	<div class="form-grupo">
 		<label for="username" class="form-etiqueta">Usuario</label>
-		<input type="text" name="username" id="username" class="form-campo" placeholder="Nombre de usuario" required autofocus>
+		<input type="text" name="username" id="usernameLog" class="form-campo" placeholder="Nombre de usuario" autofocus>
 	</div>
 	
 	<div class="form-grupo">
         <label for="password" class="form-etiqueta">Password</label>
-		<input type="password" name="password" id="password" class="form-campo" placeholder="Contraseña" required>
+		<input type="password" name="password" id="passwordLog" class="form-campo" placeholder="Contraseña">
 	</div>
 	
 	<h5>
@@ -18,26 +18,26 @@
 </form>
 
 	
-<form  th:fragment="signup" th:action="@{/signup}"  method="post" id="formRegister" class="formulario form-login" th:object="${newUser}">
+<form  th:fragment="signup(action)" th:action="@{/{act} (act=${action})}"  method="post" id="formRegister" class="formulario form-login" th:object="${newUser}">
 		<img th:src="@{/images/login.jpg}">
 		
 
 		<div class="form-grupo">
 			<label for="apodo" class="form-etiqueta">Apodo</label>
-			<input type="text" th:field="*{nombre}" class="form-campo" placeholder="Nombre de usuario" required autofocus>
+			<input type="text" id="nombreReg" th:field="*{nombre}" class="form-campo" placeholder="Nombre de usuario" autofocus>
 			<div th:replace="fragments/validacion/mensajes :: error(nombre.obl)"></div>
 		</div>
 		
 		<div class="form-grupo">
 	        <label for="usernameReg" class="form-etiqueta">Username</label>
-			<input type="text" id="usernameRef" th:field="*{username}" class="form-campo" placeholder="Contraseña" required>
+			<input type="text" id="usernameRef" th:field="*{username}" class="form-campo" placeholder="Username">
 			<div th:replace="fragments/validacion/mensajes :: error(usr.obl)"></div>
 			
 		</div>
 		
 		<div class="form-grupo">
 	        <label for="passwordReg" class="form-etiqueta">Password</label>
-			<input type="password" id="passwordReg" th:field="*{password}" class="form-campo" placeholder="Contraseña" required>
+			<input type="password" id="passwordReg" th:field="*{password}" class="form-campo" placeholder="Contraseña">
 			<div th:replace="fragments/validacion/mensajes :: error(pass.obl)"></div>
 		</div>
 		
@@ -45,4 +45,8 @@
 			Si ya tienes una cuenta haz click <a th:href="@{/login}">aqui</a>
 			para registrate
 		</h5>
+		
+		<input th:field="*{id}" name="id" type="hidden">
+		<input th:field="*{skin.id}" type="hidden">
+		<input th:field="*{energia.id}" type="hidden">
 </form>

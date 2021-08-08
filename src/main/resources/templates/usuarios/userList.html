@@ -7,27 +7,35 @@
 
 <header th:replace="fragments/menu :: menu-principal"></header>
 	
-	<main>
-		<table>
-			<tr>
-				<th sec:authorize="hasAnyAuthority('ADMIN')">Id</th>
-				<th>Nombre</th>
-				<th>Puntos</th>
-				<th sec:authorize="hasAnyAuthority('ADMIN')">Skin</th>
-				<th sec:authorize="hasAnyAuthority('ADMIN')">Acciones</th>
-			</tr>
-			<tr th:each="user:${usuarios}">
-				<td sec:authorize="hasAnyAuthority('ADMIN')" th:text="${user.id}"></td>
-				<td th:text="${user.nombre}"></td>
-				<td th:text="${user.puntos}"></td>
-				<td sec:authorize="hasAnyAuthority('ADMIN')" th:text="${user.skin!=null?user.skin.nombre : T(com.constants.Constants).DEFAULT_SKIN.nombre}"></td>
-				<td sec:authorize="hasAnyAuthority('ADMIN')">
-					<a th:href="@{/usuarios/edit/{id} (id=${user.id})}" class="btn btn-success" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-	                <a th:href="@{/usuarios/delete/{id} (id=${user.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-error btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
-				</td>
-			</tr>
-		</table>
-		<div th:replace="fragments/paginacion :: paginacion(${usuarios},@{/usuarios/list/})"></div>
+	<main class="contenedor-column">
+		<section class="contenedor-full">
+			<table class="tabla-hover">
+				<thead>
+					<tr>
+						<th sec:authorize="hasAnyAuthority('ADMIN')">Id</th>
+						<th>Nombre</th>
+						<th>Puntos</th>
+						<th sec:authorize="hasAnyAuthority('ADMIN')">Skin</th>
+						<th sec:authorize="hasAnyAuthority('ADMIN')">Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user:${usuarios}">
+						<td sec:authorize="hasAnyAuthority('ADMIN')" th:text="${user.id}"></td>
+						<td th:text="${user.nombre}"></td>
+						<td th:text="${user.puntos}"></td>
+						<td sec:authorize="hasAnyAuthority('ADMIN')" th:text="${user.skin!=null?user.skin.nombre : T(com.constants.Constants).DEFAULT_SKIN.nombre}"></td>
+						<td sec:authorize="hasAnyAuthority('ADMIN')">
+							<div class="centrar gap" >
+								<a th:href="@{/usuarios/edit/{id} (id=${user.id})}" class="btn btn-mini btn-success" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+				                <a th:href="@{/usuarios/delete/{id} (id=${user.id})}" class="btn btn-mini  btn-error" onclick="return confirm('¿Estas seguro?')" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>	
+			<div th:replace="fragments/paginacion :: paginacion(${usuarios},@{/usuarios/list/})"></div>
+		</section>
 	</main>
 	
 	<footer th:replace="fragments/footer :: footer"></footer>

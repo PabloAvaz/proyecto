@@ -9,28 +9,34 @@
 	<header th:replace="fragments/menu :: menu-principal"></header>
      
       <main>
-      	<section>
+      	<section class="contenedor-column">
       		<a class="btn btn-secundario-hover" th:href="@{/productos/create}">Crear</a>
       	</section>
 		
-		<table class="table">
-			<tr>
-				<th>Id</th>
-				<th>Nombre</th>
-				<th>Descripcion</th>
-				<th>Precio</th>
-				<th>Acciones</th>
-			</tr>
-			<tr th:each="producto:${productos}">
-				<td th:text="${producto.id}"></td>
-				<td th:text="${producto.nombre}"></td>
-				<td th:text="${producto.descripcion}"></td>
-				<td th:text="${producto.precio}"></td>
-				<td>
-					<a th:href="@{/productos/edit/{id} (id=${producto.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-	                <a th:href="@{/productos/delete/{id} (id=${producto.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-error" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
-				</td>
-			</tr>
+		<table class="tabla-hover">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Descripcion</th>
+					<th>Precio</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="producto:${productos}">
+					<td th:text="${producto.id}"></td>
+					<td th:text="${producto.nombre}"></td>
+					<td th:text="${producto.descripcion}"></td>
+					<td th:text="${producto.precio}"></td>
+					<td>
+						<div class="centrar gap">
+							<a th:href="@{/productos/edit/{id} (id=${producto.id})}" class="btn btn-mini btn-success" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+		                	<a th:href="@{/productos/delete/{id} (id=${producto.id})}" class="btn btn-mini btn-error" onclick="return confirm('¿Estas seguro?')"  title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
 		</table>
 	</main>
 	

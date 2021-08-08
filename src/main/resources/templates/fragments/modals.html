@@ -11,12 +11,23 @@
 
 <!-- Modales login -->
 <div th:fragment="modal-login">
-	<div th:replace ="~{::modal('modalLogin', ~{::login-header}, ~{::login-body}, ~{::modal-default-botones(formLogin)})}"></div>
-	<div th:replace ="~{::modal('modalRegister', ~{::register-header}, ~{::register-body}, ~{::modal-default-botones(formRegister)})}"></div>
+	<div th:replace ="~{::modal('modalLogin', ~{::modal-header('Login')}, ~{::login-body}, ~{::modal-default-botones(formLogin)})}"></div>
+	<div th:replace ="~{::modal('modalRegister', ~{::modal-header('Crea una cuenta')}, ~{::login-body}, ~{::modal-default-botones(formRegister)})}"></div>
 </div>
 
-<div th:fragment="login-header" class="modal-header centrar" >
-	<h1>Login</h1>
+<!-- Modal Comprar -->
+<div th:fragment="modal-tienda">
+	<div th:replace ="~{::modal('modalCompra', ~{::modal-header('Confirmar compra')}, ~{::compra-body}, ~{::modal-compra-botones()})}"></div>
+</div>
+
+<!-- Modales Usar -->
+<div th:fragment="modal-perfil">
+	<div th:replace ="~{::modal('modalUsar', ~{::modal-header('Utilizar objeto')}, ~{::usar-body}, ~{::modal-confirmar-botones(usarForm)})}"></div>
+</div>
+
+
+<div th:fragment="modal-header(titulo)" class="modal-header centrar" >
+	<h1 th:text="${titulo}"></h1>
 </div>
 
  <div th:fragment="login-body" class="modal-body">
@@ -25,20 +36,86 @@
 	<form th:replace="fragments/elementos/forms :: login"></form>
  </div>
 
-
-<div th:fragment="register-header" class="modal-header centrar">
-	<h1>Crea una cuenta</h1>
-</div>
-
  <div th:fragment="register-body" class="modal-body">
  	<div th:replace="fragments/validacion/alertas :: alert(${usuarioInvalido})"></div>
   	<div th:replace="fragments/validacion/alertas :: alert(${msg})"></div>
 
+	<form th:replace="fragments/elementos/forms :: signup(signup)"></form>
+</div>
 
-	<form th:replace="fragments/elementos/forms :: signup"></form>
+ <div th:fragment="compra-body" class="modal-body">
+	 <div class="form-grupo centrar">
+	 	<form id="compraForm" method="get">
+		 	<label class="form-etiqueta">Cantidad: </label>
+		 	<input id="cantidad" name="cantidad" type="number" class="form-campo" min="1" value="1" step="1" required>
+	 	</form>
+	 	<br>
+	 </div>
+	 <section class="factura">
+ 		<table>
+ 			<thead>
+ 				<tr>
+	 				<th>Dinero</th>
+	 				<th></th>
+	 				<th>Precio</th>
+	 				<th></th>
+	 				<th>Nº</th>
+	 				<th></th>
+	 				<th>Restante</th>
+ 				</tr>
+ 			</thead>
+ 			<tbody>
+ 				<tr>
+ 					<td class="valido">
+ 						<span id="dineroUsuario"></span>
+ 						<i class="fab fa-btc"></i>
+ 					</td>
+ 					<td>
+ 						<span> - </span> 
+ 					</td>
+	 				<td  class="invalido">
+	 					<span id="precioProducto"></span>
+	 				</td>
+	 				<td>
+	 				 	<span> x </span> 
+	 				</td>
+	 				<td class="invalido">
+	 					<span id="cantidadProducto"></span>
+	 				</td>
+	 				<td>
+	 					<span> = </span>
+	 				</td>
+	 				<td>
+	 					<span id="dineroRestante"></span>
+						<i class="fab fa-btc"></i>
+	 				</td>
+ 				</tr>
+ 			</tbody>
+ 		</table>
+	 </section>
+</div>
+
+<div th:fragment="usar-body" class="modal-body">
+	 <div class="form-grupo centrar">
+	 	<form id="usarForm" method="get">
+		 	<label class="form-etiqueta">Cantidad: </label>
+		 	<input id="cantidad" name="cantidad" type="number" class="form-campo" min="1" value="1" step="1" required>
+	 	</form>
+	 	<br>
+	 </div>
 </div>
 
 <div class="modal-footer" th:fragment="modal-default-botones(formId)">
     <button class="btn btn-rosa-hover" id="modal-cancelar">Cancelar</button>
     <button class="btn btn-secundario-hover" th:form="${formId}">Enviar</button>
+</div>
+
+<div class="modal-footer" th:fragment="modal-compra-botones()">
+    <button class="btn btn-rosa-hover" id="modal-cancelar">Cancelar</button>
+    <button class="btn btn-secundario-hover" th:form="compraForm">Comprar</button>
+</div>
+
+<div class="modal-footer" th:fragment="modal-confirmar-botones(formId)">
+    <button class="btn btn-rosa-hover" id="modal-cancelar">Cancelar</button>
+    <button class="btn btn-secundario-hover" th:form="${formId}">Confirmar</button>
 </div>

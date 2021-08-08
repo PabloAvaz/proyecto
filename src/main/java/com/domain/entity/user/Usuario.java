@@ -35,8 +35,8 @@ public class Usuario extends User {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "energia", referencedColumnName ="idEnergia")
 	private Energia energia;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id" ,referencedColumnName ="idUsuario")
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@JoinColumn(name = "id", referencedColumnName ="idUsuario")
 	private Daily daily;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(

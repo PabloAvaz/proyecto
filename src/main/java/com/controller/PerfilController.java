@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dto.user.UsuarioDto;
+import com.dto.util.Alert;
+import com.enums.Tipo;
+import com.enums.TipoMensaje;
 import com.service.IProductoService;
 import com.service.IUsuarioService;
 
@@ -42,11 +46,14 @@ public class PerfilController extends BaseController {
 	}
 	
 	@GetMapping("/usar/{id}")
-	public String usar(@PathVariable int id, HttpSession sesion) {
+	public String usar(@PathVariable int id, Integer cantidad, HttpSession sesion, RedirectAttributes atrib) {
 		if(!logeado) return "redirect:/login";
 		
-		if(serviceUsuario.usar(usr, serviceProducto.getById(id))) {
+		if(serviceUsuario.usar(usr, serviceProducto.getById(id), cantidad)) {
 			sesion.setAttribute("usuario", serviceUsuario.getById(usr.getId()));
+			atrib.addFlashAttribute("msgUsar", new Alert("Producto utilizado con éxito", TipoMensaje.SUCCESS));
+		} else {
+			atrib.addFlashAttribute("msgUsar", new Alert("Error al utilizar el producto", TipoMensaje.ERROR));
 		}
 
 		return "redirect:/perfil/list";

@@ -10,7 +10,7 @@
 	<main class="main">
 		<section>
 			<h2>
-				<span th:text=" ${usuario.puntos} + ' '"></span>
+				<span id="dinero" th:text=" ${usuario.puntos} + ' '"></span>
 				<i class="fab fa-btc"></i>
 			</h2>
 		</section>
@@ -24,14 +24,12 @@
 					</div>
 					<div class="carta-body">
 					   <p class="card-text" th:text="*{descripcion}"></p>
-					   <a th:href="@{/tienda/comprar/{id}(id=*{id})}" class="btn btn-redondo btn-rosa-hover" onclick="return confirm('¿Estás seguro?')" >
-				   		<span>
+					   <button th:data-id="*{id}" th:data-precio="*{precio}" th:data-equipable="${T(com.enums.Tipo).EQUIPABLE.equals(producto.tipo) ? 'S' : 'N'}" data-toggle="#modalCompra" class="btn btn-redondo btn-rosa-hover" >
 				   			<span class="precio">
-				   				<span th:text="*{precio} + ' '"></span>
-								<i class="fab fa-btc"></i>
+				   				<span data-toggle="#modalCompra" th:text="*{precio} + ' '"></span>
+								<i data-toggle="#modalCompra" class="fab fa-btc"></i>
 							</span>
-						</span>
-					   </a>
+					   </button>
 					</div>
 				</div>
 			</div>
@@ -39,6 +37,46 @@
 	</main>
 	
 	<footer th:replace="fragments/footer :: footer"></footer>
-
+	<th:block th:replace="fragments/modals :: modal-tienda"></th:block>
+	
+	<script th:inline="javascript">
+		const form = $("#compraForm"); 
+		
+		$("*[data-id]").on("click", function(e) {
+			const urlCompra = /*[[@{/tienda/comprar/}]]*/ "/tienda/comprar/";
+			form.attr("action", urlCompra + e.currentTarget.dataset.id);
+			form.data("precio", e.currentTarget.dataset.precio);
+			
+			if (e.currentTarget.dataset.equipable === "S") {
+			 	$("#cantidad").attr("readonly", "true")
+			} else {
+				$("#cantidad").removeAttr("readonly", "false")
+			}
+		});
+		
+		$("#cantidad").on("change",function() {
+			actualizarPrecio();
+		});
+		
+		function actualizarPrecio() {
+			const dinero = parseInt($("#dinero").text())
+			const precio = parseInt(form.data('precio'));
+			const cantidad = $("#cantidad").val();
+			const total = dinero - precio * cantidad;
+			
+			$("#dineroUsuario").text(dinero);
+			$("#precioProducto").text(precio);
+			$("#cantidadProducto").text(cantidad);
+			$("#dineroRestante").text(total);
+			
+			$("#dineroRestante").parent().addClass(total > 0 ? 'valido' : 'invalido');
+			$("#dineroRestante").parent().removeClass(total > 0 ? 'invalido' : 'valido');
+		}
+		$("#modalCompra").on("mostrar",function(){
+			$("#cantidad").val(1);
+			actualizarPrecio();
+			$("#cantidad").focus();
+		});
+	</script>
 </body>
 </html>

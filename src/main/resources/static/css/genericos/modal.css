@@ -13,13 +13,18 @@
 
 .modal-content {
     display: grid;
-    grid-template-columns: minmax(320px, 30vw);
-    grid-template-rows: 10vh 1fr 10vh;
+    grid-template-columns: minmax(320px, 40vw);
+    grid-template-rows: 10vh minmax(25vh, 1fr) 10vh;
     color: var(--color-negro);
     background-color: var(--color-blanco);
     border-radius: 1vw;
 }
 .modal-body{
+	display:flex;
+	flex-direction:column;
+	align-items: center;
+	justify-content: space-around;
+	padding: 10px;
 	width: 100%;
 }
 .modal-footer {

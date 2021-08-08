@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.domain.entity.user.Usuario;
+import com.dto.user.UsuarioDto;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
@@ -22,6 +23,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	@Modifying(flushAutomatically = true, clearAutomatically = true)
 	@Query("UPDATE Usuario SET username = :#{#usuario.username}")
 	public void update(@Param(value = "usuario") Usuario usuario);
+	
+	@Modifying(flushAutomatically = true, clearAutomatically = true)
+	@Query("UPDATE Usuario SET puntos = :#{#usuario.puntos} WHERE id = :#{#usuario.id}")
+	public void gastarPuntos(UsuarioDto usuario);
 	/*
     @Transactional
 	@Modifying
@@ -38,5 +43,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 			  nativeQuery = true)
 	public Integer countArticulos(Integer idUsr, Integer IdProd);
 	*/
+
 
 }

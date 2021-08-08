@@ -8,23 +8,32 @@
 	<header th:replace="fragments/menu :: menu-principal"></header>
 
 	<main class="main">
-		<a class="btn btn-primary" th:href="@{/action/create}">Crear</a>
-		<table class="table">
-			<tr>
-				<th>Id</th>
-				<th>Producto</th>
-				<th>Skin</th>
-				<th>Accion</th>
-			</tr>
-			<tr th:each="accion:${acciones}" th:object="${accion}">
-				<td th:text="*{producto.id}"></td>
-				<td th:text="*{producto.nombre}"></td>
-				<td th:text="*{skin.nombre}"></td>
-				<td>
-					<a th:href="@{/action/edit/{id} (id=*{producto.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-	                <a th:href="@{/action/delete/{id} (id=*{producto.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-error" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
-				</td>
-			</tr>
+		<section class="contenedor-column">
+				<a class="btn btn-secundario-hover" th:href="@{/action/create}">Crear</a>
+		</section>
+		
+		<table class="tabla-hover">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Producto</th>
+					<th>Skin</th>
+					<th>Accion</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="accion:${acciones}" th:object="${accion}">
+					<td th:text="*{producto.id}"></td>
+					<td th:text="*{producto.nombre}"></td>
+					<td th:text="*{skin.nombre}"></td>
+					<td>
+						<div class="centrar gap">
+						<a th:href="@{/action/edit/{id} (id=*{producto.id})}" class="btn btn-mini btn-success" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+		                <a th:href="@{/action/delete/{id} (id=*{producto.id})} "class="btn btn-mini btn-error"  onclick="return confirm('¿Estas seguro?')" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
 		</table>
 	</main>
 	

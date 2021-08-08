@@ -9,29 +9,58 @@
 	<header th:replace="fragments/menu :: menu-principal"></header>
      
       <main>
-        <table class="table">
-		<tr>
-			<th sec:authorize="hasAnyAuthority('ADMIN')">Id</th>
-			<th>Nombre</th>
-			<th>Descripcion</th>
-			<th>Tipo</th>
-			<th>Cantidad</th>
-			<th>Acción</th>
-		</tr>
-		<tr th:each="prdUsr:${productos}" th:object="${prdUsr}">
-			<td sec:authorize="hasAnyAuthority('ADMIN')" th:text="*{productoUsuarioId.producto.id}"></td>
-			<td th:text="*{productoUsuarioId.producto.nombre}"></td>
-			<td th:text="*{productoUsuarioId.producto.descripcion}"></td>
-			<td th:text="*{productoUsuarioId.producto.tipo}"></td>
-			<td th:text="*{cantidad}"></td>
-			<td>
-				<a class="btn btn-success" th:href="@{/perfil/usar/{prd} (prd=*{productoUsuarioId.producto.id})}">Usar</a>
-			</td>
-		</tr>
+      	<section>
+      		<section th:replace="fragments/validacion/alertas :: alert(${msgUsar})"></section>
+      	</section>
+      	
+        <table class="tabla-hover">
+        	<thead>
+				<tr>
+					<th sec:authorize="hasAnyAuthority('ADMIN')">Id</th>
+					<th>Nombre</th>
+					<th>Descripcion</th>
+					<th>Tipo</th>
+					<th>Usos</th>
+					<th>Acción</th>
+				</tr>
+			</thead>
+		<tbody>
+			<tr th:each="prdUsr:${productos}" th:object="${prdUsr.productoUsuarioId.producto}" th:with="equipable=${T(com.enums.Tipo).EQUIPABLE.equals(prdUsr.productoUsuarioId.producto.tipo)}">
+				<td sec:authorize="hasAnyAuthority('ADMIN')" th:text="*{id}"></td>
+				<td th:text="*{nombre}"></td>
+				<td th:text="*{descripcion}"></td>
+				<td th:text="*{tipo}"></td>
+				<td th:text="${equipable ? 'ILIMITADOS' : prdUsr.cantidad}"></td>
+				<td>
+					<a class="btn btn-success" data-toggle="#modalUsar" th:data-id="*{id}" th:data-equipable="${equipable ? 'S' : 'N'}">Usar</a>
+				</td>
+			</tr>
+		</tbody>
 		</table>
 	</main>
 	
 	<footer th:replace="fragments/footer :: footer"></footer>
-
+	<th:block th:replace="fragments/modals :: modal-perfil"></th:block>
+	
+	<script th:inline="javascript">
+		const form = $("#usarForm"); 
+		
+		$("*[data-id]").on("click", function(e) {
+			const urlUsar = /*[[@{/perfil/usar/}]]*/ "/perfil/usar/";
+			form.attr("action", urlUsar + e.currentTarget.dataset.id);
+			
+			if (e.currentTarget.dataset.equipable === "S") {
+			 	$("#cantidad").attr("readonly", "true");
+			} else {
+				$("#cantidad").removeAttr("readonly", "false");
+			}
+			
+		});
+		
+		$("#modalUsar").on("mostrar",function(){
+			$("#cantidad").val(1);
+			$("#cantidad").focus();
+		});
+	</script>
 </body>
 </html>

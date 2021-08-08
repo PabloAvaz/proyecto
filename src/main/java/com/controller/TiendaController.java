@@ -38,8 +38,8 @@ public class TiendaController {
 	}
 	
 	@GetMapping("/comprar/{id}")
-	public String comprar(@PathVariable int id, HttpSession sesion) {
-		if(serviceUsuario.comprar(usuario, serviceProductos.getById(id))) {
+	public String comprar(@PathVariable int id, Integer cantidad, HttpSession sesion) {
+		if(serviceUsuario.comprar(usuario, serviceProductos.getById(id), cantidad)) {
 			sesion.setAttribute("usuario", serviceUsuario.getById(usuario.getId()));
 		} 
 

@@ -24,7 +24,7 @@
 				<div class="ventanita-header">
 					<h1>Noticias</h1>
 				</div>
-				<div class="ventanita-body">
+				<div class="ventanita-body contenedor-column">
 					<span>Nuevo personaje disponible</span>
 					<span>Actualizacion 1.0</span>
 				</div>
@@ -58,18 +58,24 @@
 				</div>
 			</section>
 			
-			<section class="ventanita amigos" sec:authorize="isAuthenticated()">
+			<section class="ventanita opciones" sec:authorize="isAuthenticated()">
 				<div class="ventanita-header">
-					<h1>Amigos</h1>
+					<h1>Opciones</h1>
 				</div>
 				<div class="ventanita-body">
 					<span>Proximamente</span>
+					<div class="contenedor-row">
+					 	<label for="btnMute" class="fas fa-volume-mute"> </label>
+					  	<input id="btnMute"  type="checkbox" class="checkbox" style="display:none"/>
+					  	<label for="btnMute" class="checkbox-bola"><span></span></label>    
+					</div>
 				</div>
 			</section>
 		</aside>
       </main>
 	
 	<script th:inline="javascript">
+	var muted = false;
 	$(window).on("load", function(){
 		audio = /*[[
 			@{/sounds/{sonido} (sonido=${usuario!=null && usuario.skin != null  ? usuario.skin.sonido : T(com.constants.Constants).DEFAULT_SKIN.sonido})}
@@ -79,7 +85,9 @@
 		audio = new Audio(audio)
 		$("#clicker").on("click",function(){
 			$("#salida").text("Total: " + ++veces);
-			audio.play();
+			if(!muted) {
+				audio.play();
+			}
 			$.ajax({
 				url : '/enviar',
 				type : 'GET',
@@ -93,6 +101,10 @@
 				$("#clicker").addClass("animado");
 				setTimeout(function(){$("#clicker").removeClass("animado");}, 4000);
 			};
+		})
+		$("#btnMute").on("click", function(){
+			muted = !muted;
+			console.log(muted)
 		})
 	})
 	</script>

@@ -7,3 +7,11 @@
 .fab {
 	font-size: 1rem;
 }
+
+.valido {
+	color: lime;
+}
+
+.invalido {
+	color: red;
+}

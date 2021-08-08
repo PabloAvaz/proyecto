@@ -37,7 +37,7 @@ public class DailyController {
 	if(serviceUsuario.reclamarDaily(usr)) {
 		atrib.addFlashAttribute("msgDaily", new Alert("Recompensa reclamada con éxito", TipoMensaje.SUCCESS));
 	} else {
-		atrib.addFlashAttribute("msgDaily",new Alert("Error al reclamar la recompensa diaria", TipoMensaje.ERROR));
+		atrib.addFlashAttribute("msgDaily", new Alert("Error al reclamar la recompensa diaria", TipoMensaje.ERROR));
 	}
 	
 	

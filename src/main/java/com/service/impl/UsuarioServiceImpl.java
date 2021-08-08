@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
@@ -21,10 +23,13 @@ import com.domain.repository.AccionEquipableRepository;
 import com.domain.repository.DailyRepository;
 import com.domain.repository.ProductoUsuarioRepository;
 import com.domain.repository.UsuarioRepository;
+import com.dto.acciones.EfectoDto;
 import com.dto.producto.ProductoDto;
 import com.dto.producto.ProductoUsuarioDto;
 import com.dto.producto.SkinDto;
 import com.dto.user.UsuarioDto;
+import com.enums.Tipo;
+import com.enums.TipoEfecto;
 import com.mapper.producto.ProductoMapper;
 import com.mapper.producto.ProductoUsuarioMapper;
 import com.mapper.producto.SkinMapper;
@@ -39,7 +44,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @Primary
 @RequiredArgsConstructor
-public class UsuariosServiceImpl implements IUsuarioService {
+public class UsuarioServiceImpl implements IUsuarioService {
 	@Value("${daily.puntos}")
 	private int puntosDaily; 
 	private final UsuarioRepository repoUsuarios;
@@ -95,7 +100,8 @@ public class UsuariosServiceImpl implements IUsuarioService {
 
 	@Override
 	public void borrar(UsuarioDto user) {
-		repoUsuarios.delete(usuarioMapper.toEntity(user));
+		repoDaily.deleteById(user.getId());
+		repoUsuarios.deleteById(user.getId());
 	}
 
 	@Override
@@ -126,59 +132,84 @@ public class UsuariosServiceImpl implements IUsuarioService {
 	}
 
 	@Override
-	public boolean comprar(UsuarioDto user, ProductoDto prod) {
+	@Transactional
+	public boolean comprar(UsuarioDto user, ProductoDto prod, Integer cantidad) {
 		
-		if(prod != null && user.getPuntos() >= prod.getPrecio()) {
+		cantidad = cantidad != null && !prod.getTipo().equals(Tipo.EQUIPABLE) ? cantidad : 1;
+		
+		if(prod != null && user.getPuntos() >= prod.getPrecio() * cantidad) {
+			
 			if(!user.getArticulos().contains(prod)) {
-				user.comprar(prod);
-				user.gastar(prod.getPrecio());
-				modificar(user);
-			} else {
+				ProductoUsuario pru = new ProductoUsuario(new ProductoUsuarioId(productoMapper.toEntity(prod),usuarioMapper.toEntity(user)), cantidad);
+				repoProductoUsuario.save(pru);
+			} else if(!prod.getTipo().equals(Tipo.EQUIPABLE)) {
 				ProductoUsuario prodUsr = repoProductoUsuario.findById(new ProductoUsuarioId(productoMapper.toEntity(prod),usuarioMapper.toEntity(user))).get();
-				
-				user.gastar(prod.getPrecio());
-				modificar(user);
-				
-				prodUsr.aumentarCantidad(1);
+				prodUsr.aumentarCantidad(cantidad);
 				repoProductoUsuario.save(prodUsr);
 			}
 			
+			user.gastar(prod.getPrecio() * cantidad);
+			actualizarPuntos(user);
+					
 			return true;
 			
 		} else {
 			return false;
 		}
 	}
+	
+	@Override
+	@Transactional
+	public void actualizarPuntos(UsuarioDto user) {
+		repoUsuarios.gastarPuntos(user);
+	}
 
 	@Override
-	public boolean usar(UsuarioDto user, ProductoDto producto) {
+	public boolean usar(UsuarioDto user, ProductoDto producto, Integer cantidad) {
 		switch(producto.getTipo()) {
-		case CONSUMIBLE:
-			Optional<ProductoUsuario> pu = repoProductoUsuario.findById(new ProductoUsuarioId(productoMapper.toEntity(producto), usuarioMapper.toEntity(user)));
-			if(pu!=null) {
-				ProductoUsuario puFinal = pu.get();
-				if(puFinal.getCantidad()>0) {
-					puFinal.disminuirCantidad(1);
-					repoProductoUsuario.save(puFinal);
+			case CONSUMIBLE:
+				Optional<ProductoUsuario> pu = repoProductoUsuario.findById(new ProductoUsuarioId(productoMapper.toEntity(producto), usuarioMapper.toEntity(user)));
+				if(pu!=null) {
+					ProductoUsuario puFinal = pu.get();
+					if(puFinal.getCantidad() - cantidad >= 0) {
+						//TODO PVS USAR OBJETO EFECTOS
+						for (int veces = 0; veces < cantidad; veces++) {
+							for (EfectoDto efecto : producto.getEfectos()) {
+								switch(efecto.getTipo()) {
+									case RECARGAR:
+										user.getEnergia().recargar(efecto.getPoder());
+										guardar(user);
+										break;
+									case GASTAR:
+										user.getEnergia().gastar(efecto.getPoder());
+										guardar(user);
+										break;
+									default: 
+										System.out.println("Efecto no valido");
+								}
+							}
+						}
+						puFinal.disminuirCantidad(cantidad);
+						repoProductoUsuario.save(puFinal);
+						return true;
+					}
+				}
+				break;
+	
+			case EQUIPABLE:
+				Optional<AccionEquipable> accion = repoAccionEquipable.findById(producto.getId());
+				Optional<Usuario> optionalUsuario = repoUsuarios.findById(user.getId());
+	
+				if(accion.isPresent() && optionalUsuario.isPresent()) {
+					Usuario usuarioActualizado = optionalUsuario.get();
+					usuarioActualizado.setSkin(accion.get().getSkin());
+					repoUsuarios.save(usuarioActualizado);
 					return true;
 				}
+				break;
+			default:
+				System.out.println("Tipo de producto no válido");
 			}
-			break;
-
-		case EQUIPABLE:
-			Optional<AccionEquipable> accion = repoAccionEquipable.findById(producto.getId());
-			Optional<Usuario> optionalUsuario = repoUsuarios.findById(user.getId());
-
-			if(accion.isPresent() && optionalUsuario.isPresent()) {
-				Usuario usuarioActualizado = optionalUsuario.get();
-				usuarioActualizado.setSkin(accion.get().getSkin());
-				repoUsuarios.save(usuarioActualizado);
-				return true;
-			}
-			break;
-		default:
-			System.out.println("Tipo de producto no válido");
-		}
 		return false;
 	}
 

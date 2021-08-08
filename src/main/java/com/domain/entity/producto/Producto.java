@@ -1,12 +1,18 @@
 package com.domain.entity.producto;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.domain.entity.acciones.Efecto;
 import com.enums.Tipo;
 
 import lombok.AllArgsConstructor;
@@ -29,5 +35,9 @@ public class Producto {
 	private String imagen = "default.png";
 	private int precio;
 	private Tipo tipo;
+	
+	@OneToMany()
+	@JoinColumn(name = "idProducto")
+	private List<Efecto> efectos;
 
 }

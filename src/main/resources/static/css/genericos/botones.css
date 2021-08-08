@@ -14,13 +14,17 @@
     font-style: none;
 	text-decoration: none;
 	min-width: 100px;
-	z-index: 1;
 }
 
 button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled) {
     cursor: pointer;
 }
-
+.btn-mini {
+	width: 36px;
+	height: 36px;
+	min-width: 15px;
+	min-height: 15px;
+}
 .btn-round {
     border-radius: 40px;
 }
@@ -65,8 +69,6 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
     color: var(--color-texto-secundario);
     background: var(--color-fondo-secundario);
 }
-
-
 
 .btn-rosa-hover{
     color: var(--color-boton-rosa);

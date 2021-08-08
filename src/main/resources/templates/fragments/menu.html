@@ -8,7 +8,6 @@
 
         <nav>
           <ul class="navbar">
-          
             <li class="centrar" sec:authorize="hasAnyAuthority('USER','ADMIN')">
               <a th:href="@{/tienda/}">Tienda</a></a>
             </li>
@@ -27,8 +26,8 @@
           </ul>
           
 	        <div class="login">
-			    <a class="btn btn-principal btn-round" sec:authorize="isAnonymous()" th:data-url="@{/login}" data-toggle="#modalLogin">Login</a>&nbsp;
-			    <a class="btn btn-secundario btn-round" sec:authorize="isAnonymous()" th:data-url="@{/signup}" data-toggle="#modalRegister">Registrarse</a>&nbsp;
+			    <button class="btn btn-principal btn-round" sec:authorize="isAnonymous()" th:data-url="@{/login}" data-toggle="#modalLogin">Login</button>&nbsp;
+			    <button class="btn btn-secundario btn-round" sec:authorize="isAnonymous()" th:data-url="@{/signup}" data-toggle="#modalRegister">Registrarse</button>&nbsp;
 			    <a class="btn btn-rosa-hover btn-round " sec:authorize="isAuthenticated()" th:href="@{/logout}">Salir</a>
 	        </div>
         </nav>

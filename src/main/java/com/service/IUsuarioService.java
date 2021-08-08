@@ -21,10 +21,11 @@ public interface IUsuarioService {
 	void borrar(UsuarioDto user);
 	void modificar(UsuarioDto user);
 	//Acciones
-	boolean usar(UsuarioDto user, ProductoDto producto);
-	boolean comprar(UsuarioDto user, ProductoDto prod);
+	boolean usar(UsuarioDto user, ProductoDto producto, Integer cantidad);
+	boolean comprar(UsuarioDto user, ProductoDto prod, Integer cantidad);
 	void punto(UsuarioDto user);
 	UsuarioDto validar(UsuarioDto user);
+	void actualizarPuntos(UsuarioDto user);
 	//Productos
 	List<ProductoUsuarioDto> getProductos(UsuarioDto user);
 	//Recompensas diarias
