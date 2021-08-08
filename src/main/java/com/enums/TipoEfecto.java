@@ -8,7 +8,8 @@ public enum TipoEfecto {
 	RECARGAR,
 	GASTAR,
 	CURAR,
-	VELOCIDAD;
+	VELOCIDAD,
+	MULTIPLICADOR;
 
 	public static boolean contiene(String tipo) {
 

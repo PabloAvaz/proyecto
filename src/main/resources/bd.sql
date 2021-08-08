@@ -1,7 +1,7 @@
-drop database lovelive;
+-- drop database oneclick;
 
-CREATE DATABASE lovelive;
-USE lovelive;
+CREATE DATABASE oneclick;
+USE oneclick;
 
 CREATE TABLE skin (
 idSkin int NOT NULL AUTO_INCREMENT,
@@ -60,7 +60,7 @@ CONSTRAINT pk_producto PRIMARY KEY(idProducto)
 CREATE TABLE productoUsuario(
 id int not null,
 idProducto int not null,
-cantidad int default 1,
+cantidad int default 0,
 CONSTRAINT pk_productoUsuario PRIMARY KEY(id,idproducto),
 constraint fk_productousuario1 foreign key (id) references usuario(id) ON DELETE CASCADE,
 constraint fk_productousuario2 foreign key (idProducto) references producto(idproducto) ON DELETE CASCADE
@@ -83,6 +83,15 @@ constraint pk_recompensaDiaria primary key (idUsuario),
 constraint fk_recompensaDiaria foreign key (idUsuario) references usuario(id) ON DELETE CASCADE
 );
 
+CREATE TABLE efecto (
+idEfecto int NOT NULL AUTO_INCREMENT,
+idProducto int,
+tipo varchar(20),
+duracion int,
+poder int,
+CONSTRAINT pk_efecto PRIMARY KEY(idEfecto),
+constraint fk_efecto_producto foreign key(idProducto) references producto(idProducto) on delete cascade
+);
 -- drop table accionEquipable;
 -- drop table usuario;
 
@@ -93,7 +102,7 @@ insert into skin values(3,"Woki","woki.jpg","gato.mp3");
 insert into energia values(1, 100, 50);
 insert into energia values(2, 50, 25);
 insert into energia values(3, 25, 25);
-insert into energia values(4, 500, 500);
+insert into energia values(4, 1000, 500);
 
 insert into perfil values(1, "ADMIN");
 insert into perfil values(2, "USER");
@@ -101,16 +110,17 @@ insert into perfil values(2, "USER");
 insert into usuario values(1,"","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","DEFAULT", 0, 1, 1, 1);
 insert into usuario values(2,"Juan","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","Juan", 0, 1, 1, 2);
 insert into usuario values(3,"Clowdash","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","Clowdash", 0, 1, 1, 3);
-insert into usuario values(4,"Vosk","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","Pablo", 0, 1, 1, 4);
+insert into usuario values(4,"Vosk","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","Pablo", 1000, 1, 1, 4);
 
 insert into perfilUsuario values(2, 1);
 insert into perfilUsuario values(3, 2);
 insert into perfilUsuario values(4, 1);
 
-insert into producto values(1,"Traje de Luffy","El vestido inicial","default.png", 0, 0);
-insert into producto values(2,"Vestido de kanan","El vestido kanan","kanan.webp", 10, 0);
-insert into producto values(3,"Traje de gato","Woki woki <3","woki.jpg", 10, 0);
+insert into producto values(1,"Traje de luffy","El vestido inicial","default.png", 0, 0);
+insert into producto values(2,"Vestido de kanan","El vestido kanan","kanan.webp", 50, 0);
+insert into producto values(3,"Traje de gato","Woki woki <3","woki.jpg", 100, 0);
 insert into producto values(4,"Cereales Crunchy crunchy","Los mejores cereales para el mejor gato","crunchy.jpg", 10, 1);
+insert into producto values(5,"Lejía","Lo que no te mata...","lejia.jpg", 25, 1);
 
 insert into productoUsuario values(1,1,1);
 insert into productoUsuario values(1,2,1);
@@ -126,6 +136,15 @@ insert into daily values(2,0,0,0);
 insert into daily values(3,0,0,0);
 insert into daily values(4,0,0,0);
 
+insert into efecto values(1, 4, 'RECARGAR', 0, 5);
+insert into efecto values(2, 5, 'GASTAR', 0, 5);
+insert into efecto values(5, 5, 'MULTIPLICADOR', 0, 2);
+
+
+-- Desarrollo
+
+
+
 /*
 -- Consulta productos tienda por usuario;
 select * from producto where idProducto not in (
@@ -134,20 +153,6 @@ select * from producto where idProducto not in (
 	where prod.tipo = 0 and id = 2
 );
 
--- Desarrollo
-CREATE TABLE efecto (
-idEfecto int NOT NULL AUTO_INCREMENT,
-duracion int,
-poder int,
-tipo varchar(20),
-CONSTRAINT pk_efecto PRIMARY KEY(idEfecto)
-);
-
-
-
--- drop table efecto;
-
-/*
 select u.username, p.perfil from UsuarioPerfil up 
 					inner join Usuarios u on u.id = up.idUsuario 
 					inner join Perfiles p on p.id = up.idPerfil 

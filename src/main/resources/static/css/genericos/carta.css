@@ -1,0 +1,44 @@
+
+.carta {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 10px;
+	background-color: rgb(255,255,255,0.3);
+	
+	width: 20vw;
+	max-height: 55vh;
+	padding: 10px;	
+}
+
+.carta-header {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.carta .carta-header .carta-img {
+	object-fit: contain;
+	width: 100%;
+	overflow: hidden;
+	max-height: 35vh;
+}
+
+
+.carta .carta-header .carta-title {
+	text-align: center;
+	vertical-align: middle;
+	color: black;
+}
+
+.carta-body {
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	color: black;
+	max-height: 10vh;
+}
