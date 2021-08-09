@@ -21,6 +21,7 @@ import com.domain.entity.user.Daily;
 import com.domain.entity.user.Usuario;
 import com.domain.repository.AccionEquipableRepository;
 import com.domain.repository.DailyRepository;
+import com.domain.repository.EnergiaRepository;
 import com.domain.repository.ProductoUsuarioRepository;
 import com.domain.repository.UsuarioRepository;
 import com.dto.acciones.EfectoDto;
@@ -35,6 +36,7 @@ import com.mapper.producto.ProductoUsuarioMapper;
 import com.mapper.producto.SkinMapper;
 import com.mapper.user.PerfilMapper;
 import com.mapper.user.UsuarioMapper;
+import com.service.IEnergiaService;
 import com.service.IPerfilService;
 import com.service.ISkinService;
 import com.service.IUsuarioService;
@@ -58,12 +60,14 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	private final ProductoMapper productoMapper;
 	private final ProductoUsuarioMapper productoUsuarioMapper;
 	private final ISkinService serviceSkin;
-	
+	private final IEnergiaService energiaService;
+
+
 	@Override
 	public List<UsuarioDto> getAll() {
 		return usuarioMapper.toDtoList(repoUsuarios.findAll());
 	}
-	
+
 	@Override
 	public Page<UsuarioDto> getAll(Pageable page) {
 
@@ -87,7 +91,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		if (user.getSkin() != null) {
 			SkinDto skin = serviceSkin.getById(user.getSkin().getId());
-				user.setSkin((skin != null)? skin : Constants.DEFAULT_SKIN);
+			user.setSkin((skin != null)? skin : Constants.DEFAULT_SKIN);
 		}
 		guardar(user);
 		repoDaily.save(new Daily(getByUserName(user.getUsername()).getId(),0,0,false));
@@ -118,7 +122,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	public void punto(UsuarioDto user) {
 		user.anotar();
 		Optional<Usuario> tmp = repoUsuarios.findById(user.getId());
-		if(tmp.isPresent()) {
+		if (tmp.isPresent()) {
 			Usuario userFinal = tmp.get();
 			userFinal.setPuntos(user.getPuntos());
 			repoUsuarios.save(userFinal);
@@ -134,11 +138,11 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	@Override
 	@Transactional
 	public boolean comprar(UsuarioDto user, ProductoDto prod, Integer cantidad) {
-		
+
 		cantidad = cantidad != null && !prod.getTipo().equals(Tipo.EQUIPABLE) ? cantidad : 1;
-		
+
 		if(prod != null && user.getPuntos() >= prod.getPrecio() * cantidad) {
-			
+
 			if(!user.getArticulos().contains(prod)) {
 				ProductoUsuario pru = new ProductoUsuario(new ProductoUsuarioId(productoMapper.toEntity(prod),usuarioMapper.toEntity(user)), cantidad);
 				repoProductoUsuario.save(pru);
@@ -147,17 +151,17 @@ public class UsuarioServiceImpl implements IUsuarioService {
 				prodUsr.aumentarCantidad(cantidad);
 				repoProductoUsuario.save(prodUsr);
 			}
-			
+
 			user.gastar(prod.getPrecio() * cantidad);
 			actualizarPuntos(user);
-					
+
 			return true;
-			
+
 		} else {
 			return false;
 		}
 	}
-	
+
 	@Override
 	@Transactional
 	public void actualizarPuntos(UsuarioDto user) {
@@ -167,49 +171,54 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	@Override
 	public boolean usar(UsuarioDto user, ProductoDto producto, Integer cantidad) {
 		switch(producto.getTipo()) {
-			case CONSUMIBLE:
-				Optional<ProductoUsuario> pu = repoProductoUsuario.findById(new ProductoUsuarioId(productoMapper.toEntity(producto), usuarioMapper.toEntity(user)));
-				if(pu!=null) {
-					ProductoUsuario puFinal = pu.get();
-					if(puFinal.getCantidad() - cantidad >= 0) {
-						//TODO PVS USAR OBJETO EFECTOS
-						for (int veces = 0; veces < cantidad; veces++) {
-							for (EfectoDto efecto : producto.getEfectos()) {
-								switch(efecto.getTipo()) {
-									case RECARGAR:
-										user.getEnergia().recargar(efecto.getPoder());
-										guardar(user);
-										break;
-									case GASTAR:
-										user.getEnergia().gastar(efecto.getPoder());
-										guardar(user);
-										break;
-									default: 
-										System.out.println("Efecto no valido");
-								}
+		case CONSUMIBLE:
+			Optional<ProductoUsuario> pu = repoProductoUsuario.findById(new ProductoUsuarioId(productoMapper.toEntity(producto), usuarioMapper.toEntity(user)));
+			if(pu!=null) {
+				ProductoUsuario puFinal = pu.get();
+				puFinal = repoProductoUsuario.findById(new ProductoUsuarioId(productoMapper.toEntity(producto), usuarioMapper.toEntity(user))).get();
+
+				
+				if(puFinal.getCantidad() - cantidad >= 0) {
+					//TODO PVS USAR OBJETO EFECTOS
+					for (int veces = 0; veces < cantidad; veces++) {
+						for (EfectoDto efecto : producto.getEfectos()) {
+							switch(efecto.getTipo()) {
+							case RECARGAR:
+								user.getEnergia().recargar(efecto.getPoder());
+								energiaService.modificar(user.getEnergia());
+								break;
+							case GASTAR:
+								user.getEnergia().gastar(efecto.getPoder());
+								energiaService.modificar(user.getEnergia());
+								break;
+							default: 
+								System.out.println("Efecto no valido");
 							}
 						}
-						puFinal.disminuirCantidad(cantidad);
-						repoProductoUsuario.save(puFinal);
-						return true;
 					}
-				}
-				break;
-	
-			case EQUIPABLE:
-				Optional<AccionEquipable> accion = repoAccionEquipable.findById(producto.getId());
-				Optional<Usuario> optionalUsuario = repoUsuarios.findById(user.getId());
-	
-				if(accion.isPresent() && optionalUsuario.isPresent()) {
-					Usuario usuarioActualizado = optionalUsuario.get();
-					usuarioActualizado.setSkin(accion.get().getSkin());
-					repoUsuarios.save(usuarioActualizado);
+					
+					puFinal.disminuirCantidad(cantidad);
+					repoProductoUsuario.save(puFinal);
+
 					return true;
 				}
-				break;
-			default:
-				System.out.println("Tipo de producto no válido");
 			}
+			break;
+
+		case EQUIPABLE:
+			Optional<AccionEquipable> accion = repoAccionEquipable.findById(producto.getId());
+			Optional<Usuario> optionalUsuario = repoUsuarios.findById(user.getId());
+
+			if(accion.isPresent() && optionalUsuario.isPresent()) {
+				Usuario usuarioActualizado = optionalUsuario.get();
+				usuarioActualizado.setSkin(accion.get().getSkin());
+				repoUsuarios.save(usuarioActualizado);
+				return true;
+			}
+			break;
+		default:
+			System.out.println("Tipo de producto no válido");
+		}
 		return false;
 	}
 
@@ -228,7 +237,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 			daily = new Daily(user.getId(),0,0,false);
 			repoDaily.save(daily);
 		}
-		
+
 		if(!daily.isReclamado()) {
 			user.darPuntos(puntosDaily);
 			guardar(user);

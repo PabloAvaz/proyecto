@@ -32,6 +32,7 @@ public class ProductoServicempl implements IProductoService {
 	public List<ProductoDto> getByTipo(Tipo tipo) {
 		return productoMapper.toDtoList(repoProductos.findByTipo(tipo));
 	}
+	
 	@Override
 	public ProductoDto getById(int id) {
 		Optional<Producto> p = repoProductos.findById(id);
