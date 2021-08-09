@@ -16,7 +16,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer>{
 	public List<Producto> findByTipo(Tipo tipo);
 	@Query(
 			value= "select * from producto p where idProducto not in ( " +
-					"select p.idProducto from productousuario p " +
+					"select p.idProducto from productoUsuario p " +
 					"join producto prod  ON prod.idProducto = p.idProducto " +
 					"where prod.tipo = 0 and id = ?1)",
 					nativeQuery = true)

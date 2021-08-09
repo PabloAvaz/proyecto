@@ -76,9 +76,10 @@
 	
 	<script th:inline="javascript">
 	var muted = false;
+	
 	$(window).on("load", function(){
 		audio = /*[[
-			@{/sounds/{sonido} (sonido=${usuario!=null && usuario.skin != null  ? usuario.skin.sonido : T(com.constants.Constants).DEFAULT_SKIN.sonido})}
+			@{sounds/{sonido} (sonido=${usuario!=null && usuario.skin != null  ? usuario.skin.sonido : T(com.constants.Constants).DEFAULT_SKIN.sonido})}
 			]]*/ "default.wav";
 	
 		veces = 0;
@@ -89,7 +90,9 @@
 				audio.play();
 			}
 			$.ajax({
-				url : '/enviar',
+				url : /*[[
+					@{/enviar}
+					]]*/ "/enviar",
 				type : 'GET',
 				dataType : 'json',
 			    success : function(json) {

@@ -24,9 +24,9 @@ public class ProductoUsuarioId implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idProducto", table="productousuario")
+	@JoinColumn(name = "idProducto", table="productoUsuario")
 	protected Producto producto;
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id", table="productousuario")
+	@JoinColumn(name = "id", table="productoUsuario")
 	protected Usuario user;
 }

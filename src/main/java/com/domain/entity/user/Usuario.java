@@ -40,13 +40,13 @@ public class Usuario extends User {
 	private Daily daily;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
-			name = "productousuario",
+			name = "productoUsuario",
 			joinColumns = @JoinColumn(name="id"), 
 			inverseJoinColumns = @JoinColumn(name="idProducto"))
 	private List<Producto> articulos;
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
-			name = "PerfilUsuario",
+			name = "perfilUsuario",
 			joinColumns = @JoinColumn(name = "idUsuario"),
 			inverseJoinColumns = @JoinColumn(name = "idPerfil")
 			)
