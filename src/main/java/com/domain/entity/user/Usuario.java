@@ -29,7 +29,7 @@ import lombok.Setter;
 public class Usuario extends User {
 	
 	private int puntos;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "skin")
 	private Skin skin;
 	@OneToOne(cascade = CascadeType.ALL)

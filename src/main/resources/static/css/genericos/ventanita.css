@@ -10,6 +10,7 @@
 	transition: min-width 0.4s ease;
 	box-shadow: -1px 4px 14px 2px black, -7px 7px 20px 4px #d636e99e, inset -5px -5px 11px 3px #fcff0826;
 	position: relative;
+	transition: height 1s;
 }
 
 .ventanita-header {
@@ -38,4 +39,12 @@
     right:0;
 	margin-left: 10%;
 	margin-right: 10%;
+}
+
+.ventanita-oculta {
+	height: 25px!important;
+}
+
+.ventanita-oculta .ventanita-body{
+	display: none;
 }

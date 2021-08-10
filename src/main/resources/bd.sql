@@ -1,4 +1,4 @@
--- drop database oneclick;
+drop database oneclick;
 
 CREATE DATABASE oneclick;
 USE oneclick;
@@ -30,7 +30,7 @@ energia int,
 CONSTRAINT pk_usuarios PRIMARY KEY(id),
 CONSTRAINT UC_usuarios_Username UNIQUE (username),
 CONSTRAINT UC_usuarios_energia UNIQUE (energia),
-CONSTRAINT fk_usuarios_skin foreign key (skin) references skin(idSkin) ON DELETE SET NULL,
+CONSTRAINT fk_usuarios_skin foreign key (skin) references skin(idSkin) ON DELETE no action,
 CONSTRAINT fk_usuarios_energia foreign key (energia) references energia(idEnergia) ON DELETE CASCADE
 );
 
@@ -96,8 +96,9 @@ constraint fk_efecto_producto foreign key(idProducto) references producto(idProd
 -- drop table usuario;
 
 insert into skin values(1,"DEFAULT","default.png","default.wav");
-insert into skin values(2,"Kanan","kanan.webp","cancion1.mp3");
-insert into skin values(3,"Woki","woki.jpg","gato.mp3");
+insert into skin values(2,"Mikey","mikey.webp","mikey.mp3");
+insert into skin values(3,"Evee","evee.jpg","gato.mp3");
+insert into skin values(4,"Woki","woki.jpg","woki.mp3");
 
 insert into energia values(1, 100, 50);
 insert into energia values(2, 50, 25);
@@ -117,10 +118,11 @@ insert into perfilUsuario values(3, 2);
 insert into perfilUsuario values(4, 1);
 
 insert into producto values(1,"Traje de luffy","El vestido inicial","default.png", 0, 0);
-insert into producto values(2,"Vestido de kanan","El vestido kanan","kanan.webp", 50, 0);
-insert into producto values(3,"Traje de gato","Woki woki <3","woki.jpg", 100, 0);
-insert into producto values(4,"Cereales Crunchy crunchy","Los mejores cereales para el mejor gato","crunchy.jpg", 10, 1);
-insert into producto values(5,"Lejía","Lo que no te mata...","lejia.jpg", 25, 1);
+insert into producto values(2,"Traje de Mikey","Mikey god","mikey.webp", 50, 0);
+insert into producto values(3,"Traje de Eevee","Miau","evee.jpg", 100, 0);
+insert into producto values(4,"Traje de Woki","Woki woki <3","woki.jpg", 100, 0);
+insert into producto values(5,"Galletas Shin Chan","Las mejores galletas para el mejor gato","shinchan.png", 10, 1);
+insert into producto values(6,"Lejía","Lo que no te mata...","lejia.jpg", 25, 1);
 
 insert into productoUsuario values(1,1,1);
 insert into productoUsuario values(1,2,1);
@@ -130,6 +132,7 @@ insert into productoUsuario values(1,4,10);
 insert into accionEquipable values(1,1);
 insert into accionEquipable values(2,2);
 insert into accionEquipable values(3,3);
+insert into accionEquipable values(4,4);
 
 insert into daily values(1,0,0,0);
 insert into daily values(2,0,0,0);

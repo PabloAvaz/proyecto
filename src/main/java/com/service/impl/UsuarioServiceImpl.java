@@ -89,11 +89,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	public void crear(UsuarioDto user) {
 		user.agregarPerfil(perfilMapper.toDto(servicePerfil.getPerfil(2)));
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		if (user.getSkin() != null) {
-			SkinDto skin = serviceSkin.getById(user.getSkin().getId());
-			user.setSkin((skin != null)? skin : Constants.DEFAULT_SKIN);
-		}
+		user.setSkin(null);
 		guardar(user);
+
 		repoDaily.save(new Daily(getByUserName(user.getUsername()).getId(),0,0,false));
 	}
 

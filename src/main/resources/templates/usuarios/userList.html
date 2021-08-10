@@ -34,7 +34,7 @@
 					</tr>
 				</tbody>
 			</table>	
-			<div th:replace="fragments/paginacion :: paginacion(${usuarios},@{/usuarios/list/})"></div>
+			<div th:replace="fragments/paginacion :: paginacion(${usuarios},${'/usuarios/list'})"></div>
 		</section>
 	</main>
 	
