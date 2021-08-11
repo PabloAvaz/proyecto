@@ -2,13 +2,14 @@
 .carta {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	align-items: center;
 	border-radius: 10px;
-	background-color: rgb(255,255,255,0.3);
+	background-color: whitesmoke;
 	
 	width: 20vw;
 	max-height: 55vh;
-	padding: 10px;	
+	padding: 0;
 }
 
 .carta-header {
@@ -30,7 +31,9 @@
 .carta .carta-header .carta-title {
 	text-align: center;
 	vertical-align: middle;
-	color: black;
+	color: #222;
+    background: var(--color-fondo-principal);	
+	padding: 10px;
 }
 
 .carta-body {
@@ -41,4 +44,5 @@
 	width: 100%;
 	color: black;
 	max-height: 10vh;
+	padding: 10px;
 }

@@ -3,7 +3,9 @@ package com.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +42,9 @@ public class UserController extends BaseController {
 	
 	@GetMapping("/list")
 	private String listar(Model modelo, Pageable page) {
+		
+		page = PageRequest.of(page.getPageNumber(), page.getPageSize(), Sort.by("puntos").descending());
+
 		modelo.addAttribute("usuarios", serviceUsuarios.getAll(page));
 		return "/usuarios/userList";
 	}

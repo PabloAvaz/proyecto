@@ -1,5 +1,6 @@
 package com.service.impl;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -9,7 +10,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -59,7 +62,6 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	private final PerfilMapper perfilMapper;
 	private final ProductoMapper productoMapper;
 	private final ProductoUsuarioMapper productoUsuarioMapper;
-	private final ISkinService serviceSkin;
 	private final IEnergiaService energiaService;
 
 
@@ -70,7 +72,6 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
 	@Override
 	public Page<UsuarioDto> getAll(Pageable page) {
-
 		return repoUsuarios.findAll(page).map(usuarioMapper::toDto);
 	}
 

@@ -109,7 +109,13 @@
 			muted = !muted;
 			console.log(muted)
 		})
-	})
+		$("#clicker").on("dragstart", function(e){
+			e.preventDefault();
+			return false;
+		})
+	});
+	
+	
 	</script>
 	
 	<th:block th:replace="fragments/modals :: modal-login"></th:block>
