@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/usuarios")
 @RequiredArgsConstructor
-public class UserController extends BaseController {
+public class UserController {
 	private final IUsuarioService serviceUsuarios;
 	private final ISkinService serviceSkins;
 	private final PasswordEncoder passwordEncoder;

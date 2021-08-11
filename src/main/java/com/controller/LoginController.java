@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class LoginController extends BaseController {
+public class LoginController {
 
 	private final IUsuarioService serviceUsuarios;
 	private final UsuarioValidator validatorUsuarios;

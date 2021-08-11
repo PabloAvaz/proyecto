@@ -1,6 +1,10 @@
 package com.controller;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
 
-public class BaseController {
+
+@Component
+public class BaseController implements AsyncHandlerInterceptor {
 	
 }

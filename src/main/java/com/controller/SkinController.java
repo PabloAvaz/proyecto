@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/skin")
 @RequiredArgsConstructor
-public class SkinController extends BaseController {
+public class SkinController {
 	@Value("${ruta.imagenes}")
 	private String rutaImagen;
 	@Value("${ruta.sonidos}")

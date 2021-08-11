@@ -30,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/productos")
 @RequiredArgsConstructor
-public class ProductoController extends BaseController {
+public class ProductoController {
 	
 	@Value("${ruta.imagenes}")
 	private String ruta;

@@ -13,24 +13,24 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class IndexController extends BaseController{
+public class IndexController {
 	private final IUsuarioService serviceUsuario;
 
 	@ModelAttribute
 	public void init(Model model) {
-	    model.addAttribute("newUser", new UsuarioDto());
+		model.addAttribute("newUser", new UsuarioDto());
 	}
-	
+
 	@GetMapping("/")
 	public String defaultIndex() {
 		return "redirect:/play";
 	}
-	
+
 	@GetMapping("/index")
 	public String index() {
 		return "redirect:/play";
 	}
-	
+
 	@GetMapping("/play")
 	public String play(Authentication auth, HttpSession sesion, Model modelo) {
 		if(auth != null) {
@@ -40,5 +40,4 @@ public class IndexController extends BaseController{
 		modelo.addAttribute("usuario", sesion.getAttribute("usuario"));
 		return "index.html";
 	}
-
 }

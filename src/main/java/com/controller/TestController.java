@@ -21,24 +21,19 @@ import com.service.IProductoService;
 import com.service.ISkinService;
 import com.service.IUsuarioService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequestMapping("/test")
 @SuppressWarnings("unused")
+@RequiredArgsConstructor
 public class TestController {
-	@Autowired
 	private ISkinService serviceSkin;
-	@Autowired
 	private IUsuarioService serviceUsuario;
-	@Autowired
 	private IProductoService serviceProducto;
-	
-	@Autowired
 	private AccionEquipableRepository repoAcciones;
-	@Autowired
 	private EfectoRepository repoEfectos;
-	@Autowired
 	private ProductoUsuarioRepository repoProductoUsuario;
-	@Autowired
 	private EnergiaRepository repoEnergia;
 	
 	private UsuarioDto usr;

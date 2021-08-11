@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/perfil")
 @RequiredArgsConstructor
-public class PerfilController extends BaseController {
+public class PerfilController {
 	private final IUsuarioService serviceUsuario;
 	private final IProductoService serviceProducto;
 	
