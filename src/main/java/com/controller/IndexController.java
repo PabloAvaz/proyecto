@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class IndexController extends BaseController{
 	private final IUsuarioService serviceUsuario;
-	
+
 	@ModelAttribute
 	public void init(Model model) {
 	    model.addAttribute("newUser", new UsuarioDto());

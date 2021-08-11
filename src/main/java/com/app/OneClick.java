@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@ComponentScan("com")
+@ComponentScan("com.*")
 @EntityScan("com.domain.entity")
 @EnableJpaRepositories("com.domain.repository")
 @EnableScheduling
