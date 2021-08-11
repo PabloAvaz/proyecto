@@ -5,6 +5,7 @@
 	text-decoration: none;
 	color: white;
 	width: 20vw;
+	font-size: 32px;
 }
 
 .logo img {
@@ -51,8 +52,10 @@ nav ul.navbar li a:hover {
 }
 
 .hamburguesa {
+	font-size: 2rem;
 	display: none;
 }
+
 .login {
 	display: flex;
 	flex-direction: row;
@@ -60,9 +63,6 @@ nav ul.navbar li a:hover {
 	align-items: center;
 	margin: 10px;
 }
-
-
-
 
 @media screen and (min-width: 1079px) {
 	nav ul.navbar li:hover {
