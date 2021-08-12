@@ -15,6 +15,7 @@ import lombok.Setter;
 public class UsuarioDto extends UserDto {
 	
 	private int puntos;
+	private int total;
 	private SkinDto skin;
 	private EnergiaDto energia;
 	private DailyDto daily;
@@ -46,15 +47,18 @@ public class UsuarioDto extends UserDto {
 	}
 	public void anotar() {
 		this.puntos++;
+		this.total++;
 	}
 	public void comprar(ProductoDto articulo) {
 			articulos.add(articulo);
 	}
 	public void darPuntos(int cantidad) {
 		this.puntos += cantidad;
+		this.total += cantidad;
 	}
 	public void gastar(int cantidad) {
 		this.puntos -= cantidad;
+		this.total -= cantidad;
 	}
 
 	@Override

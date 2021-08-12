@@ -18,7 +18,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer>{
 			value= "select * from producto p where idProducto not in ( " +
 					"select p.idProducto from productoUsuario p " +
 					"join producto prod  ON prod.idProducto = p.idProducto " +
-					"where prod.tipo = 0 and id = ?1)",
+					"where prod.tipo = 0 and id = ?1) and p.activo = 1",
 					nativeQuery = true)
 	public List<Producto> getListaCompra(Integer idUser);
 }

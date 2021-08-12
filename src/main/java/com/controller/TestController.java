@@ -28,13 +28,13 @@ import lombok.RequiredArgsConstructor;
 @SuppressWarnings("unused")
 @RequiredArgsConstructor
 public class TestController {
-	private ISkinService serviceSkin;
-	private IUsuarioService serviceUsuario;
-	private IProductoService serviceProducto;
-	private AccionEquipableRepository repoAcciones;
-	private EfectoRepository repoEfectos;
-	private ProductoUsuarioRepository repoProductoUsuario;
-	private EnergiaRepository repoEnergia;
+	private final ISkinService serviceSkin;
+	private final IUsuarioService serviceUsuario;
+	private final IProductoService serviceProducto;
+	private final AccionEquipableRepository repoAcciones;
+	private final EfectoRepository repoEfectos;
+	private final ProductoUsuarioRepository repoProductoUsuario;
+	private final EnergiaRepository repoEnergia;
 	
 	private UsuarioDto usr;
 	

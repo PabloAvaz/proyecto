@@ -2,16 +2,18 @@ package com.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.domain.entity.acciones.AccionEquipable;
 import com.domain.repository.AccionEquipableRepository;
 import com.service.IAccionEquipableService;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class AccionEquipableServiceImpl implements IAccionEquipableService {
-	@Autowired AccionEquipableRepository repoAcciones;
+	private final AccionEquipableRepository repoAcciones;
 	
 	@Override
 	public List<AccionEquipable> getAll() {
@@ -21,6 +23,5 @@ public class AccionEquipableServiceImpl implements IAccionEquipableService {
 	@Override
 	public void save(AccionEquipable accion) {
 		repoAcciones.save(accion);
-	}
-
+	} 
 }

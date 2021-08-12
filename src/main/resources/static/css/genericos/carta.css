@@ -6,6 +6,7 @@
 	align-items: center;
 	border-radius: 10px;
 	background-color: whitesmoke;
+	color: #222;
 	
 	width: 20vw;
 	max-height: 55vh;
@@ -31,7 +32,6 @@
 .carta .carta-header .carta-title {
 	text-align: center;
 	vertical-align: middle;
-	color: #222;
     background: var(--color-fondo-principal);	
 	padding: 10px;
 }

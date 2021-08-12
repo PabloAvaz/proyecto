@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @Primary
 @RequiredArgsConstructor
-public class ProductoServicempl implements IProductoService {
+public class ProductoServiceImpl implements IProductoService {
 	private final ProductoRepository repoProductos;
 	private final ProductoMapper productoMapper;
 
@@ -67,6 +67,14 @@ public class ProductoServicempl implements IProductoService {
 	@Override
 	public List<ProductoDto> getListaCompraByUser(UsuarioDto user) {
 		return productoMapper.toDtoList(repoProductos.getListaCompra(user.getId()));
+	}
+	
+	@Override
+	public void toggle(ProductoDto producto) {
+		if(producto != null) {
+			producto.toggle();
+			update(producto);
+		}
 	}
 
 }

@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,6 +34,19 @@ public class Producto {
 	private String imagen = "default.png";
 	private int precio;
 	private Tipo tipo;
+	private boolean activo;
+	
+	public void activar() {
+		this.activo = true;
+	}
+	
+	public void desactivar() {
+		this.activo = false;
+	}
+	
+	public void toggle() {
+		this.activo = !this.activo;
+	}
 	
 	@OneToMany()
 	@JoinColumn(name = "idProducto")

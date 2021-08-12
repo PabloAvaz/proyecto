@@ -15,4 +15,5 @@ public interface IProductoService {
 	void eliminar(int id);
 	void update(ProductoDto producto);
 	List<ProductoDto> getListaCompraByUser(UsuarioDto user);
+	public void toggle(ProductoDto producto);
 }

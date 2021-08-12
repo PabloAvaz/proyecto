@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/propios/tienda.css}" rel="stylesheet">
+</head>
+<body class="default-plantilla">
+
+	<header th:replace="fragments/menu :: menu-principal"></header>
+
+	<main class="main">
+
+		<h1>Efectos</h1>
+		<section class="contenedor-row">
+			<div>
+				<a th:href="@{/efecto/add/{idProducto} (idProducto = ${producto.id})}" class="btn btn-secundario-hover">+</a>
+			</div>
+			
+			<div>
+				<a th:href="@{/productos/list}" class="btn btn-rosa-hover">Volver</a>
+			</div>
+		</section>
+	
+		<section th:replace="efecto/efectos :: efectoList(${producto})"></section>
+	</main>
+	
+	<footer th:replace="fragments/footer :: footer"></footer>
+
+</body>
+</html>

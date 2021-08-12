@@ -28,6 +28,11 @@
 			    <input type="radio" name="tipo" th:field="*{tipo}" class="form-campo" value="EQUIPABLE"><label for="tipo2" class="form-etiqueta">EQUIPABLE</label>
 			    <div th:replace="fragments/validacion/mensajes :: error(prod.tipo.obl)"></div>
 			  </div>
+			  <div class="contenedor-row">
+			    <label class="activo">Activo</label>
+				<input id="activo"  name="activo" th:checked="*{activo}" value="1"  type="checkbox" class="checkbox" style="display:none"/>
+				<label for="activo" class="checkbox-bola"><span></span></label>    
+			  </div>
 			  <div class="form-grupo">
 			    <label class="form-etiqueta">Precio</label>
 			    <input type="number" name="precio" th:field="*{precio}" class="form-campo" placeholder="Precio" min="0" value="0" step="1">
@@ -46,7 +51,6 @@
 			  </div>
 			</form>
       </section>
-		
 	</main>
 	
 	<footer th:replace="fragments/footer :: footer"></footer>

@@ -1,0 +1,54 @@
+<th:block th:fragment="efectoForm(efecto)">
+	<form th:action="@{/efecto/add}" method="post" th:object="${efecto}">
+	  <div class="form-grupo">
+	    <label class="form-etiqueta">Tipo</label>
+	    <select name="tipo" class="form-campo">
+	    	<option th:each="tipo : ${T(com.enums.TipoEfecto).values()}" th:value="${tipo}" th:selected="${tipo.equals(efecto.tipo)}" th:text="${tipo}" ></option>
+	    </select>
+	   	<div th:replace="fragments/validacion/mensajes :: error(prod.descr.obl)"></div>
+	  </div>
+	  <div class="form-check">
+	    <label for="duracion" class="form-etiqueta">Duración</label>
+	    <input type="number" th:field="*{duracion}" class="form-campo" placeholder="Duración" min="0" value="0" step="1">
+	  </div>
+	  <div class="form-grupo">
+	    <label for="poder" class="form-etiqueta">Poder</label>
+	    <input type="number" th:field="*{poder}" class="form-campo" placeholder="Poder" min="0" value="0" step="1">
+	  </div>
+	
+	  <input type="hidden" th:field="*{idEfecto}"></input>
+	  <input type="hidden" th:field="*{idProducto}"></input>
+	  
+	  <div class="centrar">
+	  		<button type="submit" class="btn btn-secundario-hover">Enviar</button>
+	  </div>
+	</form>
+</th:block>
+
+<section th:fragment="efectoList(producto)">
+	<table class="tabla-hover">
+		<thead>
+			<tr>
+				<th>Tipo</th>
+				<th>Duración</th>
+				<th>Poder</th>
+				<th>Acción</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="efecto: ${producto.efectos}" th:object="${efecto}">
+				<td th:text="*{tipo}"></td>
+				<td th:text="*{duracion}"></td>
+				<td th:text="*{poder}"></td>
+				<td>
+					<div class="centrar gap">
+					<a th:href="@{/efecto/edit/{idProducto}/{idEfecto} (idProducto=${producto.id}, idEfecto=*{idEfecto})}" class="btn btn-mini btn-success" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+	                <a th:href="@{/efecto/delete/{idProducto}/{idEfecto} (idProducto=${producto.id}, idEfecto=*{idEfecto})} "class="btn btn-mini btn-error"  onclick="return confirm('¿Estás seguro?')" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+<!-- TODO MODAL -->

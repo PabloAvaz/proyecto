@@ -22,6 +22,21 @@
 				<a th:href="@{/usuarios/list}" class="btn btn btn-redondo btn-principal-hover abajo">Inicio</a>
 			</div>
 		</section>
+		
+		<section class="ventanita">
+			<div class="ventanita-header">
+		    	<h4>Productos</h4>
+			</div>
+			<div class="ventanita-body">
+				<ul class="sin-estilo">
+				   <li><a th:href="@{/productos/create}">Crear producto</a></li>
+				   <li><a th:href="@{/productos/list}">Ver productos</a></li>
+				   <li><a th:href="@{/action/list}">Modificar Skins</a></li>
+				   <li></li>
+				</ul>
+				<a th:href="@{/productos/list}" class="btn btn btn-redondo btn-principal-hover abajo">Inicio</a>
+			</div>
+		</section>
 	
 		<section class="ventanita">
 			<div class="ventanita-header">
@@ -49,21 +64,6 @@
 
 				</ul>
 				<a th:href="@{/admin/daily}" class="btn btn btn-redondo btn-principal-hover abajo">Inicio</a>
-			</div>
-		</section>
-	
-		<section class="ventanita">
-			<div class="ventanita-header">
-		    	<h4>Productos</h4>
-			</div>
-			<div class="ventanita-body">
-				<ul class="sin-estilo">
-				   <li><a th:href="@{/productos/create}">Crear producto</a></li>
-				   <li><a th:href="@{/productos/list}">Ver productos</a></li>
-				   <li><a th:href="@{/action/list}">Modificar Skins</a></li>
-				   <li></li>
-				</ul>
-				<a th:href="@{/productos/list}" class="btn btn btn-redondo btn-principal-hover abajo">Inicio</a>
 			</div>
 		</section>
    	</main>

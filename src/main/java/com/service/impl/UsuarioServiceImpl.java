@@ -1,6 +1,5 @@
 package com.service.impl;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -10,13 +9,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.constants.Constants;
 import com.domain.entity.acciones.AccionEquipable;
 import com.domain.entity.producto.ProductoUsuario;
 import com.domain.entity.producto.ProductoUsuarioId;
@@ -24,24 +20,19 @@ import com.domain.entity.user.Daily;
 import com.domain.entity.user.Usuario;
 import com.domain.repository.AccionEquipableRepository;
 import com.domain.repository.DailyRepository;
-import com.domain.repository.EnergiaRepository;
 import com.domain.repository.ProductoUsuarioRepository;
 import com.domain.repository.UsuarioRepository;
 import com.dto.acciones.EfectoDto;
 import com.dto.producto.ProductoDto;
 import com.dto.producto.ProductoUsuarioDto;
-import com.dto.producto.SkinDto;
 import com.dto.user.UsuarioDto;
 import com.enums.Tipo;
-import com.enums.TipoEfecto;
 import com.mapper.producto.ProductoMapper;
 import com.mapper.producto.ProductoUsuarioMapper;
-import com.mapper.producto.SkinMapper;
 import com.mapper.user.PerfilMapper;
 import com.mapper.user.UsuarioMapper;
 import com.service.IEnergiaService;
 import com.service.IPerfilService;
-import com.service.ISkinService;
 import com.service.IUsuarioService;
 
 import lombok.RequiredArgsConstructor;
@@ -124,6 +115,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		if (tmp.isPresent()) {
 			Usuario userFinal = tmp.get();
 			userFinal.setPuntos(user.getPuntos());
+			userFinal.setTotal(user.getTotal());
 			repoUsuarios.save(userFinal);
 		}
 	}

@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/propios/tienda.css}" rel="stylesheet">
+</head>
+<body class="default-plantilla">
+
+	<header th:replace="fragments/menu :: menu-principal"></header>
+
+	<main class="main">
+		<div th:replace="efecto/efectos:: efectoForm(${efecto})"></div>
+	</main>
+	
+	<footer th:replace="fragments/footer :: footer"></footer>
+
+</body>
+</html>

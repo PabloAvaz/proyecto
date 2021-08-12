@@ -21,8 +21,21 @@ public class ProductoDto {
 	private String imagen = "default.png";
 	private int precio;
 	private Tipo tipo;
+	private boolean activo;
 	
 	private List<EfectoDto> efectos;
+	
+	public void activar() {
+		this.activo = true;
+	}
+	
+	public void desactivar() {
+		this.activo = false;
+	}
+	
+	public void toggle() {
+		this.activo = !this.activo;
+	}
 
 	@Override
 	public String toString() {

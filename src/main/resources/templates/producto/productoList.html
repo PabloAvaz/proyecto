@@ -24,15 +24,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="producto:${productos}">
+				<tr th:each="producto:${productos}" th:with="equipable=${T(com.enums.Tipo).EQUIPABLE.equals(producto.tipo)}">
 					<td th:text="${producto.id}"></td>
 					<td th:text="${producto.nombre}"></td>
 					<td th:text="${producto.descripcion}"></td>
 					<td th:text="${producto.precio}"></td>
 					<td>
 						<div class="centrar gap">
-							<a th:href="@{/productos/edit/{id} (id=${producto.id})}" class="btn btn-mini btn-success" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-		                	<a th:href="@{/productos/delete/{id} (id=${producto.id})}" class="btn btn-mini btn-error" onclick="return confirm('¿Estas seguro?')"  title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+							<a th:href="@{/productos/toggle/{id} (id=${producto.id})}" class="btn btn-mini" th:classappend="${producto.activo ? 'btn-success' : 'btn-error'}" title="Alternar estado">
+								<i class="fas fa-power-off"></i>
+							</a>
+							<a th:href="@{/{tipo}/edit/{id} (id=${producto.id}, tipo=${equipable ? 'action' : 'efecto'})}" class="btn btn-mini btn-info" title="Añadir efecto">
+								<i th:class="${equipable ? 'fas fa-eye' : ' fas fa-magic'}"></i>
+							</a>
+							<a th:href="@{/productos/edit/{id} (id=${producto.id})}" class="btn btn-mini btn-success" title="Editar el registro.">
+								<i class="fas fa-pencil-alt" aria-hidden="true"></i>
+							</a>
+		                	<a th:href="@{/productos/delete/{id} (id=${producto.id})}" class="btn btn-mini btn-error" onclick="return confirm('¿Estas seguro?')"  title="Eliminar el registro.">
+		                		<i class="fas fa-trash" aria-hidden="true"></i>
+		                	</a>
 						</div>
 					</td>
 				</tr>
@@ -41,6 +51,6 @@
 	</main>
 	
 	<footer th:replace="fragments/footer :: footer"></footer>
-
+	
 </body>
 </html>

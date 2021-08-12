@@ -20,6 +20,7 @@
 				<div class="carta" style="width: 18rem;" th:each="producto:${productos}" th:object="${producto}">
 					<div class="carta-header">
 						<h3 class="carta-title" th:text="*{nombre}"></h3>
+						<b><span class="centrar" th:text="*{tipo}"></b>
 					 	<img th:src="@{/img/{img} (img=*{imagen})}" class="carta-img" th:alt="*{nombre}">
 					</div>
 					<div class="carta-body">

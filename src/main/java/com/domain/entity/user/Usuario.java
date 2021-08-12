@@ -29,6 +29,8 @@ import lombok.Setter;
 public class Usuario extends User {
 	
 	private int puntos;
+	private int total;
+	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "skin")
 	private Skin skin;
@@ -79,15 +81,18 @@ public class Usuario extends User {
 	}
 	public void anotar() {
 		this.puntos++;
+		this.total++;
 	}
 	public void comprar(Producto articulo) {
 			articulos.add(articulo);
 	}
 	public void darPuntos(int cantidad) {
 		this.puntos += cantidad;
+		this.total += cantidad;
 	}
 	public void gastar(int cantidad) {
 		this.puntos -= cantidad;
+		this.total -= cantidad;
 	}
 
 	@Override

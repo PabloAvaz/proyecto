@@ -23,7 +23,7 @@
 					<tr th:each="user:${usuarios}">
 						<td sec:authorize="hasAnyAuthority('ADMIN')" th:text="${user.id}"></td>
 						<td th:text="${user.nombre}"></td>
-						<td th:text="${user.puntos}"></td>
+						<td th:text="${user.total}"></td>
 						<td sec:authorize="hasAnyAuthority('ADMIN')" th:text="${user.skin!=null?user.skin.nombre : T(com.constants.Constants).DEFAULT_SKIN.nombre}"></td>
 						<td sec:authorize="hasAnyAuthority('ADMIN')">
 							<div class="centrar gap" >

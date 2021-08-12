@@ -71,9 +71,12 @@ public class ProductoController {
 		}
 		producto = serviceProducto.guardar(producto);
 		
-		if(producto.getTipo().equals(Tipo.EQUIPABLE)) {
+		if(Tipo.EQUIPABLE.equals(producto.getTipo())) {
 			return"redirect:/action/edit/" + producto.getId();
+		} else if (Tipo.CONSUMIBLE.equals(producto.getTipo())) {
+			return"redirect:/efecto/edit/" + producto.getId();
 		}
+		
 		return "redirect:/productos/list";
 	}
 	@GetMapping("/delete/{id}")
@@ -86,5 +89,12 @@ public class ProductoController {
 		modelo.addAttribute("producto", serviceProducto.getById(id));
 		return "producto/productoForm";
 	}
-
+	
+	@GetMapping("/toggle/{id}")
+	public String toggle(@PathVariable int id, Model modelo) {
+		serviceProducto.toggle(serviceProducto.getById(id));
+		modelo.addAttribute("producto", serviceProducto.getById(id));
+		return "redirect:/productos/list";
+	}
+	
 }

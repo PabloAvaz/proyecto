@@ -43,7 +43,7 @@ public class UserController {
 	@GetMapping("/list")
 	private String listar(Model modelo, Pageable page) {
 		
-		page = PageRequest.of(page.getPageNumber(), page.getPageSize(), Sort.by("puntos").descending());
+		page = PageRequest.of(page.getPageNumber(), page.getPageSize(), Sort.by("total").descending());
 
 		modelo.addAttribute("usuarios", serviceUsuarios.getAll(page));
 		return "/usuarios/userList";

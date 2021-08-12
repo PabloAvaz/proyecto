@@ -1,7 +1,6 @@
 package com.service;
 
 import java.util.List;
-
 import com.dto.producto.SkinDto;
 
 public interface ISkinService {

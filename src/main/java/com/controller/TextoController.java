@@ -27,7 +27,7 @@ public class TextoController {
 		serviceUsuarios.punto(usr);
 		datos.put("user", usr.getNombre());
 		datos.put("puntos", usr.getPuntos());
-
+		datos.put("total", usr.getTotal());
 		return datos;
 	}
 	
