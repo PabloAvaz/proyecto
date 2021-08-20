@@ -14,6 +14,13 @@ import com.service.IUsuarioService;
 
 import lombok.RequiredArgsConstructor;
 
+
+/**
+ * Controlador para procesar puntos y devolverlos como un objeto
+ * @author Pablo
+ *
+ */
+
 @RestController
 @RequiredArgsConstructor
 public class TextoController {

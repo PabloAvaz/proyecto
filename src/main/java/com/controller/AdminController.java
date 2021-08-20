@@ -13,6 +13,12 @@ import com.service.IUsuarioService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Controlador para gestionar la administracion
+ * @author Pablo
+ *
+ */
+
 @Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor

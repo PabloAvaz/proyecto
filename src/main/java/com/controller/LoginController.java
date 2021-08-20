@@ -4,7 +4,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +13,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dto.user.UsuarioDto;
 import com.dto.util.Alert;
+import com.enums.TipoCodigo;
 import com.enums.TipoMensaje;
+import com.service.IRestaurarService;
 import com.service.IUsuarioService;
 import com.validator.user.UsuarioValidator;
 
 import lombok.RequiredArgsConstructor;
+
+/**
+ * Controlador de la seccion de login y registro de usuarios
+ * @author Pablo
+ *
+ */
 
 @Controller
 @RequiredArgsConstructor
@@ -26,6 +33,7 @@ public class LoginController {
 
 	private final IUsuarioService serviceUsuarios;
 	private final UsuarioValidator validatorUsuarios;
+	private final IRestaurarService restaurarService;
 
 
 	@ModelAttribute
@@ -62,14 +70,15 @@ public class LoginController {
 			modelo.addAttribute("action","signup");
 			return "/usuarios/userForm.html";
 		} else if (serviceUsuarios.existe(newUser)) {
-			modelo.addAttribute("usuarioInvalido", new Alert("Ya existe un usuario con el mismo username", TipoMensaje.ERROR));
+			modelo.addAttribute("usuarioInvalido", new Alert("Ya existe un usuario con el mismo username o email", TipoMensaje.ERROR));
 		    modelo.addAttribute("user", newUser);
 			modelo.addAttribute("action","signup");
 			return "/usuarios/userForm.html";
 		}
 
 			serviceUsuarios.crear(newUser);
-			return "redirect:/login";
+			restaurarService.generarCodigo(newUser.getEmail(), TipoCodigo.VALIDATE_USER);
+			return "redirect:/tokens/generar/confirmation/" + newUser.getEmail();
 	}
 
 	@GetMapping("/login")

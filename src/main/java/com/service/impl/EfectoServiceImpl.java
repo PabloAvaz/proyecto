@@ -13,6 +13,12 @@ import com.service.IEfectoService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Interfaz con los metodos para gestionar la clase efecto
+ * @author Pablo
+ *
+ */
+
 @Service
 @RequiredArgsConstructor
 public class EfectoServiceImpl implements IEfectoService {

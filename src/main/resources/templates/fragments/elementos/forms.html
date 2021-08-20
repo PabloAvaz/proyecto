@@ -12,8 +12,12 @@
 	</div>
 	
 	<h5>
-		Si todavia no tienes una cuenta haz click <a th:href="@{/signup}">aqui</a>
-		para registrate
+		Si todavia no tienes una cuenta haz click <a th:href="@{/signup}">aquí</a>
+		para registrarte
+	</h5>
+	<h5>
+		¿Has olvidado tu contraseña? Haz click <a th:href="@{/tokens/newPass}">aquí</a>
+		 para intentar recuperarla
 	</h5>
 </form>
 
@@ -29,10 +33,16 @@
 		</div>
 		
 		<div class="form-grupo">
+	        <label for="email" class="form-etiqueta">Email</label>
+			<input type="email" id="email" th:field="*{email}" class="form-campo" placeholder="Email">
+			<div th:replace="fragments/validacion/mensajes :: error(email.obl)"></div>
+			<div th:replace="fragments/validacion/mensajes :: error(email.err)"></div>
+		</div>
+		
+		<div class="form-grupo">
 	        <label for="usernameReg" class="form-etiqueta">Username</label>
 			<input type="text" id="usernameRef" th:field="*{username}" class="form-campo" placeholder="Username">
 			<div th:replace="fragments/validacion/mensajes :: error(usr.obl)"></div>
-			
 		</div>
 		
 		<div class="form-grupo">
@@ -42,9 +52,10 @@
 		</div>
 		
 		<h5>
-			Si ya tienes una cuenta haz click <a th:href="@{/login}">aqui</a>
-			para registrate
+			Si ya tienes una cuenta haz click <a th:href="@{/login}">aquí</a>
+			para iniciar sesion
 		</h5>
+
 		
 		<input th:field="*{id}" name="id" type="hidden">
 		<input th:field="*{skin.id}" type="hidden">

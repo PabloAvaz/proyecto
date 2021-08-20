@@ -14,6 +14,12 @@ import com.dto.user.UsuarioDto;
 import com.service.IProductoService;
 import com.service.IUsuarioService;
 
+/**
+ * Controlador para gestionar la tienda
+ * @author Pablo
+ *
+ */
+
 @Controller
 @RequestMapping("/tienda")
 public class TiendaController {

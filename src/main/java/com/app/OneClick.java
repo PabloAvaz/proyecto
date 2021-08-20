@@ -8,11 +8,18 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+/**
+ * Clase principal con el metodo main
+ * @author Pablo
+ *
+ */
+
 @SpringBootApplication
 @ComponentScan("com.*")
 @EntityScan("com.domain.entity")
 @EnableJpaRepositories("com.domain.repository")
 @EnableScheduling
+
 public class OneClick extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {

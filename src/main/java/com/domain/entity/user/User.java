@@ -5,12 +5,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 
 @NoArgsConstructor
+@AllArgsConstructor
 @MappedSuperclass
 @Data
 public class User {
@@ -20,16 +22,9 @@ public class User {
 	protected Integer id;
 	protected String nombre;
 	protected boolean estatus;
+	protected String email;
 
 	protected String username;
 	protected String password;
-	
-	public User(Integer id, String nombre, String username, String password, boolean estatus) {
-		this.id = id;
-		this.nombre = nombre;
-		this.estatus = estatus;
-		this.username = username;
-		this.password = password;
-	}
 	
 }

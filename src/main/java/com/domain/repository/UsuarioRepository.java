@@ -18,7 +18,8 @@ import com.dto.user.UsuarioDto;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	public Optional<Usuario> findByUsernameAndPassword(String username, String password);
 	public Optional<Usuario> findByUsername(String username);
-	
+	public Optional<Usuario> findByUsernameOrEmail(String username, String email);
+
 	@Transactional
 	@Modifying(flushAutomatically = true, clearAutomatically = true)
 	@Query("UPDATE Usuario SET username = :#{#usuario.username}")
@@ -27,6 +28,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	@Modifying(flushAutomatically = true, clearAutomatically = true)
 	@Query("UPDATE Usuario SET puntos = :#{#usuario.puntos} WHERE id = :#{#usuario.id}")
 	public void gastarPuntos(UsuarioDto usuario);
+	
+	public Usuario findByEmail(String email);
 	/*
     @Transactional
 	@Modifying

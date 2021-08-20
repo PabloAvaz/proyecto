@@ -7,6 +7,12 @@ import org.mapstruct.Mapper;
 import com.domain.entity.user.Daily;
 import com.dto.user.DailyDto;
 
+/**
+ * Mapper de la clase Daily
+ * @author Pablo
+ *
+ */
+
 @Mapper(componentModel = "spring")
 public interface DailyMapper {
 

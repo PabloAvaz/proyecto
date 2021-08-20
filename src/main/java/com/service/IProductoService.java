@@ -6,6 +6,12 @@ import com.dto.producto.ProductoDto;
 import com.dto.user.UsuarioDto;
 import com.enums.Tipo;
 
+/**
+ * Interfaz con los metodos para gestionar la clase producto
+ * @author Pablo
+ *
+ */
+
 public interface IProductoService {
 	List<ProductoDto> getAll();
 	List<ProductoDto> getByTipo(Tipo tipo);

@@ -13,12 +13,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dto.user.UsuarioDto;
 import com.dto.util.Alert;
-import com.enums.Tipo;
 import com.enums.TipoMensaje;
 import com.service.IProductoService;
 import com.service.IUsuarioService;
 
 import lombok.RequiredArgsConstructor;
+
+/**
+ * Controlador para gestionar el perfil de los usuarios
+ * @author Pablo
+ *
+ */
 
 @Controller
 @RequestMapping("/perfil")

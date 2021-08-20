@@ -17,6 +17,12 @@ import com.util.Utilidades;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Controlador para gestionar las skins
+ * @author Pablo
+ *
+ */
+
 @Controller
 @RequestMapping("/skin")
 @RequiredArgsConstructor

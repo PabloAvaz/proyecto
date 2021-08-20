@@ -12,6 +12,7 @@ import com.domain.entity.producto.Producto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @MappedSuperclass
 @Data
 @NoArgsConstructor

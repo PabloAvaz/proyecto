@@ -10,6 +10,12 @@ import com.service.IAccionEquipableService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Interfaz con los metodos para gestionar la clase accionequipable
+ * @author Pablo
+ *
+ */
+
 @Service
 @RequiredArgsConstructor
 public class AccionEquipableServiceImpl implements IAccionEquipableService {

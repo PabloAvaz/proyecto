@@ -7,6 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 
+/**
+ * Clase que se ejecuta siempre que hay que procesar una peticion
+ * @author Pablo
+ *
+ */
+
 @Component
 public class MiddleWare implements AsyncHandlerInterceptor {
 	

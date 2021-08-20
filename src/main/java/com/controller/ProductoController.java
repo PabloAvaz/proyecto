@@ -27,6 +27,13 @@ import com.validator.producto.ProductoValidator;
 
 import lombok.RequiredArgsConstructor;
 
+
+/**
+ * 
+ * @author Pablo
+ * Controlador para gestionar los productos
+ */
+
 @Controller
 @RequestMapping("/productos")
 @RequiredArgsConstructor

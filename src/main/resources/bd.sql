@@ -1,4 +1,4 @@
-drop database oneclick;
+-- drop database oneclick;
 
 CREATE DATABASE oneclick;
 USE oneclick;
@@ -6,8 +6,8 @@ USE oneclick;
 CREATE TABLE skin (
 idSkin int NOT NULL AUTO_INCREMENT,
 nombre varchar(50),
-imagen varchar(50),
-sonido varchar(50),
+imagen varchar(60),
+sonido varchar(60),
 CONSTRAINT pk_skin PRIMARY KEY(idSkin)
 );
 
@@ -23,6 +23,7 @@ id int NOT NULL AUTO_INCREMENT,
 username varchar(50),
 password varchar(100),
 nombre varchar(50),
+email varchar(50),
 puntos int,
 total int,
 estatus tinyint(1),
@@ -31,6 +32,7 @@ energia int,
 CONSTRAINT pk_usuarios PRIMARY KEY(id),
 CONSTRAINT UC_usuarios_Username UNIQUE (username),
 CONSTRAINT UC_usuarios_energia UNIQUE (energia),
+CONSTRAINT UC_usuarios_email UNIQUE (email),
 CONSTRAINT fk_usuarios_skin foreign key (skin) references skin(idSkin) ON DELETE no action,
 CONSTRAINT fk_usuarios_energia foreign key (energia) references energia(idEnergia) ON DELETE CASCADE
 );
@@ -55,6 +57,7 @@ descripcion varchar(50),
 imagen varchar(50),
 precio int,
 tipo varchar(20),
+activo boolean,
 CONSTRAINT pk_producto PRIMARY KEY(idProducto)
 );
 
@@ -109,21 +112,21 @@ insert into energia values(4, 1000, 500);
 insert into perfil values(1, "ADMIN");
 insert into perfil values(2, "USER");
 
-insert into usuario values(1,"","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","DEFAULT", 0, 1, 1, 1);
-insert into usuario values(2,"Juan","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","Juan", 0, 1, 1, 2);
-insert into usuario values(3,"Clowdash","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","Clowdash", 0, 1, 1, 3);
-insert into usuario values(4,"Vosk","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","Pablo", 1000, 1, 1, 4);
+insert into usuario values(1,"","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","DEFAULT", "",0, 0, 1, 1, 1);
+insert into usuario values(2,"Juan","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","Juan", "juan@hotmail.com", 0, 0, 1, 1, 2);
+insert into usuario values(3,"Clowdash","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","Clowdash", "clowdash@gmail.com", 0, 0, 1, 1, 3);
+insert into usuario values(4,"Vosk","$2a$10$7ZxjsUMq4gkadInXbeQFPunitfypgwBralu0JM2PFlpuFJzl8Y0ty","Pablo", "pablo.avaz@hotmail.com", 1000, 1500, 1, 1, 4);
 
 insert into perfilUsuario values(2, 1);
 insert into perfilUsuario values(3, 2);
 insert into perfilUsuario values(4, 1);
 
-insert into producto values(1,"Traje de luffy","El vestido inicial","default.png", 0, 0);
-insert into producto values(2,"Traje de Mikey","Mikey god","mikey.webp", 50, 0);
-insert into producto values(3,"Traje de Eevee","Miau","evee.jpg", 100, 0);
-insert into producto values(4,"Traje de Woki","Woki woki <3","woki.jpg", 100, 0);
-insert into producto values(5,"Galletas Shin Chan","Las mejores galletas para el mejor gato","shinchan.png", 10, 1);
-insert into producto values(6,"Lejía","Lo que no te mata...","lejia.jpg", 25, 1);
+insert into producto values(1,"Traje de luffy","El vestido inicial","default.png", 0, 0, true);
+insert into producto values(2,"Traje de Mikey","Mikey god","mikey.webp", 50, 0, true);
+insert into producto values(3,"Traje de Eevee","Miau","evee.jpg", 100, 0, true);
+insert into producto values(4,"Traje de Woki","Woki woki <3","woki.jpg", 100, 0, true);
+insert into producto values(5,"Galletas Shin Chan","Las mejores galletas para el mejor gato","shinchan.png", 10, 1, true);
+insert into producto values(6,"Lejía","Lo que no te mata...","lejia.jpg", 25, 1, true);
 
 insert into productoUsuario values(1,1,1);
 insert into productoUsuario values(1,2,1);

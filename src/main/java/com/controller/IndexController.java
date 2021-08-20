@@ -1,6 +1,8 @@
 package com.controller;
 
-
+/**
+ * Controlador de la página principal
+ */
 import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

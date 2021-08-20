@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/propios/tienda.css}" rel="stylesheet">
+</head>
+<body  class="default-plantilla">
+
+	<header th:replace="fragments/menu :: menu-principal"></header>
+
+	<main class="main">
+		
+		<section th:if="${!valido}">
+			<h1>El código introducido no es válido o ha expirado</h1>
+		</section>
+		
+		<section th:if="${valido}">
+			
+		<form th:action="@{/tokens/newPass/{codigo} (codigo=${codigo})}"  method="post" class="formulario form-login">
+			<div class="form-grupo">
+				<h1>Nueva contraseña</h1>
+		        <label for="passwordReg" class="form-etiqueta">Introduce tu nueva contraseña</label>
+				<input type="password" id="newPass" name="newPass" class="form-campo" placeholder="Contraseña">
+				<div th:replace="fragments/validacion/mensajes :: error(pass.obl)"></div>
+				<input type="submit" class="btn btn-secundario-hover">
+			</div>
+			
+		</form>
+		</section>
+		
+	</main>
+	
+	<script>
+		$(".login").addClass("oculto")
+	</script>
+</body>
+</html>

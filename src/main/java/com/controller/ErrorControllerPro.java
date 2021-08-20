@@ -14,7 +14,11 @@ import lombok.RequiredArgsConstructor;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
-
+/**
+ * Controlador para gestionar los errores de la app
+ * @author Pablo
+ *
+ */
 @Controller
 @RequiredArgsConstructor
 public class ErrorControllerPro implements ErrorController {

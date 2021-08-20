@@ -5,6 +5,11 @@ import com.enums.TipoEfecto;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * Dto de los efectos
+ * @author Pablo
+ *
+ */
 @Data
 @ToString
 public class EfectoDto {

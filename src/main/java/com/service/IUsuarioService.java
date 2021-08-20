@@ -9,12 +9,18 @@ import com.dto.producto.ProductoDto;
 import com.dto.producto.ProductoUsuarioDto;
 import com.dto.user.UsuarioDto;
 
+/**
+ * Interfaz con los metodos para gestionar la clase usuario
+ * @author Pablo
+ *
+ */
 public interface IUsuarioService {
 	//Busqueda
 	List<UsuarioDto> getAll();
 	Page<UsuarioDto> getAll(Pageable page);
 	UsuarioDto getById(Integer id);
 	UsuarioDto getByUserName(String username);
+	UsuarioDto getByEmail(String email);
 	//CRUD
 	void crear(UsuarioDto user);
 	void guardar(UsuarioDto user);

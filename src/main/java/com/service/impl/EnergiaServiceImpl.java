@@ -12,6 +12,12 @@ import com.service.IEnergiaService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Interfaz con los metodos para gestionar la clase energia
+ * @author Pablo
+ *
+ */
+
 @RequiredArgsConstructor
 @Service
 public class EnergiaServiceImpl implements IEnergiaService {

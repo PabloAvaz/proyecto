@@ -7,6 +7,12 @@ import org.mapstruct.Mapper;
 import com.domain.entity.user.Energia;
 import com.dto.user.EnergiaDto;
 
+/**
+ * Mapper de la clase Energia
+ * @author Pablo
+ *
+ */
+
 @Mapper(componentModel = "spring")
 public interface EnergiaMapper {
 	EnergiaDto toDto(Energia energiaEntity);

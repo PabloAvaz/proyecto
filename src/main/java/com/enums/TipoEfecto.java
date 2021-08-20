@@ -2,6 +2,12 @@ package com.enums;
 
 import lombok.Getter;
 
+/**
+ * Enumerado con los tipos de efectos
+ * @author Pablo
+ *
+ */
+
 @Getter
 public enum TipoEfecto {
 	NINGUNO,

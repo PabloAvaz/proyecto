@@ -8,6 +8,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Configuracion MVC
+ * Configuracion rutas imagenes y sonidos
+ * @author Pablo
+ *
+ */
+
 @Configuration
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {

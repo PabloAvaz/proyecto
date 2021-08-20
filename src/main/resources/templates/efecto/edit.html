@@ -9,7 +9,7 @@
 
 	<main class="main">
 
-		<h1>Efectos</h1>
+		<h1 th:text="${'Efectos de ' + producto.nombre}"></h1>
 		<section class="contenedor-row">
 			<div>
 				<a th:href="@{/efecto/add/{idProducto} (idProducto = ${producto.id})}" class="btn btn-secundario-hover">+</a>

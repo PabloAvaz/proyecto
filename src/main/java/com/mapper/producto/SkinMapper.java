@@ -8,6 +8,12 @@ import org.mapstruct.MappingTarget;
 import com.domain.entity.producto.Skin;
 import com.dto.producto.SkinDto;
 
+/**
+ * Mapper de la clase skin
+ * @author Pablo
+ *
+ */
+
 @Mapper(componentModel = "spring")
 public interface SkinMapper {
 	

@@ -18,6 +18,11 @@ import com.service.IUsuarioService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Controlador de las recompensas diarias
+ * @author Pablo
+ *
+ */
 @Controller
 @RequestMapping("/daily")
 @RequiredArgsConstructor

@@ -58,12 +58,12 @@ public class Usuario extends User {
 
 	
 	public Usuario() {
-		this(0,"","",true,"",0);
+		this(0,"", "", true,"","",0);
 		this.skin = new Skin();
 	}
 
-	public Usuario(Integer id, String username, String password, boolean estatus, String nombre, int puntos) {
-		super(id,nombre,username,password,estatus);
+	public Usuario(Integer id, String username, String password, boolean estatus, String email, String nombre, int puntos) {
+		super(id, nombre, estatus, email, username, password);
 		this.username = username;
 		this.password = password;
 		this.estatus = estatus;

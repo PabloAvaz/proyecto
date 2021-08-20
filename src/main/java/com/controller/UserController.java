@@ -22,6 +22,11 @@ import com.service.IUsuarioService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Controlador para gestionar a los usuarios
+ * @author Pablo
+ *
+ */
 @Controller
 @RequestMapping("/usuarios")
 @RequiredArgsConstructor

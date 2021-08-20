@@ -15,6 +15,12 @@ import com.service.ISkinService;
 
 import lombok.RequiredArgsConstructor;
 
+
+/**
+ * Controlador que sirve para asociar un producto con una skin
+ * @author Pablo
+ *
+ */
 @Controller
 @RequestMapping("/action")
 @RequiredArgsConstructor

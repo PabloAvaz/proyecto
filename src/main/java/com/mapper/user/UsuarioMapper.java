@@ -6,13 +6,16 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
-import org.springframework.data.domain.Page;
 
 import com.domain.entity.user.Usuario;
 import com.dto.user.UsuarioDto;
-import com.mapper.producto.ProductoMapper;
 import com.mapper.producto.SkinMapper;
 
+/**
+ * Mapepr de la clase usuario
+ * @author Pablo
+ *
+ */
 
 @Mapper(componentModel = "spring", uses = {SkinMapper.class})
 public interface UsuarioMapper {

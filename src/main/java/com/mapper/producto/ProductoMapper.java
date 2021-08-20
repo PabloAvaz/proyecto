@@ -8,6 +8,12 @@ import org.mapstruct.MappingTarget;
 import com.domain.entity.producto.Producto;
 import com.dto.producto.ProductoDto;
 
+/**
+ * Mapper de la clase producto
+ * @author Pablo
+ *
+ */
+
 @Mapper(componentModel = "spring")
 public interface ProductoMapper {
 	

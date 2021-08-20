@@ -12,6 +12,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * Clase para configurar la seguridad del proyecto
+ * @author Pablo
+ *
+ */
+
 @Configuration
 public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 	@Autowired
@@ -48,6 +54,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				"/bcript/**",
 				"/logout/**",
 				"/usuarios/list/"
+				,"/tokens/**"
 				).permitAll()
 		
 		//Permisos por roles

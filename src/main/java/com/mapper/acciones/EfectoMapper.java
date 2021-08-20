@@ -4,9 +4,14 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-
 import com.domain.entity.acciones.Efecto;
 import com.dto.acciones.EfectoDto;
+
+/**
+ * Mapper de la clase efecto
+ * @author Pablo
+ *
+ */
 
 @Mapper(componentModel = "spring")
 public interface EfectoMapper {

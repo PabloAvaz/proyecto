@@ -12,6 +12,7 @@ public class UserDto {
 	protected Integer id;
 	protected String nombre;
 	protected boolean estatus;
+	protected String email;
 
 	protected String username;
 	protected String password;

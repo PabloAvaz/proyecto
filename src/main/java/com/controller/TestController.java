@@ -23,6 +23,12 @@ import com.service.IUsuarioService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Controlador para hacer pruebas
+ * @author Pablo
+ *
+ */
+
 @Controller
 @RequestMapping("/test")
 @SuppressWarnings("unused")
@@ -44,7 +50,6 @@ public class TestController {
 		System.out.println(usr);
 
 		test();
-
 		return "/test";
 	} 
 	@GetMapping("/energia")
@@ -52,7 +57,6 @@ public class TestController {
 		usr = ((UsuarioDto)sesion.getAttribute("usuario"));
 		
 		test();
-
 		return "/test";
 	} 
 	

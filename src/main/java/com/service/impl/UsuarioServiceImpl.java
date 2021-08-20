@@ -33,6 +33,7 @@ import com.mapper.user.PerfilMapper;
 import com.mapper.user.UsuarioMapper;
 import com.service.IEnergiaService;
 import com.service.IPerfilService;
+import com.service.IRestaurarService;
 import com.service.IUsuarioService;
 
 import lombok.RequiredArgsConstructor;
@@ -54,7 +55,6 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	private final ProductoMapper productoMapper;
 	private final ProductoUsuarioMapper productoUsuarioMapper;
 	private final IEnergiaService energiaService;
-
 
 	@Override
 	public List<UsuarioDto> getAll() {
@@ -82,6 +82,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		user.agregarPerfil(perfilMapper.toDto(servicePerfil.getPerfil(2)));
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setSkin(null);
+		user.setEstatus(false);
 		guardar(user);
 
 		repoDaily.save(new Daily(getByUserName(user.getUsername()).getId(),0,0,false));
@@ -248,7 +249,12 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
 	@Override
 	public Boolean existe(UsuarioDto user) {
-		return repoUsuarios.findByUsername(user.getUsername()).isPresent();
+		return repoUsuarios.findByUsernameOrEmail(user.getUsername(), user.getEmail()).isPresent();
+	}
+
+	@Override
+	public UsuarioDto getByEmail(String email) {
+		return usuarioMapper.toDto(repoUsuarios.findByEmail(email));
 	}
 
 

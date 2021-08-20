@@ -9,6 +9,12 @@ import com.domain.entity.user.Perfil;
 import com.domain.repository.PerfilRepository;
 import com.service.IPerfilService;
 
+/**
+ * Interfaz con los metodos para gestionar la clase producto
+ * @author Pablo
+ *
+ */
+
 @Service
 public class PerfilServiceImpl implements IPerfilService {
 

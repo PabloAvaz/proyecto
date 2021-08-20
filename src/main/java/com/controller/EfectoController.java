@@ -7,23 +7,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.domain.entity.acciones.AccionEquipable;
 import com.dto.acciones.EfectoDto;
-import com.enums.Tipo;
-import com.service.IAccionEquipableService;
 import com.service.IEfectoService;
 import com.service.IProductoService;
-import com.service.ISkinService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Controlador de los efectos de los objetos consumibles
+ * @author Pablo
+ *
+ */
 @Controller
 @RequestMapping("/efecto")
 @RequiredArgsConstructor
 public class EfectoController {
 	private final IEfectoService serviceEfecto;
 	private final IProductoService serviceProducto;
-	private final ISkinService serviceSkins;
 	
 	@GetMapping("/add/{idProducto}")
 	public String crear(Model modelo, @PathVariable int idProducto) {

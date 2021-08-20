@@ -3,6 +3,12 @@ package com.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * Enumerado con los tipos de mensaje usados en alerts y validacion
+ * @author Pablo
+ *
+ */
+
 @AllArgsConstructor
 @Getter
 public enum TipoMensaje {

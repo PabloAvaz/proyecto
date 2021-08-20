@@ -11,11 +11,22 @@ import org.springframework.util.StringUtils;
 import com.dto.producto.ProductoDto;
 import com.enums.Tipo;
 
+/**
+ * Clase para realizar las validaciones de productos
+ * @author Pablo
+ *
+ */
+
 @Component
 public class ProductoValidator {
 	
 	private final List<Tipo> TIPOS_VALIDOS = Arrays.asList(Tipo.values()); 
 
+	/**
+	 * Metodo que devuelve un mapa con los errores de validacion que contenga el producto pasado como parametro
+	 * @param producto
+	 * @return
+	 */
 	public Map<String, String> validarProducto(ProductoDto producto) {
 		
 		
