@@ -41,7 +41,7 @@ public class CodigosController {
 	private String generarPass(HttpServletRequest request, String email, RedirectAttributes atrib) {
 		Codigo codigo = restaurarService.generarCodigo(email, TipoCodigo.NEW_PASS);
 		
-		if(codigo != null && restaurarService.mailNewPass(restaurarService.validarCodigo(codigo), request.getServerName() + ":" + request.getServerPort() + "/tokens/newPass/" + codigo.getValor())) {
+		if(codigo != null && restaurarService.mailNewPass(restaurarService.validarCodigo(codigo), request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/tokens/newPass/" + codigo.getValor())) {
 			atrib.addFlashAttribute("msgLogin", new Alert("Se ha enviado un correo a la dirección indicada para restaurar la contraseña", TipoMensaje.SUCCESS));
 		} else {
 			atrib.addFlashAttribute("msgLogin", new Alert("No se pudo enviar el mensaje al correo del usuario", TipoMensaje.ERROR));
@@ -59,7 +59,8 @@ public class CodigosController {
 	private String generarUser(HttpServletRequest request, @PathVariable String email, RedirectAttributes atrib) {
 
 		Codigo codigo = restaurarService.generarCodigo(email, TipoCodigo.VALIDATE_USER);
-		if(codigo != null && restaurarService.mailNewUser(restaurarService.validarCodigo(codigo), request.getServerName() + ":" + request.getServerPort() + "/tokens/confirmation/" + codigo.getValor())) {
+		
+		if(codigo != null && restaurarService.mailNewUser(restaurarService.validarCodigo(codigo), request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/tokens/confirmation/" + codigo.getValor())) {
 			atrib.addFlashAttribute("msg", new Alert("Se ha enviado un correo al email introducido para activar el usuario", TipoMensaje.SUCCESS));
 		} else {
 			atrib.addFlashAttribute("msg", new Alert("No se pudo enviar el codigo de confirmación al email introducido", TipoMensaje.ERROR));
