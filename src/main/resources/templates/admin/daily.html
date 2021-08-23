@@ -4,15 +4,18 @@
     <link th:href="@{/css/propios/tienda.css}" rel="stylesheet">
 </head>
 <body class="default-plantilla">
-
 	<header th:replace="fragments/menu :: menu-principal"></header>
 
 	<main class="main">
-		<h4 class="my-0 fw-normal">Recompensas diarias</h4>
-		<a th:href="@{/admin/daily/restart}">Reiniciar</a>
+		<section th:replace="fragments/validacion/alertas :: alert(${msg})"></section>
+		
+		<section>
+			<h4 class="my-0 fw-normal">Recompensas diarias</h4>
+			<a th:href="@{/admin/daily/restart}">Reiniciar</a>
+		</section>
+
 	</main>
 	
 	<footer th:replace="fragments/footer :: footer"></footer>
-
 </body>
 </html>

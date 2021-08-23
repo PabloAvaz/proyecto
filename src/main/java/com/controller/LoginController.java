@@ -35,17 +35,12 @@ public class LoginController {
 	private final UsuarioValidator validatorUsuarios;
 	private final IRestaurarService restaurarService;
 
-
-	@ModelAttribute
-	public void init(Model model) {
-	    model.addAttribute("newUser", new UsuarioDto());
-	}
-
 	private UsuarioDto usuario;
 
 	@ModelAttribute
 	public void init(Model modelo, HttpSession sesion) {
 		usuario =  (UsuarioDto) sesion.getAttribute("usuario");
+		modelo.addAttribute("newUser", new UsuarioDto());
 	}
 
 	@GetMapping("/signup")

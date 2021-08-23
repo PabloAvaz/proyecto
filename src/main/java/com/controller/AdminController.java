@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dto.util.Alert;
+import com.enums.TipoMensaje;
 import com.service.IUsuarioService;
 
 import lombok.RequiredArgsConstructor;
@@ -44,6 +46,7 @@ public class AdminController {
 	@GetMapping("/daily/restart")
 	public String adminRestart(RedirectAttributes atrib) {
 		serviceUsuarios.reiniciarDaily();
+		atrib.addFlashAttribute("msg", new Alert("Recompensas diarias reiniciadas", TipoMensaje.SUCCESS));
 		return "redirect:/admin/daily";
 	}
 }

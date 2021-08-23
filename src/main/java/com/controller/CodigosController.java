@@ -108,7 +108,6 @@ public class CodigosController {
 	@PostMapping("/newPass/{codigo}")
 	private String actualizar(String newPass, @PathVariable String codigo) {
 		UsuarioDto usr = restaurarService.validarCodigo(new Codigo(codigo,TipoCodigo.NEW_PASS));
-		System.out.println(usr);
 		if(usr != null) {
 			usr.setPassword(passwordEncoder.encode(newPass));
 			usuarioService.modificar(usr);

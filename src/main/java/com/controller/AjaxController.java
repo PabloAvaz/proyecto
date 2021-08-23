@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public class TextoController {
+public class AjaxController {
 	private final IUsuarioService serviceUsuarios;
 	
 	@RequestMapping(value="/enviar",produces="application/json")

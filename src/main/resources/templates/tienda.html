@@ -55,7 +55,7 @@
 			}
 		});
 		
-		$("#cantidad").on("change",function() {
+		$("#cantidad").on("input",function() {
 			actualizarPrecio();
 		});
 		
@@ -64,14 +64,22 @@
 			const precio = parseInt(form.data('precio'));
 			const cantidad = $("#cantidad").val();
 			const total = dinero - precio * cantidad;
-			
+			const valido = total > 0;
 			$("#dineroUsuario").text(dinero);
 			$("#precioProducto").text(precio);
 			$("#cantidadProducto").text(cantidad);
 			$("#dineroRestante").text(total);
 			
-			$("#dineroRestante").parent().addClass(total > 0 ? 'valido' : 'invalido');
-			$("#dineroRestante").parent().removeClass(total > 0 ? 'invalido' : 'valido');
+			$("#dineroRestante").parent().addClass(valido ? 'valido' : 'invalido');
+			$("#dineroRestante").parent().removeClass(valido ? 'invalido' : 'valido');
+			
+			if(valido){
+				$("#btn-comprar").removeClass('oculto')
+
+			} else {
+				$("#btn-comprar").addClass('oculto')
+			}
+			console.log($("#btn-comprar"))
 		}
 		$("#modalCompra").on("mostrar",function(){
 			$("#cantidad").val(1);

@@ -39,16 +39,16 @@ public class DailyController {
 	@GetMapping("/claim")
 	public String claim(RedirectAttributes atrib) {
 
-	if(serviceUsuario.reclamarDaily(usr)) {
-		atrib.addFlashAttribute("msgDaily", new Alert("Recompensa reclamada con éxito", TipoMensaje.SUCCESS));
-	} else {
-		atrib.addFlashAttribute("msgDaily", new Alert("Error al reclamar la recompensa diaria", TipoMensaje.ERROR));
+		if(serviceUsuario.reclamarDaily(usr)) {
+			atrib.addFlashAttribute("msgDaily", new Alert("Recompensa reclamada con éxito", TipoMensaje.SUCCESS));
+		} else {
+			atrib.addFlashAttribute("msgDaily", new Alert("Error al reclamar la recompensa diaria", TipoMensaje.ERROR));
+		}
+		
+		return "redirect:/play";
 	}
 	
-	
-	return "redirect:/play";
-	}
-	
+	@GetMapping("/restart")
 	@Scheduled(cron = "0 0 0 * * *")
 	private void restart() {
 		System.out.println("Reiniciando recompensas diarias: " + new Date());
