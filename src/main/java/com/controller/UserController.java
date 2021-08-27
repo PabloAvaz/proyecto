@@ -75,7 +75,8 @@ public class UserController {
 		usrModificado.setUsername(StringUtils.hasText(newUser.getUsername()) ? newUser.getUsername() : null);
 		usrModificado.setPassword(StringUtils.hasText(newUser.getPassword()) ? passwordEncoder.encode(newUser.getPassword()) : null);
 		usrModificado.setNombre(StringUtils.hasText(newUser.getNombre()) ? newUser.getNombre() : null);
-		
+		usrModificado.setEmail(StringUtils.hasText(newUser.getEmail()) ? newUser.getEmail() : null);
+
 		serviceUsuarios.modificar(usrModificado);
 		return "redirect:/usuarios/list";
 	}

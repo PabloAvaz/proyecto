@@ -30,7 +30,8 @@ public interface UsuarioMapper {
 	@Mappings ({
 		@Mapping(target="password", expression = "java(usuariodto.getPassword() != null ? usuariodto.getPassword() : usuario.getPassword())"),
 		@Mapping(target="username", expression = "java(usuariodto.getUsername() != null ? usuariodto.getUsername() : usuario.getUsername())"),
-		@Mapping(target="nombre", expression = "java(usuariodto.getNombre() != null ? usuariodto.getNombre() : usuario.getNombre())")
+		@Mapping(target="nombre", expression = "java(usuariodto.getNombre() != null ? usuariodto.getNombre() : usuario.getNombre())"),
+		@Mapping(target="email", expression = "java(usuariodto.getEmail() != null ? usuariodto.getEmail() : usuario.getEmail())")
 	})
 	Usuario merge(UsuarioDto usuariodto, @MappingTarget Usuario usuario);
 }	
