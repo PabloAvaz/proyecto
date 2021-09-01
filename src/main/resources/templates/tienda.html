@@ -70,8 +70,14 @@
 			$("#cantidadProducto").text(cantidad);
 			$("#dineroRestante").text(total);
 			
-			$("#dineroRestante").parent().addClass(valido ? 'valido' : 'invalido');
-			$("#dineroRestante").parent().removeClass(valido ? 'invalido' : 'valido');
+			if(valido) {
+				$("#dineroRestante").parent().addClass('valido');
+				$("#dineroRestante").parent().removeClass('invalido');
+
+			} else {
+				$("#dineroRestante").parent().addClass('invalido');
+				$("#dineroRestante").parent().removeClass('valido');
+			}
 			
 			if(valido){
 				$("#btn-comprar").removeClass('oculto')
@@ -79,8 +85,8 @@
 			} else {
 				$("#btn-comprar").addClass('oculto')
 			}
-			console.log($("#btn-comprar"))
 		}
+		
 		$("#modalCompra").on("mostrar",function(){
 			$("#cantidad").val(1);
 			actualizarPrecio();

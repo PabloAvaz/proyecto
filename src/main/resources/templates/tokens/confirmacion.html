@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="fragments/head:: head"/>
+    <link th:href="@{/css/propios/tienda.css}" rel="stylesheet">
+</head>
+<body  class="default-plantilla">
+
+	<header th:replace="fragments/menu :: menu-principal"></header>
+
+	<main class="main">
+		<section>
+			<form th:action="@{/tokens/generar/newConfirm}" method="get" class="formulario form-login">
+	
+				<div class="form-grupo">
+					<h1>El codigo no es valido o ha expirado, introduce tu correo para generar otro</h1>
+			        <label for="email" class="form-etiqueta">Email</label>
+					<input type="email" id="email" name="email" class="form-campo" placeholder="Email">
+					<input type="submit" class="btn btn-secundario-hover">
+				</div>
+				
+			</form>
+		</section>
+	</main>
+	
+	<footer th:replace="fragments/footer :: footer"></footer>
+	
+	
+	<script>
+		$(".login").addClass("oculto")
+	</script>
+</body>
+</html>

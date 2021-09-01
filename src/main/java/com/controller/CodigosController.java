@@ -70,6 +70,16 @@ public class CodigosController {
 	}
 	
 	/**
+	 * Endpoint con el formulario para generar un nuevo token de activacion de cuenta
+	 * @param request
+	 * @param email
+	 */
+	@GetMapping("/generar/newConfirm")
+	private String generarNuevoConfirm(String email, Model modelo) {
+		return "redirect:/tokens/generar/confirmation/" + email;
+	}
+	
+	/**
 	 * Endpoint para confirmar el usuario
 	 * @param request
 	 * @param email
@@ -82,11 +92,12 @@ public class CodigosController {
 			user.setEstatus(true);
 			usuarioService.modificar(user);
 			return "redirect:/login";
+		} else {
+			return "tokens/confirmacion";
 		}
 		
-		return "redirect:/";
-		
 	}
+	
 	
 	/**
 	 * Endpoint con el formulario para cambiar la contraseña
